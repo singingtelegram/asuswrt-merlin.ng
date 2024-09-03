@@ -4,25 +4,19 @@
    Copyright (c) 2022 Broadcom 
    All Rights Reserved
 
-Unless you and Broadcom execute a separate written software license
-agreement governing use of this software, this software is licensed
-to you under the terms of the GNU General Public License version 2
-(the "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
-with the following added to such license:
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as published by
+the Free Software Foundation (the "GPL").
 
-   As a special exception, the copyright holders of this software give
-   you permission to link this software with independent modules, and
-   to copy and distribute the resulting executable under terms of your
-   choice, provided that you also meet, for each linked independent
-   module, the terms and conditions of the license of that module.
-   An independent module is a module which is not derived from this
-   software.  The special exception does not apply to any modifications
-   of the software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-Not withstanding the above, under no circumstances may you combine
-this software in any way with any other Broadcom software provided
-under a license other than the GPL, without Broadcom's express prior
-written consent.
+
+A copy of the GPL is available at http://www.broadcom.com/licenses/GPLv2.php, or by
+writing to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
 
 :>
 */
@@ -65,12 +59,15 @@ typedef struct {
     uint32_t pkt_store_cnt;             /* Times reference packet stored */
     uint32_t pkt_free_cnt;              /* Times reference packet freed */
     uint32_t error_cnt;                 /* Times error/unexpected event occured */
+    uint32_t error_pkt_cnt;             /* Times error packet (corrupted udp) event occured */
+    uint32_t error_no_flow;             /* Times no flow found error occured */
     uint32_t netdev_rx_cnt;             /* Times netdev_receive on spdsvc device called */
     uint32_t soft_gen_cnt;              /* Times software based generator started */
     uint32_t tx_via_fc_cnt;             /* Times packet got transmitted via FC flow without starting generator */
     uint32_t hw_gen_cnt;                /* Times hardware based generator started */
     uint32_t hw_gen_cmpl_cnt;           /* Times hardware generator completed */
     uint32_t hw_gen_chk_status;         /* Times hardware generator status checked for completion */
+    uint32_t hw_gen_cmpl_cnt_dupl;      /* Duplicate Times hardware generator completed */
     uint32_t nf_out_hk_cnt;             /* Times NF-LOCAL-OUT hook called */
     uint32_t nf_out_hk_reg_cnt;         /* Times NF-LOCAL-OUT hook registered */
     uint32_t nf_out_hk_unreg_cnt;       /* Times NF-LOCAL-OUT hook unregistered */
@@ -90,6 +87,9 @@ typedef struct {
     uint32_t nf_invalid_state;          /* Times NF-LOCAL-IN/OUT hook called in invalid state */
     uint32_t nf_invalid_mode;           /* Times NF-LOCAL-IN/OUT hook called in invalid mode */
     uint32_t nf_invalid_socket;         /* Times NF-LOCAL-IN/OUT hook called in invalid socket */
+    uint32_t rx_buf_thr_recycle;        /* Recycle rx buffer by the dedicated thread */
+    uint32_t rx_buf_local_recycle;      /* Recycle rx buffer by the local receive task */
+    uint32_t rx_wait_for_completion;    /* No of times the disable waits for work thread to complete */
 } spdsvc_tr471_procfs_data_t;
 
 typedef struct {
@@ -103,12 +103,18 @@ typedef struct {
     spdsvc_tr471_procfs_data_t tr471_cnts;
 } spdsvc_procfs_data_t;
 
-extern spdsvc_procfs_data_t spdsvc_procfs_data_g;
+#if defined(CONFIG_BCM_TR471_MFLOW)
+#define SPDSVC_MAX_CONN                   8 /* Align with spdsvc.h or make it common later - TBD */
+#else
+#define SPDSVC_MAX_CONN                   1
+#endif
 
-#define SPDSVC_PROCFS_INC(f)    spdsvc_procfs_data_g.f++
-#define TR471_PROCFS_INC(f)     spdsvc_procfs_data_g.tr471_cnts.f++
+extern spdsvc_procfs_data_t spdsvc_procfs_data_g[SPDSVC_MAX_CONN+1];
 
-void spdsvc_procfs_handle_enable(void);
+#define SPDSVC_PROCFS_INC(index,f)    spdsvc_procfs_data_g[index].f++
+#define TR471_PROCFS_INC(index,f)     spdsvc_procfs_data_g[index].tr471_cnts.f++
+
+void spdsvc_procfs_handle_enable(int connindex);
 int spdsvc_procfs_construct(void);
 
 #endif // __SPDSVC_PROCFS_H_INCLUDED__

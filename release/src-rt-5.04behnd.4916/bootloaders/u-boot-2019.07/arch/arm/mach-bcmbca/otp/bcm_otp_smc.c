@@ -73,6 +73,7 @@ enum
 #define k_FIELD_STR_PROCESS             "PROCESS"
 #define k_FIELD_STR_SUBSTRATE           "SUBSTRAT"
 #define k_FIELD_STR_FOUNDARY            "FOUNDARY"
+#define k_FIELD_STR_UART_EN             "UARTEN"
 
 #define OTP_MFG_SECURE_MASK             0x1
 #define OTP_FLD_SECURE_MASK             0x2
@@ -121,7 +122,7 @@ static bcm_otp_feat_info otp_feat_info[] = {
       .read_cb = otp_fld_mode_read_cb, .write_cb = otp_fld_mode_write_cb },
     { .feat = SOTP_MAP_CUST_AREA, .fld_name = k_FIELD_STR_CUST_KEYS, .fld_size = 2320, .is_sotp=1 },
     { .feat = SOTP_MAP_CUST_NECC0, .fld_name = k_FIELD_STR_GEN_ROW0, .fld_size = 9, .is_sotp=1 },
-    { .feat = SOTP_MAP_CUST_NECC1, .fld_name = k_FIELD_STR_GEN_ROW1, .fld_size = 9, .is_sotp=1 },
+    { .feat = SOTP_MAP_ANTI_ROLLBACK, .fld_name = k_FIELD_STR_GEN_ROW1, .fld_size = 9, .is_sotp=1 },
     { .feat = SOTP_MAP_CUST_NECC2, .fld_name = k_FIELD_STR_GEN_ROW2, .fld_size = 9, .is_sotp=1 },
     { .feat = SOTP_MAP_CUST_NECC3, .fld_name = k_FIELD_STR_GEN_ROW3, .fld_size = 9, .is_sotp=1 },
     { .feat = OTP_MAP_JTAG_PWD, .fld_name = k_FIELD_STR_JTAGPWD, .fld_size = 8, .read_cb = bcm_otp_empty_read_cb},
@@ -131,7 +132,8 @@ static bcm_otp_feat_info otp_feat_info[] = {
       .write_cb = bcm_otp_swap_write_cb, .read_cb = bcm_otp_swap_read_cb},
     { .feat = OTP_MAP_MFG_PROCESS,   .fld_name = k_FIELD_STR_PROCESS,   .fld_size = sizeof(u32)},
     { .feat = OTP_MAP_MFG_SUBSTRATE, .fld_name = k_FIELD_STR_SUBSTRATE, .fld_size = sizeof(u32)}, 
-    { .feat = OTP_MAP_MFG_FOUNDRY,   .fld_name = k_FIELD_STR_FOUNDARY,  .fld_size = sizeof(u32)},   
+    { .feat = OTP_MAP_MFG_FOUNDRY,   .fld_name = k_FIELD_STR_FOUNDARY,  .fld_size = sizeof(u32)},
+    { .feat = OTP_MAP_UART_EN, .fld_name = k_FIELD_STR_UART_EN, .fld_size = 4 },   
 };
 static u32 zero_buf[16];
 
@@ -459,6 +461,25 @@ int bcm_otp_init()
     return OTP_MAP_CMN_OK;
 }
 
+int bcm_otp_deinit()                                                             
+{                                                                                
+    int i;                                                                       
+    for (i = 0; i < sizeof(otp_feat_info)/sizeof(otp_feat_info[0]); i++)         
+    {                                                                            
+        if (otp_feat_info[i].cache)                                              
+        {                                                                        
+                memset(otp_feat_info[i].cache,0,otp_feat_info[i].fld_size);      
+                free(otp_feat_info[i].cache);                                    
+                otp_feat_info[i].cache = NULL;                                   
+        }                                                                        
+    }                                                                            
+    memset((void *)SOTP_EXCHANGE_AREA_ADDR_START,                                
+        0,                                                                       
+        SOTP_EXCHANGE_AREA_ADDR_END-SOTP_EXCHANGE_AREA_ADDR_START+1);            
+    OTP_DBG("DeInit completed\n");                                               
+    return OTP_MAP_CMN_OK;                                                       
+}                                                                                
+
 otp_map_cmn_err_t bcm_otp_read(otp_map_feat_t otp_feat, u32** data, u32* size)
 {
     bcm_otp_feat_info *feat_info = otp_feat_info_get(otp_feat);
@@ -642,4 +663,9 @@ int bcm_otp_get_mfg_foundry(u32* val)
 int bcm_otp_get_mfg_substrate(u32* val)
 {
     return bcm_otp_get(OTP_MAP_MFG_SUBSTRATE, val);
+}
+
+int bcm_otp_get_chip_ser_num(unsigned int* val)
+{
+    return bcm_otp_get(OTP_MAP_CSEC_CHIPID, val);
 }

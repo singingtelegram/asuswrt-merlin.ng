@@ -6,17 +6,17 @@
 #error "non sim compilation"
 #endif
 
-void *cmdlist_buffer_alloc(void **phys_addr_pp)
+void *cmdlist_buffer_alloc(phys_addr_t *phys_addr_p)
 {
-    bdmf_phys_addr_t phys_addr_p;
-    void *buffer_p = rdp_mm_aligned_alloc_atomic(CMDLIST_BUFFER_SIZE, &phys_addr_p);
+    bdmf_phys_addr_t phys_addr;
+    void *buffer_p = rdp_mm_aligned_alloc_atomic(CMDLIST_BUFFER_SIZE, &phys_addr);
 
     if(buffer_p)
     {
-        *phys_addr_pp = (void *)phys_addr_p;
+        *phys_addr_p = (phys_addr_t)phys_addr;
     }
 
-    __logDebug("buffer_p %p, phys_addr_p %px", buffer_p, *phys_addr_pp);
+    __logDebug("buffer_p %p, phys_addr %px", buffer_p, (void *)*phys_addr_p);
 
     return buffer_p;
 }

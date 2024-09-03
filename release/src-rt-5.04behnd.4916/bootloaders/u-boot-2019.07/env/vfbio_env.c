@@ -13,7 +13,8 @@ DECLARE_GLOBAL_DATA_PTR;
 static int vfbio_save(void)
 {
 	int ret, i, id;
-	uint blk_size = 0, lun_size = 0;
+	uint blk_size = 0;
+	uint64_t lun_size = 0;
 	char name[16];
 	ALLOC_CACHE_ALIGN_BUFFER(char, env_new, CONFIG_ENV_SIZE + SZ_4K);
 
@@ -37,7 +38,7 @@ static int vfbio_save(void)
 		vfbio_lun_get_blk_size(id, &blk_size);
 		if((CONFIG_ENV_SIZE + blk_size) > lun_size)
 		{
-			printf("Not enough space to burn %s image - available %u, needed %u\n", name, lun_size, CONFIG_ENV_SIZE);
+			printf("Not enough space to burn %s image - available %llu, needed %u\n", name, lun_size, CONFIG_ENV_SIZE);
 			return -1;
 		}
 		

@@ -1,0 +1,1211 @@
+<?xml version="1.0"?>
+<xmlMandatorySingleRootNode copyright="Broadcom Ltd., 2006-2018"  warning="This file is auto-generated.  Edits to this file will be lost!" >
+
+
+
+
+
+<object name="Device." shortObjectName="Dev2DeviceObject" specSource="TR181" profile="Device2_Baseline:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" multiCompObj="true" oid="1000" lockZone="0" />
+  <description source="TRx">The top-level object for a Device.</description>
+
+  <parameter name="RootDataModelVersion" type="string" specSource="TR181" profile="Device2_Baseline:3" requirements="R" supportLevel="ReadOnly" defaultValue="2.15" maxLength="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Root data model version, e.g. 2.4.  For a vendor-defined root data model, this is the standard Broadband Forum model on which the vendor defined model is based.  Possible patters: 2\.\d+</description>
+
+  <parameter name="InterfaceStackNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the InterfaceStack table.</description>
+
+
+
+
+<object name="Device.SoftwareModules." shortObjectName="SwModulesObject" specSource="TR181" profile="Device2_SM_Baseline:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1820" lockZone="6" />
+  <description source="TRx">Top level object for dynamically managed software applications.</description>
+  <description source="BROADCOM">REPORT_PROFILE: SM_Baseline:1, SM_ExecEnvs:1, SM_DeployAndExecUnits:1</description>
+
+  <parameter name="ExecEnvNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the ExecEnv table</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1, SM_DeploymentAndExecUnits:1</description>
+
+  <parameter name="DeploymentUnitNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the DeploymentUnit table.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_Baseline:1, SM_DeploymentAndExecUnits:1</description>
+
+  <parameter name="ExecutionUnitNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the ExecutionUnit table.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_Baseline:1, SM_DeploymentAndExecUnits:1</description>
+
+  <parameter name="X_BROADCOM_COM_PreinstallNeeded" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This flag can be set by local management system or remote management. When set to true, preinstalled software modules in the firmware need to be processed. If this flag is true and X_BROADCOM_COM_PreinstallAtRuntime is true, preinstall process will take place at runtime. Otherwise, preinstall process will take place after reboot</description>
+
+  <parameter name="X_BROADCOM_COM_PreinstallAtRuntime" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This flag provides the information whether preinstall package process should happen at runtime or bootup time</description>
+
+  <parameter name="X_BROADCOM_COM_PreinstallOverwrite" type="boolean" specSource="Broadcom" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This parameter sets the mode that dictates the behavior of how software modules are installed from a firmware.  When this flag is true, the packages in the firmware will overwrite all preinstalled EE(s) and all DUs installed in it whether they were manually installed or preinstalled from firmware update.   When false, if there are existing preinstalled packages, they are not overwritten until the existing packages are removed (configuration reset to default).</description>
+
+  <parameter name="X_BROADCOM_COM_MaxDUEntries" type="int" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="-1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">This parameter is the maximum number of deployment units which openplat project can install. If the value is -1, it means no limitation.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}." shortObjectName="ExecEnvObject" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="MultipleInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1821" lockZone="6" />
+  <description source="TRx">Describe an Execution Environment that is available on the device along with its configurable settings.&#10;At most one entry in this table can exist with a given value for Alias, or with a given value for Name.</description>
+  <description source="BROADCOM">REPORT_PROFILE: SM_Baseline:1, SM_ExecEnvs:1&#10;</description>
+
+  <parameter name="Enable" type="boolean" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicateds whether or not this ExecEnv is enabled.&#10;&#10;Disabling an enabled Execution Environment stops it, while enabling a disabled Execution Environment starts it.&#10;&#10;When an Execution Environment is disabled, Deployment Units installed to that Execution Environment will be unaffected, but any Execution Units currently running on that Execution Environment will automatically transition to Idle.&#10;&#10;If a ChangeDUState is attempted on a DeploymentUnit that is to be applied against a disabled ExecEnv, that ChangeDUState operation fails and the associated DUStateChangeComplete RPC will contain a FaultStruct for that operation.&#10;&#10;If a SetParameterValues is attempted against the ExecutionUnit.{i}.RequestedState for an ExecutionUnit that is associated with a disabled ExecEnv a CWMP Fault will be issued in response.&#10;&#10;Disabling an Execution Environment could place the device in a non-manageable state that would require a manual reboot to alleviate.  For example, if the operating system itself was modeled as an ExecEnv and the ACS disabled it, the CWMP managment agent might be terminated leaving the device unmanageable.&#10;</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="Status" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="Disabled" validValuesArray="ExecEnvStatusValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the status of this ExecEnv.  Enumeration of:&#10;Up&#10;Error (OPTIONAL)&#10;Disabled</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="Reset" type="boolean" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Setting this parameter to true causes EE to revert back to the state it was in when it first issued a &quot;1 BOOTSTRAP&quot; inform event.   The following requirement indicate what the MUST happen for the reset to be complete:&#10;&#10;1. Al DUs that were installed after the first &quot;1 BOOTSTRAP&quot; Inform event MUST be removed.&#10;2. All persistent storage, configuration files, and log files that were associated with the removed DUs MUST be removed&#10;3. Any DU that is still installed against the EE MUST be restored to the version present when the first &quot;1 BOOTSTRAP&quot; Inform evnet was issued.&#10;4. Any DU that was present when the last &quot;1 BOOTSTRAP&quot; Inform event was issued, but was subsequently uninstalled and is now not present, MUST be installed with the version that was present when the last &quot;1 BOOTSTRAP&quot; inform event was issued&#10;5. The EE MUST be restored to the version and conifguration present when the first &quot;1 BOOTSTRAP&quot; Inform event was issued&#10;6. The EE MUST be restarted after all other restoration requirements have been met.&#10;&#10;When read, this parameter returns false, regardless of the actual value.&#10;</description>
+
+  <parameter name="Alias" type="string" specSource="TR181" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="cpe-ee" maxLength="64" hideParameterFromAcs="false" autoGenerateAlias="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">A non-volatitle handle used to reference this instance.  Alias provides a mechanism for an ACS to label this instance for future reference.&#10;&#10;An initial unique value MUST be assigned when the CPE creates an instance of this ExecEnv.</description>
+
+  <parameter name="Name" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">A Name provided by the CPE that adequately distinguishes this ExecEnv from all other ExecEnv instances.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="Type" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the complete type and specification version of this ExecEnv</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="InitialRunLevel" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The run level that this ExecEnv will be in upon startup (whether that is caused by a CPE Boot or the Execution Envionment starting).&#10;&#10;Run levels dictate which Execution Units will be started.  Execution Units will be started if ExecutionUnit.{i}.RunLevel is less than CurrentRunLevel and ExecutionUnit.{i}.AutoStart is true.&#10;&#10;If the value of CurrentRunLevel is -1, then the value of this parameter is irrelevant when read and setting its value has no impact to the Run Level of this ExecEnv.</description>
+
+  <parameter name="RequestedRunLevel" type="int" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="-1" minValue="-1" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Provides a mechanism to remotely manipulate the run level of this ExecEnv.&#10;&#10;Run levels dictate which Execution Units will be started if ExecutionUnit.{i}.RunLevel is less than CurrentRunLevel and ExecutionUnit.{i}.AutoStart is true.&#10;&#10;Setting this value when CurrentRunLevel is -1 has no impact to the Run Level of this ExecEnv.&#10;&#10;When read, this parameter retuns -1, regardless of the actual value.</description>
+
+  <parameter name="CurrentRunLevel" type="int" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="-1" minValue="-1" maxValue="65535" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The run level that this ExecEnv is currently operating in.&#10;&#10;Upon startup (whether that is caused by a CPE Boot or the Execution Environment starting), Current Run Level will be equal to InitialRunLevel, unless Run Levels are not supported by this ExecEnv in which case CurrentRunLevel will be -1.&#10;&#10;Run level dictate which Execution Units will be started.  Execution United will be started if ExecutionUnit.{i}.RunLevel is less than CurrentRunLevel and ExecutionUnit.{i}.AutoSatrt is true.&#10;&#10;If CurrentRunLevel is -1 then RunLevels are not suported by this ExecEnv and setting InitialRunLevel or RequestedRunLevel will not impact the Run Level of this ExecEnv.</description>
+
+  <parameter name="InitialExecutionUnitRunLevel" type="int" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="-1" minValue="-1" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the initial value on creation for {{param|#.ExecutionUnit.{i}.RunLevel}} for all Execution Unit instances associated with this {{object}}.   If the value of {{param|CurrentRunLevel}} is -1, then the value of this parameter is irrelevant when read and setting its value has no impact on the Run Level of any Execution Unit. </description>
+
+  <parameter name="Vendor" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="128" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The vendor that produced this ExecEnv.&#10;</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="Version" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The version of this ExecEnv as specified by the Vendor that implemented this ExecEnv, not the version of the specification.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="ParentExecEnv" type="string" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The value MUST be the path name of a row in the ExecEnv table.  If the referenced object is deleted, the parameter value MUST be set to an empty string.   Represents the parent ExecEnv of this ExecEnv.&#10;&#10;If this value is an empty string then this is the Primary Execution Environment.</description>
+
+  <parameter name="AllocatedDiskSpace" type="int" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="-1" minValue="-1" maxValue="2147483647" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The amount of disk space measured in kilobytes allocated to this ExecEnv.  A value of -1 MUST be used for ExecEnv instances where this parameter is not applicable.&#10;</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1</description>
+
+  <parameter name="AvailableDiskSpace" type="int" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="-1" minValue="-1" maxValue="2147483647" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The amount of disk space measured in kilobytes currently available ito this ExecEnv.  This value changes as the ExecutionUnit instances assocatated with this ExecEnv consumes disk space.  A value of 1 MUST be used for ExecEnv isntances where this parameter is not applicable.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1</description>
+
+  <parameter name="AllocatedMemory" type="int" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="-1" minValue="-1" maxValue="2147483647" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The amount of physical RAM measured in kilobytes allocated to this ExecEnv.   A value of -1 MUST be used for ExecEnv instances where this paremter is not applicable.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1</description>
+
+  <parameter name="AvailableMemory" type="int" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="-1" minValue="-1" maxValue="2147483647" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The amount of physcial RAM measured in kilobytes currrently available to this ExecEnv.  This value changes as the Execution Unit instances associated with this ExecEnv are started/stopped and consume the physical RAM.  A value of -1 MUST be used for ExecEnv instances where this parameter is not applicable.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1</description>
+
+  <parameter name="ActiveExecutionUnits" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Eac list item MUST be the path name of a rows in the ExecutionUnit table.  If the referenced object is deleted, the corresponding item MUST be removed from the list  Represents the ExecutionUnit instances currently running on this ExecEnv.  This is a subset of AssociatedExecutionUnits as it only contains ExecutionUnit instances that are currently Active.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_ExecEnvs:1, SM_Baseline:1</description>
+
+  <parameter name="ProcessorRefList" type="string" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separted list of strings.  Each list item MUST be the path name of a row in the DeviceInfo.Processor table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the processor that this ExecEnv has available to it.</description>
+
+  <parameter name="X_BROADCOM_COM_MngrEid" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The EID of the app that manages this Execution Environment.</description>
+
+  <parameter name="X_BROADCOM_COM_ContainerName" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The container name of this Execution Environment.</description>
+
+  <parameter name="X_BROADCOM_COM_MngrAppName" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The manager application name of this Execution Environment, if this EE is a app_mediaType is 'ee_tarball'.  It is named as app_tarballMngrExecutable in the package information text file.</description>
+
+  <parameter name="X_BROADCOM_COM_IsPreinstall" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">When this flag is true, this EE has been preinstalled by BEEP framework.</description>
+
+  <parameter name="X_BROADCOM_COM_Username" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The unique username of this ExecEnv. Only need for unprivileged container.</description>
+
+  <parameter name="X_BROADCOM_COM_UidBase" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The base uid of this ExecEnv. Only need for unprivileged container.</description>
+
+  <parameter name="X_BROADCOM_COM_IPv4Addresses" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">List of IPv4 addresses of this ExecEnv delimited by comma.</description>
+
+  <parameter name="X_BROADCOM_COM_IPv6Addresses" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">List of IPv6 addresses of this ExecEnv delimited by comma.</description>
+
+  <parameter name="X_BROADCOM_COM_MaxActiveContainers" type="int" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="-1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">For each execution environment, this parameter sets the maximum number of active containers in the EE. It is up to EE manager to maintain this limit. -1 means unlimited number of active containers as long as the EE's resource allows it.</description>
+
+  <parameter name="X_BROADCOM_COM_NumberOfActiveContainers" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">This parameter is the number of current active containers in the execution environment. It is up to EE manager to update this number.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest." shortObjectName="EeManifestObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="true" bbfProtocol="common" oid="1822" lockZone="6" />
+  <description source="BROADCOM">This object contains proprietary information from the manifest of this ExecEnv.</description>
+
+  <parameter name="IsPrivileged" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" minValue="0" maxValue="2" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">When 0, EE is an unprivileged container. When 1, EE is a privileged container without write permission to proc/sys. When 2, EE is a privileged container with write permission to proc/sys.</description>
+
+  <parameter name="EnableAfterInstall" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">When true, EE will start after being installed. This parameter takes precedence over the object's Enable parameter which is default to be false. When it is desirable to start the EE immediately after installation, set this parameter to true. Consequently, the EE's enable parameter is set to true as well.</description>
+
+  <parameter name="AccessHostFiles" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This parameter is only used for unprivileged EEs. When 0, the unprivileged EE cannot access any file in host filesystem. When 1, the unprivileged EE is allowed to access the files in host filesystem.</description>
+
+  <parameter name="ExposedPorts" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This parameter specifies those ports requested by the EE. The format is port/tcp, port/udp, port with the default protocol being tcp if not specified.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Bus." shortObjectName="EeBusObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1823" lockZone="6" />
+  <description source="BROADCOM">Message bus attribute section of this EE.</description>
+
+  <parameter name="BusInfo" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The bus info string contains the message bus information of this EE. It is string parameters seperated by | with first parameter being busType.  For example, D-Bus info will be like &quot;D-Bus|com.broadcom.pmd|/com/broadcom/pmd|com.broadcom.pmd&quot;</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Process." shortObjectName="EeProcessObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1824" lockZone="6" />
+  <description source="BROADCOM">Process attribute section of this EE.</description>
+
+  <parameter name="ApparmorProfile" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The name of the profile that defines this EE's AppArmor confinement.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Process.Args.{i}." shortObjectName="EeProcessArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1825" lockZone="6" />
+  <description source="BROADCOM">Arguments to start this EE process. List of strings with similar semantics to IEEE Std 1003.1-2008 execvp's argv. &#10;&#10;    This specification extends the IEEE standard in that at least one entry is REQUIRED, and that entry is used with the same semantics as execvp's file. &#10;&#10;    For example, to start BEE process with command &quot;pmd&quot;, argv[0]=&quot;pmd&quot;</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Process argv, e.g. &quot;pmd&quot;</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Process.Env.{i}." shortObjectName="EeProcessEnvObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1826" lockZone="6" />
+  <description source="BROADCOM">Arguments to set this EE process's environment variables.</description>
+
+  <parameter name="EnvVar" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Process' environment variables</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Mounts.{i}." shortObjectName="EeMountsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1827" lockZone="6" />
+  <description source="BROADCOM">Directories to be mounted into EE containers</description>
+
+  <parameter name="Destination" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Destination of mount point: path inside container. This value MUST be an absolute path. This parameter is required for Mounts object</description>
+
+  <parameter name="Source" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">A device name, but can also be a file or directory name for bind mounts or a dummy. Path values for bind mounts are either absolute or relative to the bundle. This parameter is optional for Mounts object</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The type of the filesystem to be mounted. This parameter is optional for Mounts object</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Mounts.{i}.Options.{i}." shortObjectName="EeMountsOptionObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1828" lockZone="6" />
+  <description source="BROADCOM">Mount options of the filesystem to be used. This dynamic object is optional for Mounts object</description>
+
+  <parameter name="option" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Mount options of the filesystem to be used</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux." shortObjectName="EeLinuxObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1829" lockZone="6" />
+  <description source="BROADCOM">Linux attribute section of this EE.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Resources." shortObjectName="EeResourceObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1830" lockZone="6" />
+  <description source="BROADCOM">Resource attributes for this EE.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Resources.BlockIO.{i}." shortObjectName="EeBlkioObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1831" lockZone="6" />
+  <description source="BROADCOM">Block I/O device attributes.</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" validValuesArray="BlockIoTypeValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Block IO type.</description>
+
+  <parameter name="Major" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device major number.</description>
+
+  <parameter name="Minor" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device minor number.</description>
+
+  <parameter name="Rate" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">For BPS device type, the maximum read/write rate in bytes per second on the device. For IOPS device type, the maximum number of read/write operations per second on the device.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Resources.CPU." shortObjectName="EeCpuObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1832" lockZone="6" />
+  <description source="BROADCOM">Resource CPU attributes.</description>
+
+  <parameter name="Quota" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="0" maxValue="100000" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Specifies the total amount of time in microseconds for which all tasks in a cgroup can run during one period. The period is fixed at 100 milliseconds. Minimum quota is 1 millisecond.</description>
+
+  <parameter name="RealtimeRuntime" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Specifies a period of time in microseconds for the longest continuous period in which the tasks in a cgroup have access to CPU resources. Applicable to real-time scheduling tasks only.</description>
+
+  <parameter name="Cpus" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Comma-separated list of CPUs with dashes (&quot;-&quot;) to represent ranges, the container will run in. For example, &quot;0-2,16&quot; represents CPUs 0, 1, 2, and 16.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Resources.Devices.{i}." shortObjectName="EeResDevicesObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1833" lockZone="6" />
+  <description source="BROADCOM">Resource device attributes.</description>
+
+  <parameter name="Allow" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">When true, allow access to device. Otherwise, cannot access to device.</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="a" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Type of device: a(all), c(char), or b(block).  Default to a(all).</description>
+
+  <parameter name="Major" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device major number.</description>
+
+  <parameter name="Minor" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device minor number.</description>
+
+  <parameter name="Access" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Cgroup permissions for device. A composition of r(read), w(write), and m(mknod). For example, &quot;rwm&quot;.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Resources.NetworkSetup." shortObjectName="EeNetworkSetupObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1834" lockZone="6" />
+  <description source="BROADCOM">Network setup attributes.</description>
+
+  <parameter name="NetworkMode" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="Disconnect" validValuesArray="ContainerNetworkModeValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Disconnect (default): No network setup required (No LAN nor WAN access). Primary: LAN and WAN access available. Secondary: WAN access available. LAN RX only, no TX. LanOnly: LAN access only. WanOnly: WAN access only.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Devices.{i}." shortObjectName="EeDevicesObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1835" lockZone="6" />
+  <description source="BROADCOM">List of devices that must be available in the container.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to device inside container.</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Type of Linux device: c, b, u or p. More info in mknod(1).</description>
+
+  <parameter name="Major" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device major number.</description>
+
+  <parameter name="Minor" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device minor number.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks." shortObjectName="EeHooksObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1836" lockZone="6" />
+  <description source="BROADCOM">Container hooks.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Presetup.{i}." shortObjectName="EePresetupObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1837" lockZone="6" />
+  <description source="BROADCOM">List of container presetup hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Presetup.{i}.Args.{i}." shortObjectName="EePresetupArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1838" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Prestart.{i}." shortObjectName="EePrestartObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1839" lockZone="6" />
+  <description source="BROADCOM">List of container prestart hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Prestart.{i}.Args.{i}." shortObjectName="EePrestartArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1840" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststart.{i}." shortObjectName="EePoststartObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1841" lockZone="6" />
+  <description source="BROADCOM">List of container poststart hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststart.{i}.Args.{i}." shortObjectName="EePoststartArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1842" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststop.{i}." shortObjectName="EePoststopObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1843" lockZone="6" />
+  <description source="BROADCOM">List of container poststop hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststop.{i}.Args.{i}." shortObjectName="EePoststopArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1844" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecEnv.{i}.X_BROADCOM_COM_NetworkInfo." shortObjectName="EeNetworkObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="true" bbfProtocol="common" oid="1845" lockZone="6" />
+  <description source="BROADCOM">This object contains proprietary network information of this ExecEnv.</description>
+
+  <parameter name="PrimaryIfName" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">The textual name of the primary interface as assigned by the CPE</description>
+
+  <parameter name="PrimaryIfAddr" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">The IPv4 address of the primary interface</description>
+
+  <parameter name="SecondaryIfName" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">The textual name of the secondary interface as assigned by the CPE</description>
+
+  <parameter name="SecondaryIfAddr" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">The IPv4 address of the secondary interface</description>
+
+  <parameter name="WanOnlyIfName" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">The textual name of the WanOnly interface as assigned by the CPE</description>
+
+  <parameter name="WanOnlyIfAddr" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+  <description source="BROADCOM">The IPv4 address of the WanOnly interface</description>
+
+
+
+
+<object name="Device.SoftwareModules.DeploymentUnit.{i}." shortObjectName="DUObject" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1846" lockZone="6" />
+  <description source="TRx">this table serves as the Deployment Unit inventory and contains status information about each Deployment Unit.&#10;&#10;A new instance of this table gets created during the installation of a Software Module.&#10;&#10;At most one entry in this table can exist with all the same values for UUID, Version and ExecutionEnvRef, or with a given value for Alias.</description>
+  <description source="BROADCOM">The TR181 spec says this object is Read-only, i.e. multiple instances.  I think we can change it back since only osgid and linmosd will create instances of this object, not tr69c.&#10;REPORT_PROFILE: SM_Baseline:1, SM_DeployAndExecUnits:1</description>
+
+  <parameter name="UUID" type="UUID" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="36" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">A universally Unique Identifier chosen by the ACS.  The format of this valued defined by RFC4122 Version 4 (Random)&#10;&#10;This value MUST NOT be altered when the DeploymentUnit is updated.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="DUID" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Deployment Unit Identifier chosen by targed ExecEnv.  The formate of this value is Execution Environment specific.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Alias" type="string" specSource="TR181" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="cpe-du" maxLength="64" hideParameterFromAcs="false" autoGenerateAlias="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">A non-volatile handle used to reference this instance.  Alias provides a mechanism for an ACS to label this instance for furture reference.&#10;&#10;An initial unique value MUST be assigned when the CPE creates an instance of this DeploymentUnit.</description>
+
+  <parameter name="Name" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the Name of this DeploymentUnit, which is choosen by the author of the Deployment Unit.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Status" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="Uninstalled" validValuesArray="DUStatusValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the status of this DeploymentUnit.  Enumeration of:&#10;Installing (this instance is in the process of being Installed and SHOULD transition to the Installed state)&#10;Installed (this instance has been successfully installed.  The Resolved flag SHOULD also be referenced for dependency resolution)&#10;Updating (this instance is in the process of being updated and SHOULD transition to the Installed state)&#10;Uninstalling (this instance is in the process of being Uninstalled and should be transition to the Uninstalled state)&#10;Uninstalled (this instance has been successfully Uninstalled.  This status will typically not be seen within a DeploymentUnit instance)</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Resolved" type="boolean" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates whether or not this DeploymentUnit has resolved all of its dependencies.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1</description>
+
+  <parameter name="URL" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Contains the URL used by the most recent ChangeDUState RPC to either Install or Update this DeploymentUnit.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="X_BROADCOM_COM_Username" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="256" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Username to be used by the CPE to authenticate with the file server, if authentication is required.</description>
+
+  <parameter name="X_BROADCOM_COM_Password" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="256" isTr69Password="true" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Password to be used by the CPE to authenticate with the file server, if authentication is required.</description>
+
+  <parameter name="Description" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="256" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Textual description of this DeploymentUnit.  The format of this value is Execution Environment specific.&#10;</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1</description>
+
+  <parameter name="Vendor" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="128" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Vendor of this DeploymentUnit.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Version" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Version of this DeploymentUnit.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="VendorLogList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a table row in the DeviceInfo.VendorLogFile table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the vendor log files that have come into existence because of this ExecutionUnit.&#10;&#10;When the DeploymentUnit (that caused this ExecutionUnit to come into existence) is uninstalled the vendor log files referenced here SHOLD be removed from the CPE.&#10;&#10;Not all DeploymentUnit instances will actually have a corresponding vendor log file in which case the value of this parameter will be an empty string.</description>
+
+  <parameter name="VendorConfigList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a table row in the DeviceInfo.VendorConfigFile table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the vendor config files that have come into existence because of this ExecutionUnit.&#10;&#10;When the DeploymentUnit (that caused this ExecutionUnit to come into existence) is uninstalled the vendor config files referenced here SHOULD be removed from the CPE.&#10;&#10;Not all DeploymentUnit instances will actually have a corresponding vendor config file in which case the value of this parameter will be an empty string.</description>
+
+  <parameter name="ExecutionUnitList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a row in the ExecutionUnit table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the ExecutionUnit instances that are associated with this DeploymentUnit instance.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="ExecutionEnvRef" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">This value MUST be the path name of a row in the ExecEnv table.  If the referenced object is deleted, the parameter value MUST be set to an empty string.  Represents the ExecEnv that this DeploymentUnit is associated with.</description>
+    <description source="BROADCOM">Should be ExecutionEnvRef.  When is a good time to fix?&#10;REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="X_BROADCOM_COM_ExecutionEnvList" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Comma-separated list of strings.  Each list item MUST be the path name of a row in the ExecEnv table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the ExecEnv instances that are associated with this DeploymentUnit instance.</description>
+
+  <parameter name="X_BROADCOM_COM_startTime" type="dateTime" specSource="Broadcom" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The date and time the operation on the DU was started in UTC.  If this is unknown, the parameter value is set to the Unknow Time value.</description>
+
+  <parameter name="X_BROADCOM_COM_completeTime" type="dateTime" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The date and time the operation on the DU was completed in UTC.  If this is unknown, the parameter value is set to the Unknow Time value.</description>
+
+  <parameter name="X_BROADCOM_COM_bundleId" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This field is only used when this DU is associated with OSGI/Felix.</description>
+
+  <parameter name="X_BROADCOM_COM_IsPreinstall" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">When this flag is true, this DU has been preinstalled by BEEP framework.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}." shortObjectName="EUObject" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1847" lockZone="6" />
+  <description source="TRx">This table serves as the Execution Unit inventory and contains both status information about each Execution Unit as well as configurable parameters for each Execution Unit.&#10;&#10;Each DeploymentUnit that is installed can have zero or more Execution Units.&#10;&#10;Once a Deployment Unit is installed, it populates this table with its contained Execution Units.&#10;&#10;When the Deployment Unit (that caused this ExecutionUnit to come into existence) is updated, this instance MAY be removed and new instances MAY come into existence.  While the Deployment Unit (that caused this ExecutionUnit to come into existence) is being updated, all ExecutionUnit instances assocciatedwith the Deployment Unit will be stopped until the update is complete at which time they will be restored to the state that they were in before the update started.&#10;&#10;When the Deployment Unit (that caused this ExecutionUnit to come into existence) is uninstalled, this instance is removed.&#10;&#10;Each ExecutionUnit MAY also contain a set of vendor specific parameters displaying status and maining configuration that reside under the Extensions objection.&#10;&#10;At most one entry in this table can exist with a given value for EUID or with a given value for Alias.&#10; </description>
+  <description source="BROADCOM">The TR181 spec says this object is Read-only, i.e. multiple instances.  I think we can change it back since only osgid and linmosd will create instances of this object, not tr69c.&#10;REPORT_PROFILE: SM_Baseline:1, SM_DeployAndExecUnits:1&#10;</description>
+
+  <parameter name="EUID" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Execution Unit Identifier chosen by the ExecEnv during installation of the associated DeploymentUnit.&#10;&#10;The format of this value is Execution Environment specific, but it MUST be unique across ExecEnv isntances.  Thus, it is recommended that this be a combination of the ExecEnv.{i}.Name and and ExecutionEnvironment local unique value.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1&#10;</description>
+
+  <parameter name="Alias" type="string" specSource="TR181" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="cpe-eu" maxLength="64" hideParameterFromAcs="false" autoGenerateAlias="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">A non-volatile handle used to reference this instance.  Alias provides a mechanism for an ACS to label this instance for future reference. &#10;&#10;An initial unique value MUST be assigned when the CPE creates an instance of this ExecutionUnit.&#10;</description>
+
+  <parameter name="Name" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The name of this ExecutionUnit as it pertains to its associated DeploymentUnit, which SHOULD be unique accross all ExecutionUnit instances contained within its associated DeploymentUnit.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="ExecEnvLabel" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The name of this ExecutionUnit as provided by the ExecEnv, which SHOULD be unique across all ExecutionUnit intances contained within a specif ExecEnv.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Status" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="Idle" validValuesArray="EUStatusValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the status of this Execution Unit.  Enumeration of:&#10;Idle (this instance is in an Idle state and not running)&#10;Starting (this instance is in the process of Starting and SHOULD transition to the Active state)&#10;Active (this instance is currently running)&#10;Stopping (this instance is in the process of Stopping and SHOULD transition to the Idle state)&#10;</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="RequestedState" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="W" supportLevel="ReadWrite" defaultValue="" validValuesArray="EURequestStateValues" isTr69Password="true" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the state transition that the ACS is requesting for this ExecutionUnit.   Enumeration of:&#10;Idle (if this ExcutionUnit is currently Starting or Active, the CPE will attempt to Stop the Execution Unit; otherwise this requested state is ignored)&#10;&#10;Active (if this ExecutionUnit is currently in Idle the CPE will attempt to Start the ExcutionUnit.  If this ExecutionUnit is in Stopping the request is rejected and a fault is raised.   Otherwise, this request state is ignored)&#10;&#10;When read, this parameter returns an empty string, regardless of the actual value.&#10;</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="ExecutionFaultCode" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="NoFault" validValuesArray="ExecutionFaultCodeValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">If while running or transitioning between states tis ExecutionUnit identifies a fault this parameter embodies the problem.  The value of NoFault MUST be used when everything is working as intended.  Enumeration of:&#10;NoFault&#10;FailureOnStart&#10;FaiureOnAutoStart&#10;FailureOnStop&#10;FailureWhileActive&#10;DependencyFailure&#10;UnStartable</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="ExecutionFaultMessage" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">If while running or transitioning between states this ExecutionUnit identifies a fault this pareamter provides a more detailed explaination of the problem.&#10;&#10;If ExecutionFaultCode has the value of NoFault then the value of this parameter MUST be an empty string and ignored by ACS.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="X_BROADCOM_COM_StateChangeReason" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="256" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This parameter indicates the reason of the state change of the EU. So far, only out of memory is supported.</description>
+
+  <parameter name="X_BROADCOM_COM_State_LastChange" type="dateTime" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This parameter records the time at which the state of the EU changes.</description>
+
+  <parameter name="AutoStart" type="boolean" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Controls whether or not this ExecutionUnit will automatically start when its ExecEnv is either booted or restarted.&#10;&#10;If TRUE and the RunLevel verification is also met, then this ExecutionUnit will be automatically started by the device after a reboot or restart.&#10;&#10;If false this ExecutionUnit will not be started after a reboot or restart until it is explicitly commanded to do so either by the ACS or another Execution Unit.&#10;</description>
+
+  <parameter name="RunLevel" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Determines when this ExecutionUnit will be started.&#10;&#10;If AutoStart is true and ExecEnv.{i}.CurrentRunLevel is greater than RunLevel, then this ExecutionUnit will be started.&#10;&#10;If the value of ExecEnv.{i}.CurrentRunLevel is -1, the the associated ExecEnv. doesn't support Run Levels, thus the value of this parameter is irrelvant when read and setting its value has no impact to the Run Level of this ExecutionUnit.</description>
+
+  <parameter name="Vendor" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="128" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Vendor of this ExecutionUnit.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Version" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Version of this ExecutionUnit.  The format of this value is Execution Environment specific.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+  <parameter name="Description" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="256" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Textual description of this ExecutionUnit.  The format of this value is Execution Environment specific.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1</description>
+
+  <parameter name="DiskSpaceInUse" type="int" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The amount of disk space measured in kilobytes currently being used by this ExecutionUnit.  A valued of -1 MUST be used for ExecutionUnit instances where this parameter is not applicable.</description>
+
+  <parameter name="MemoryInUse" type="int" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The amount of physical RAM measured in kilobytes currently being used by this ExecutionUnit.  A valued of -1 MUST be used for ExecutionUnit instances where this parameter is not applicable.</description>
+
+  <parameter name="References" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a table row.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represnts the instances of multi-instanced object that have come into existence because of this ExecutionUnit.&#10;&#10;NOTE: All other objects and parameters (i.e. not multi-instanced objects) that this Execution has caused to come into existence will be discovered via the DeviceInfo.SupportedDataModel.{i}.table.</description>
+
+  <parameter name="AssociatedProcessList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a table row in the DeviceInfo.ProcessStatus.Process table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the system processes that are active in the system because of this ExecutionUnit.&#10;&#10;If Status is not Active it is expected that this list will be an empty string.  Some ExecutionUnit instances MIGHT NOT have any system processes irrespective of the value of Status.</description>
+
+  <parameter name="VendorLogList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a table row in the DeviceInfo.VendorLogFile table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the vendor log files that have come into existence because of this ExecutionUnit.&#10;&#10;When the DeploymentUnit (that caused this ExecutionUnit to come into existence) is uninstalled the vendor log files referenced here SHOLD be removed from the CPE.&#10;&#10;Not all ExecutionUnit instances will actually have a corresponding vendor log file in which case the value of this parameter will be an empty string.</description>
+
+  <parameter name="VendorConfigList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list of strings.  Each list item MUST be the path name of a table row in the DeviceInfo.VendorConfigFile table.  If the referenced object is deleted, the corresponding item MUST be removed from the list.  Represents the vendor config files that have come into existence because of this ExecutionUnit.&#10;&#10;When the DeploymentUnit (that caused this ExecutionUnit to come into existence) is uninstalled the vendor config files referenced here SHOULD be removed from the CPE.&#10;&#10;Not all ExecutionUnit instances will actually have a corresponding vendor config file in which case the value of this parameter will be an empty string.</description>
+
+  <parameter name="SupportedDataModelList" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The value MUST be the path name of a table row in the DeviceInfo.SupportedDataModel table.  If the referenced object is deleted, this parameter value MUST be set to an empty string.  Represents the CWMP-DT schema instance that has been introduced to this device because  of existence of this ExecutionUnit.</description>
+
+  <parameter name="ExecutionEnvRef" type="string" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">This value MUST be the path name of a row in the ExecEnv table.  If the referenced object is deleted, the parameter value MUST be set to an empty string.  Represents the ExecEnv that this ExecutionUnit is associated with.</description>
+    <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1</description>
+
+  <parameter name="X_BROADCOM_COM_bundleId" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This field is only used when this EU is associated with OSGI/Felix.</description>
+
+  <parameter name="X_BROADCOM_COM_appDigest" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="160" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The digital digest of this app -- ie. binary executable application digest which will be checked againt during the launch.</description>
+
+  <parameter name="X_BROADCOM_COM_ManifestDigest" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="160" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The digital digest of this app manifest which will be checked againt during app launch.</description>
+
+  <parameter name="X_BROADCOM_COM_MediaType" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The media type of this EU -  &quot;executible and tarball&quot; for now and can be expanded if needed.</description>
+
+  <parameter name="X_BROADCOM_COM_Username" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The unique username of this Execution Unit.</description>
+
+  <parameter name="X_BROADCOM_COM_MngrAppName" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The manager application name of this Execution Unit, if this a app_mediaType  'tarball'. It is named as app_tarballMngrExecutable in the package information text file.</description>
+
+  <parameter name="X_BROADCOM_COM_IPv4Addresses" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">List of IPv4 addresses of this EU delimited by comma.</description>
+
+  <parameter name="X_BROADCOM_COM_IPv6Addresses" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">List of IPv6 addresses of this EU delimited by comma.</description>
+
+  <parameter name="X_BROADCOM_COM_autoStartOrder" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The auto-start order of this EU. After its ExecEnv is either rebooted or restarted, EUs with autoStartOrder 0 will be auto-started first, followed by EUs with autoStartOrder 1, provided that the EU is autoStart enabled and the RunLevel verification is also met.</description>
+
+  <parameter name="X_BROADCOM_COM_autoRelaunch" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Controls whether or not this ExecutionUnit will automatically restart after it exits.&#10;&#10;If TRUE this ExecutionUnit will be restarted by the device unless it was stopped by ACS or other management interface.&#10;&#10;If false this ExecutionUnit will not be restarted after it exits.&#10;</description>
+
+  <parameter name="X_BROADCOM_COM_maxRestarts" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="5" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The maximum number of tries to restart this ExecutionUnit after it exits.</description>
+
+  <parameter name="X_BROADCOM_COM_restartInterval" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="2000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The device MUST wait for the interval (in milliseconds) specified by this parameter to expire before attempting to restart this ExecutionUnit.</description>
+
+  <parameter name="X_BROADCOM_COM_successfulStartPeriod" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="3000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The device MUST check that the ExecutionUnit remains running after the period (in milliseconds) specified by this parameter.&#10;&#10;If it is, then this should be taken as an indication that the ExecutionUnit is running successfully&#10;&#10;and at this point the device MUST reset the current number of retries to zero.</description>
+
+  <parameter name="X_BROADCOM_COM_restartCount" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The current number of tries for restarting the ExecutionUnit.</description>
+
+  <parameter name="X_BROADCOM_COM_ContainerName" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="true" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The container name of this ExecutionUnit.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions." shortObjectName="ExtensionsObject" specSource="TR181" profile="Device2_SM_Baseline:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1848" lockZone="6" />
+  <description source="TRx">This object proposes a general location for vendor extensions specific to this Execution Unit, which allows multiple Execution Units to expose parameters without the concern of conflicting parameter names.  These vendor extensions are related to displaying status and maintaining configuration for this Execution Unit.&#10;&#10;It is also possible for the Execution Unit to expose status and configuration parameters within Service objects or as embedded objects and parameters directly within the root data model, in  which case the cobination of References and SupportedDataModelRef will be used to determine their locations.</description>
+  <description source="BROADCOM">REPORT_PROFILE: SM_DeployAndExecUnits:1, SM_Baseline:1</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Bus." shortObjectName="BusObject" specSource="Broadcom" profile="Unspecified" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1849" lockZone="6" />
+  <description source="BROADCOM">This object contains bus name information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Name" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the wellknown name of D-Bus application.</description>
+
+  <parameter name="ObjectPathNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The number of entries in the Bus ObjectPath table.</description>
+
+  <parameter name="ServiceStatus" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="Down" validValuesArray="EUServiceStatusValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The D-Bus service status of this Execution Unit. Service status is Up when the wellknown name is acquired. Service status is Down when the wellknown name is lost.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Bus.ObjectPath.{i}." shortObjectName="BusObjectPathObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1850" lockZone="6" />
+  <description source="BROADCOM">This object contains object path information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the object path of D-Bus application.</description>
+
+  <parameter name="InterfaceNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The number of entries in the Bus Interface table.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Bus.ObjectPath.{i}.Interface.{i}." shortObjectName="BusInterfaceObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1851" lockZone="6" />
+  <description source="BROADCOM">This object contains interface information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Name" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the interface name of D-Bus application.</description>
+
+  <parameter name="MethodNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The number of entries in the Bus Method table.</description>
+
+  <parameter name="SignalNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The number of entries in the Bus Signal table.</description>
+
+  <parameter name="PropertyNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The number of entries in the Bus Property table.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Bus.ObjectPath.{i}.Interface.{i}.Method.{i}." shortObjectName="BusMethodObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1852" lockZone="6" />
+  <description source="BROADCOM">This object contains method information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Name" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the method name of D-Bus application.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Bus.ObjectPath.{i}.Interface.{i}.Signal.{i}." shortObjectName="BusSignalObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1853" lockZone="6" />
+  <description source="BROADCOM">This object contains signal information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Name" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the signal name of D-Bus application.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Bus.ObjectPath.{i}.Interface.{i}.Property.{i}." shortObjectName="BusPropertyObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1854" lockZone="6" />
+  <description source="BROADCOM">This object contains property information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Name" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the property name of D-Bus application.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_BusClient." shortObjectName="BusClientObject" specSource="Broadcom" profile="Unspecified" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1855" lockZone="6" />
+  <description source="BROADCOM">This object contains bus client application information of execution unit running on BEEP D-Bus framework.</description>
+
+  <parameter name="Name" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the name of D-Bus client application.</description>
+
+  <parameter name="PrivilegeNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The number of entries in the Bus Client Privilege table.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_BusClient.Privilege.{i}." shortObjectName="BusClientPrivilegeObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1856" lockZone="6" />
+  <description source="BROADCOM">This object contains client privilege information of execution unit running on BEEP D-Bus framework. The client application represented by this execution unit is allowed to access to services that are configured by this object.</description>
+
+  <parameter name="WellknownName" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the bus wellknown name of D-Bus application.</description>
+
+  <parameter name="ObjectPath" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the object path of D-Bus application.</description>
+
+  <parameter name="Interface" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is the interface of D-Bus application.</description>
+
+  <parameter name="Member" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value is name of either method, signal, or property of D-Bus application.</description>
+
+  <parameter name="MemberType" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="Method" validValuesArray="BusInterfaceMemberTypes" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value specifies type of member. It is either All, Method, Signal, or Property.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest." shortObjectName="ManifestObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="true" bbfProtocol="common" oid="1857" lockZone="6" />
+  <description source="BROADCOM">This object contains proprietary information from the manifest of this execution unit.</description>
+
+  <parameter name="User" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This value indicates whether D-Bus application is run on priviledged or unpriviledged container.</description>
+
+  <parameter name="MaxMemory" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Container Memory size limit in Kbytes. -1 for unlimited memory size.</description>
+
+  <parameter name="MaxFlashSize" type="int" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Container flash size limit in Kbytes. -1 for unlimited flash size.</description>
+
+  <parameter name="NetworkMode" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="Disconnect" validValuesArray="ContainerNetworkModeValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Disconnect (default): No network setup required (No LAN nor WAN access). Primary: LAN and WAN access available. Secondary: WAN access available. LAN RX only, no TX. LanOnly: LAN access only. WanOnly: WAN access only.</description>
+
+  <parameter name="InterfaceIdentifier" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Interface identifier is used for lanonly networking mode</description>
+
+  <parameter name="ExposedPorts" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">This parameter specifies those ports requested by the EU service. The format is port/tcp, port/udp, port with the default protocol being tcp if not specified.</description>
+
+  <parameter name="RealtimeRuntime" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Specifies a period of time in microseconds for the longest continuous period in which the tasks in a cgroup have access to CPU resources. Applicable to real-time scheduling tasks only.</description>
+
+  <parameter name="Cpus" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Comma-separated list of CPUs with dashes (&quot;-&quot;) to represent ranges, the container will run in. For example, &quot;0-2,16&quot; represents CPUs 0, 1, 2, and 16.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Bus." shortObjectName="EuBusObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1858" lockZone="6" />
+  <description source="BROADCOM">Message bus attribute section of this EU.</description>
+
+  <parameter name="BusInfo" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The bus info string contains the message bus information of this EE. It is string parameters seperated by | with first parameter being busType.  For example, D-Bus info will be like &quot;D-Bus|com.broadcom.pmd|/com/broadcom/pmd|com.broadcom.pmd&quot;</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Process." shortObjectName="EuProcessObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1859" lockZone="6" />
+  <description source="BROADCOM">Process attribute section of this EU.</description>
+
+  <parameter name="ApparmorProfile" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The name of the profile that defines this EU's AppArmor confinement.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Process.Args.{i}." shortObjectName="EuProcessArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1860" lockZone="6" />
+  <description source="BROADCOM">Arguments to start this EU process. List of strings with similar semantics to IEEE Std 1003.1-2008 execvp's argv. &#10;&#10;    This specification extends the IEEE standard in that at least one entry is REQUIRED, and that entry is used with the same semantics as execvp's file. &#10;&#10;    For example, to start cwmpd process with command &quot;cwmpd -v 0&quot;, argv[0]=&quot;cwmpd&quot;, argv[1]=&quot;-v&quot;, argv[2]=&quot;0&quot;</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Process argv, e.g. &quot;cwmp&quot;.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Process.Env.{i}." shortObjectName="EuProcessEnvObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1861" lockZone="6" />
+  <description source="BROADCOM">Arguments to set this EU process's environment variables.</description>
+
+  <parameter name="EnvVar" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Process' environment variables</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Mounts.{i}." shortObjectName="EuMountsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1862" lockZone="6" />
+  <description source="BROADCOM">Directories to be mounted into EU containers</description>
+
+  <parameter name="Destination" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Destination of mount point: path inside container. This value MUST be an absolute path. This parameter is required for Mounts object</description>
+
+  <parameter name="Source" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">A device name, but can also be a file or directory name for bind mounts or a dummy. Path values for bind mounts are either absolute or relative to the bundle. This parameter is optional for Mounts object</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The type of the filesystem to be mounted. This parameter is optional for Mounts object</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Mounts.{i}.Options.{i}." shortObjectName="EuMountsOptionObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1863" lockZone="6" />
+  <description source="BROADCOM">Mount options of the filesystem to be used. This dynamic object is optional for Mounts object</description>
+
+  <parameter name="option" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Mount options of the filesystem to be used</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux." shortObjectName="EuLinuxObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1864" lockZone="6" />
+  <description source="BROADCOM">Linux attribute section of this EU.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Resources." shortObjectName="EuResourceObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1865" lockZone="6" />
+  <description source="BROADCOM">Resource attributes for this EU.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Resources.BlockIO.{i}." shortObjectName="EuBlkioObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1866" lockZone="6" />
+  <description source="BROADCOM">Block I/O device attributes.</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" validValuesArray="BlockIoTypeValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Block IO type.</description>
+
+  <parameter name="Major" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device major number.</description>
+
+  <parameter name="Minor" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device minor number.</description>
+
+  <parameter name="Rate" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">For BPS device type, the maximum read/write rate in bytes per second on the device. For IOPS device type, the maximum number of read/write operations per second on the device.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Resources.CPU." shortObjectName="EuCpuObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1867" lockZone="6" />
+  <description source="BROADCOM">Resource CPU attributes.</description>
+
+  <parameter name="Quota" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="0" maxValue="100000" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Specifies the total amount of time in microseconds for which all tasks in a cgroup can run during one period. The period is fixed at 100 milliseconds. Minimum quota is 1 millisecond.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Resources.Devices.{i}." shortObjectName="EuResDevicesObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1868" lockZone="6" />
+  <description source="BROADCOM">Resource device attributes.</description>
+
+  <parameter name="Allow" type="boolean" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">When true, allow access to device. Otherwise, cannot access to device.</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="a" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Type of device: a(all), c(char), or b(block).  Default to a(all).</description>
+
+  <parameter name="Major" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device major number.</description>
+
+  <parameter name="Minor" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device minor number.</description>
+
+  <parameter name="Access" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Cgroup permissions for device. A composition of r(read), w(write), and m(mknod). For example, &quot;rwm&quot;.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Devices.{i}." shortObjectName="EuDevicesObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1869" lockZone="6" />
+  <description source="BROADCOM">List of devices that must be available in the container.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to device inside container.</description>
+
+  <parameter name="Type" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Type of Linux device: c, b, u or p. More info in mknod(1).</description>
+
+  <parameter name="Major" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device major number.</description>
+
+  <parameter name="Minor" type="long" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Device minor number.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks." shortObjectName="EuHooksObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1870" lockZone="6" />
+  <description source="BROADCOM">Container hooks.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Presetup.{i}." shortObjectName="EuPresetupObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1871" lockZone="6" />
+  <description source="BROADCOM">List of container presetup hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Presetup.{i}.Args.{i}." shortObjectName="EuPresetupArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1872" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Prestart.{i}." shortObjectName="EuPrestartObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1873" lockZone="6" />
+  <description source="BROADCOM">List of container prestart hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Prestart.{i}.Args.{i}." shortObjectName="EuPrestartArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1874" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststart.{i}." shortObjectName="EuPoststartObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1875" lockZone="6" />
+  <description source="BROADCOM">List of container poststart hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststart.{i}.Args.{i}." shortObjectName="EuPoststartArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1876" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststop.{i}." shortObjectName="EuPoststopObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1877" lockZone="6" />
+  <description source="BROADCOM">List of container poststop hooks.</description>
+
+  <parameter name="Path" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Full path to the hook command.</description>
+
+  <parameter name="Timeout" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="18446744073709551615" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Timeout value in seconds for running hook command.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Linux.Hooks.Poststop.{i}.Args.{i}." shortObjectName="EuPoststopArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1878" lockZone="6" />
+  <description source="BROADCOM">Hook command argv[].</description>
+
+  <parameter name="Arg" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" maxLength="1024" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Hook command argv.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Dependency." shortObjectName="EuDependencyObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1879" lockZone="6" />
+  <description source="BROADCOM">List of dependencies that this EU depends on.</description>
+
+  <parameter name="Libraries" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Comma-separated list of libraries that this EU depends on.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Seccomp." shortObjectName="EuSeccompObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1880" lockZone="6" />
+  <description source="BROADCOM">Seccomp attributes.</description>
+
+  <parameter name="DefaultAction" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="UNSET" validValuesArray="SyscallActionValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The default action for seccomp rules. Valid values are defined in SyscallActionValues array.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Seccomp.Syscalls.{i}." shortObjectName="EuSyscallsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1881" lockZone="6" />
+  <description source="BROADCOM">Seccomp syscalls attributes.</description>
+
+  <parameter name="Names" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Comma-separated list of names of the syscalls. Must contain at least one entry.</description>
+
+  <parameter name="Action" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="UNSET" validValuesArray="SyscallActionValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The action for seccomp rules. Valid values are defined in SyscallActionValues array.</description>
+
+
+
+
+<object name="Device.SoftwareModules.ExecutionUnit.{i}.Extensions.X_BROADCOM_COM_Manifest.Seccomp.Syscalls.{i}.Args.{i}." shortObjectName="EuSyscallArgsObject" specSource="Broadcom" profile="Unspecified" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1882" lockZone="6" />
+  <description source="BROADCOM">List of seccomp syscall arguments.</description>
+
+  <parameter name="Index" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The index for syscall arguments in seccomp.</description>
+
+  <parameter name="Value" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The value for syscall arguments in seccomp.</description>
+
+  <parameter name="ValueTwo" type="unsignedLong" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The value for syscall arguments in seccomp.</description>
+
+  <parameter name="Op" type="string" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="UNSET" validValuesArray="SyscallArgsOpValues" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The operator for syscall arguments in seccomp. Valid values are defined in SyscallArgsOpValues array.</description>
+
+
+
+
+<object name="Device.SoftwareModules.X_BROADCOM_COM_DmAccess.{i}." shortObjectName="DmAccessObject" specSource="Broadcom" profile="Unspecified" requirements="PC" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1883" lockZone="6" />
+  <description source="BROADCOM">Each instance of this table represents an MDM granular access. </description>
+
+  <parameter name="EUID" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The Execution Unit Identifier of this MDM granular access.</description>
+
+  <parameter name="AccessID" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="64" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The unique identifier for this MDM granular access.</description>
+
+  <parameter name="ProfileList" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Comma-separated list of accessible profile names.</description>
+
+
+
+
+<vsaInfo>
+
+<validstringarray name="minimumSingleVsaValues" />
+  <element>IgnoreThis</element>
+
+<validstringarray name="ponTypeValues" />
+  <element>GPON</element>
+  <element>EPON</element>
+  <element>BPON</element>
+  <element>GEPON</element>
+  <element>PONTYPE_NONE</element>
+  <element>AE</element>
+  <element>XGPON</element>
+  <element>XGS-PON</element>
+  <element>NGPON2</element>
+
+<validstringarray name="ponRateValues" />
+  <element>1010</element>
+  <element>2510</element>
+  <element>1025</element>
+  <element>0202</element>
+  <element>1001</element>
+  <element>0101</element>
+  <element>0201</element>
+  <element>2501</element>
+
+<validstringarray name="BusInterfaceMemberTypes" />
+  <element>Method</element>
+  <element>Signal</element>
+  <element>Property</element>
+  <element></element>
+
+<validstringarray name="BusTypeValues" />
+  <element>D-Bus</element>
+  <element>EeMngrEid</element>
+
+<validstringarray name="ContainerNetworkModeValues" />
+  <element>Disconnect</element>
+  <element>Primary</element>
+  <element>Secondary</element>
+  <element>WanOnly</element>
+  <element>LanOnly</element>
+
+<validstringarray name="DUStatusValues" />
+  <element>Installing</element>
+  <element>Installed</element>
+  <element>Updating</element>
+  <element>Uninstalling</element>
+  <element>Uninstalled</element>
+  <element>X_BROADCOM_COM_Downloading</element>
+  <element>X_BROADCOM_COM_DnldFailed</element>
+  <element>X_BROADCOM_COM_DnldBadFormat</element>
+  <element>X_BROADCOM_COM_DnldCorrupted</element>
+  <element>X_BROADCOM_COM_DnldBadSigntr</element>
+
+<validstringarray name="EURequestStateValues" />
+  <element>Idle</element>
+  <element>Active</element>
+  <element></element>
+
+<validstringarray name="EUServiceStatusValues" />
+  <element>NoService</element>
+  <element>Down</element>
+  <element>Up</element>
+
+<validstringarray name="EUStatusValues" />
+  <element>Idle</element>
+  <element>Starting</element>
+  <element>Active</element>
+  <element>Stopping</element>
+
+<validstringarray name="ExecEnvStatusValues" />
+  <element>Up</element>
+  <element>Updating</element>
+  <element>Error</element>
+  <element>Disabled</element>
+  <element>X_BROADCOM_COM_Starting</element>
+  <element>X_BROADCOM_COM_Stopping</element>
+
+<validstringarray name="ExecutionFaultCodeValues" />
+  <element>NoFault</element>
+  <element>FailureOnStart</element>
+  <element>FailureOnAutoStart</element>
+  <element>FailureOnStop</element>
+  <element>FailureWhileActive</element>
+  <element>DependencyFailure</element>
+  <element>UnStartable</element>
+
+<validstringarray name="BlockIoTypeValues" />
+  <element>CONT_BLKIO_READ_BPS_DEV</element>
+  <element>CONT_BLKIO_WRITE_BPS_DEV</element>
+  <element>CONT_BLKIO_READ_IOPS_DEV</element>
+  <element>CONT_BLKIO_WRITE_IOPS_DEV</element>
+
+<validstringarray name="SyscallActionValues" />
+  <element>UNSET</element>
+  <element>SCMP_ACT_KILL</element>
+  <element>SCMP_ACT_TRAP</element>
+  <element>SCMP_ACT_ERRNO</element>
+  <element>SCMP_ACT_TRACE</element>
+  <element>SCMP_ACT_ALLOW</element>
+
+<validstringarray name="SyscallArgsOpValues" />
+  <element>UNSET</element>
+  <element>SCMP_CMP_NE</element>
+  <element>SCMP_CMP_LT</element>
+  <element>SCMP_CMP_LE</element>
+  <element>SCMP_CMP_EQ</element>
+  <element>SCMP_CMP_GE</element>
+  <element>SCMP_CMP_GT</element>
+  <element>SCMP_CMP_MASKED_EQ</element>
+
+</vsaInfo>
+
+<profileInfo>
+<profile name="Device2_Baseline:1" />
+<profile name="Device2_Baseline:2" />
+<profile name="Device2_Baseline:3" />
+<profile name="Device2_Reboot:1" />
+<profile name="Unspecified" />
+<profile name="Device2_SM_Baseline:1" />
+</profileInfo>
+
+
+</xmlMandatorySingleRootNode>

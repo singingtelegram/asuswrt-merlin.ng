@@ -4,25 +4,19 @@
    Copyright (c) 2018 Broadcom 
    All Rights Reserved
 
-Unless you and Broadcom execute a separate written software license
-agreement governing use of this software, this software is licensed
-to you under the terms of the GNU General Public License version 2
-(the "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
-with the following added to such license:
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as published by
+the Free Software Foundation (the "GPL").
 
-   As a special exception, the copyright holders of this software give
-   you permission to link this software with independent modules, and
-   to copy and distribute the resulting executable under terms of your
-   choice, provided that you also meet, for each linked independent
-   module, the terms and conditions of the license of that module.
-   An independent module is a module which is not derived from this
-   software.  The special exception does not apply to any modifications
-   of the software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-Not withstanding the above, under no circumstances may you combine
-this software in any way with any other Broadcom software provided
-under a license other than the GPL, without Broadcom's express prior
-written consent.
+
+A copy of the GPL is available at http://www.broadcom.com/licenses/GPLv2.php, or by
+writing to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
 
 :>
 */
@@ -176,14 +170,21 @@ exit:
     payload[payload_len - 1] = payload_saved_last_byte;
 }
 
-static void send_report(uint8_t stream_idx, uint64_t bytes)
+static void send_report(uint8_t stream_idx, uint64_t bytes, uint8_t is_upload)
 {
-    uint32_t delay_ms;
+    int32_t delay_ms;
     uint64_t rate_Mbps;
     struct rtnl_link_stats64 dev_stats;
 
     /* take time before validating */
     do_gettimeofday(&_time_stop[stream_idx]);
+
+	if (!is_upload)
+		tcpspd_engine_print_last_spdsts(stream_idx);
+
+    if ((g_tcpspd[stream_idx].mode == TCPSPD_MODE_HTTP) && is_upload)
+        atomic_set(&http_state[stream_idx], HTTP_UP_STATE_DATA_TRANSFER_DONE);
+
     delay_ms = (_time_stop[stream_idx].tv_usec - _time_start[stream_idx].tv_usec) / 1000;
     delay_ms += (_time_stop[stream_idx].tv_sec - _time_start[stream_idx].tv_sec) * 1000;
 
@@ -197,62 +198,20 @@ static void send_report(uint8_t stream_idx, uint64_t bytes)
     g_spd_report[stream_idx].expected_bytes = tcpspd_engine_get_expected_bytes(stream_idx);
     g_spd_report[stream_idx].time_ms = delay_ms;
 
-    /* With Time Base the stop can happen before the stream has started, bytes, expected _bytes may be 0. check for 0 < bytes */
-    g_spd_report[stream_idx].status = ((bytes && bytes >= g_spd_report[stream_idx].expected_bytes) ? TCPSPDTEST_GENL_CMD_STATUS_OK : TCPSPDTEST_GENL_CMD_STATUS_INTERRUPTED);
-
-    if (0 == tcpspd_get_iface_stats_by_stream(stream_idx, &dev_stats))
-    {
-        g_spd_report[stream_idx].total_rx_bytes = dev_stats.rx_bytes - g_spd_iface_stats_start[stream_idx].rx_bytes;
-        g_spd_report[stream_idx].total_tx_bytes = dev_stats.tx_bytes - g_spd_iface_stats_start[stream_idx].tx_bytes;
-    }
-
-    if (g_tcpspd[stream_idx].end_of_test_spd_report)
-        tcpspd_genl_send_speed_report_msg(stream_idx, &(g_spd_report[stream_idx]), g_spd_report[stream_idx].status);
-
-    g_tcpspd[stream_idx].state = TCPSPD_STATE_DONE_DATA;
-
-    tc_debug("[%hhu] Kernel Upload complete with %llu bytes at %u ms GoodPut=%u Mbps\n", stream_idx, bytes,
-        delay_ms, (uint32_t)rate_Mbps);
-}
-
-/* HTTP, FTP download complete callback */
-static void download_complete_cb(uint8_t stream_idx, void *data, uint16_t len)
-{
-    uint64_t bytes = *(uint64_t *)data;
-    int32_t delay_ms;
-    uint64_t rate_Mbps;
-    struct rtnl_link_stats64 dev_stats;
-
-    tcpspd_engine_down(stream_idx);
-
-    if (TCPSPD_STATE_DONE_DATA == g_tcpspd[stream_idx].state)
-        return; /* Second complete cb may happen with http. The resp ok for http get req is also counted as received bytes */
-
-    do_gettimeofday(&_time_stop[stream_idx]);
-
-    /* print last pending speed stats before engine down */
-    tcpspd_engine_print_last_spdsts(stream_idx);
-
-    delay_ms = (_time_stop[stream_idx].tv_usec - _time_start[stream_idx].tv_usec) / 1000;
-    delay_ms += (_time_stop[stream_idx].tv_sec - _time_start[stream_idx].tv_sec) * 1000;
-
-    /* do calculation in two stages to prevent wrap around */
-    rate_Mbps = bytes << 3;      /* bits */
-    do_div(rate_Mbps, delay_ms); /* bits/msec */
-    do_div(rate_Mbps, 1000);     /* bits/usec */
-
-    /* Prepare speed report */
-    g_spd_report[stream_idx].rate = rate_Mbps;
-    g_spd_report[stream_idx].num_bytes = bytes;
-    g_spd_report[stream_idx].expected_bytes = tcpspd_engine_get_expected_bytes(stream_idx);
-    g_spd_report[stream_idx].time_ms = delay_ms;
-
+    /* Prepare tr143 speed report */
     if (g_tcpspd[stream_idx].mode == TCPSPD_MODE_HTTP)
     {
-        g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_sec = _time_http_head_req[stream_idx].tv_sec;
-        g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_usec = _time_http_head_req[stream_idx].tv_usec;
-        g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_sec = _time_http_head_resp[stream_idx].tv_sec;
-        g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_usec = _time_http_head_resp[stream_idx].tv_usec;
+        if (is_upload) {
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_sec = _time_http_post_req[stream_idx].tv_sec;
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_usec = _time_http_post_req[stream_idx].tv_usec;
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_sec = _time_start[stream_idx].tv_sec;
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_usec = _time_start[stream_idx].tv_usec;
+        } else {
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_sec = _time_http_head_req[stream_idx].tv_sec;
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_usec = _time_http_head_req[stream_idx].tv_usec;
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_sec = _time_http_head_resp[stream_idx].tv_sec;
+            g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_usec = _time_http_head_resp[stream_idx].tv_usec;
+        }
     }
     else
     {
@@ -276,8 +235,32 @@ static void download_complete_cb(uint8_t stream_idx, void *data, uint16_t len)
 
     g_tcpspd[stream_idx].state = TCPSPD_STATE_DONE_DATA;
 
-    tc_info("[%hhu] Kernel Download complete with %llu bytes at %u ms GoodPut=%u Mbps\n", stream_idx, bytes,
+    tc_info("[%hhu] Kernel %s complete with %llu bytes at %u ms GoodPut=%u Mbps\n", stream_idx, is_upload ? "Upload" : "Download", bytes,
         delay_ms, (uint32_t)rate_Mbps);
+}
+
+/* HTTP, FTP download complete callback */
+static void download_complete_cb(uint8_t stream_idx, void *data, uint16_t len)
+{
+    uint64_t bytes = *(uint64_t *)data;
+
+    if (TCPSPD_STATE_DONE_DATA == g_tcpspd[stream_idx].state)
+        return; /* Second complete cb may happen with http. The resp ok for http get req is also counted as received bytes */
+
+    tcpspd_engine_down(stream_idx);
+    send_report(stream_idx, bytes, 0);
+}
+
+/* HTTP, FTP upload complete callback */
+static void upload_complete_cb(uint8_t stream_idx, void *data, uint16_t len)
+{
+    uint64_t bytes = *(uint64_t *)data;
+
+    if (TCPSPD_STATE_DONE_DATA == g_tcpspd[stream_idx].state)
+        return; /* Second complete cb may happen with http. The resp ok for http get req is also counted as received bytes */
+
+    tcpspd_engine_down(stream_idx);
+    send_report(stream_idx, bytes, 1);
 }
 
 /* HTTP upload/download response callback */
@@ -287,72 +270,6 @@ static void http_response_cb(uint8_t stream_idx, void *data, uint16_t len)
     {
         http_handle_response(stream_idx, (uint8_t *)data, len);
     }
-}
-
-/* FTP upload complete callback */
-static void upload_complete_cb(uint8_t stream_idx, void *data, uint16_t len)
-{
-    uint64_t bytes = *(uint64_t *)data;
-
-    send_report(stream_idx, bytes);
-
-    tcpspd_engine_down(stream_idx);
-}
-
-/* HTTP upload complete callback */
-static void http_upload_complete_cb(uint8_t stream_idx, void *data, uint16_t len)
-{
-    int32_t delay_ms;
-    uint64_t rate_Mbps;
-    uint64_t bytes = *(uint64_t *)data;
-    struct rtnl_link_stats64 dev_stats;
-
-    tcpspd_engine_down(stream_idx);
-
-    if (TCPSPD_STATE_DONE_DATA == g_tcpspd[stream_idx].state)
-        return; /* Second complete cb may happen with http. The resp ok for http get req is also counted as received bytes */
-
-    do_gettimeofday(&_time_stop[stream_idx]);
-
-    atomic_set(&http_state[stream_idx], HTTP_UP_STATE_DATA_TRANSFER_DONE);
-
-    delay_ms = (_time_stop[stream_idx].tv_usec - _time_start[stream_idx].tv_usec) / 1000;
-    delay_ms += (_time_stop[stream_idx].tv_sec - _time_start[stream_idx].tv_sec) * 1000;
-
-    /* calculation in two stages to prevent wrap around */
-    rate_Mbps = bytes << 3;       /* bits */
-    do_div(rate_Mbps, delay_ms);  /* bits/msec */
-    do_div(rate_Mbps, 1000);      /* bits/usec */
-
-    g_spd_report[stream_idx].rate = rate_Mbps;
-    g_spd_report[stream_idx].num_bytes = bytes;
-    g_spd_report[stream_idx].expected_bytes = tcpspd_engine_get_expected_bytes(stream_idx);
-    g_spd_report[stream_idx].time_ms = delay_ms;
-
-    /* Prepare tr143 speed report */
-    g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_sec = _time_http_post_req[stream_idx].tv_sec;
-    g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_ROM_TIME].tv_usec = _time_http_post_req[stream_idx].tv_usec;
-    g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_sec = _time_start[stream_idx].tv_sec;
-    g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_BOM_TIME].tv_usec = _time_start[stream_idx].tv_usec;
-    g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_EOM_TIME].tv_sec = _time_stop[stream_idx].tv_sec;
-    g_spd_report[stream_idx].msg.tr143_ts[SPDT_TR143_TS_REPORT_EOM_TIME].tv_usec = _time_stop[stream_idx].tv_usec;
-
-    /* With Time Base the stop can happen before the stream has started, bytes, expected _bytes may be 0. check for 0 < bytes */
-    g_spd_report[stream_idx].status = ((bytes && bytes >= g_spd_report[stream_idx].expected_bytes) ? TCPSPDTEST_GENL_CMD_STATUS_OK : TCPSPDTEST_GENL_CMD_STATUS_INTERRUPTED);
-
-    if (0 == tcpspd_get_iface_stats_by_stream(stream_idx, &dev_stats))
-    {
-        g_spd_report[stream_idx].total_rx_bytes = dev_stats.rx_bytes - g_spd_iface_stats_start[stream_idx].rx_bytes;
-        g_spd_report[stream_idx].total_tx_bytes = dev_stats.tx_bytes - g_spd_iface_stats_start[stream_idx].tx_bytes;
-    }
-
-    if (g_tcpspd[stream_idx].end_of_test_spd_report)
-        tcpspd_genl_send_speed_report_msg(stream_idx, &(g_spd_report[stream_idx]), g_spd_report[stream_idx].status);
-
-    g_tcpspd[stream_idx].state = TCPSPD_STATE_DONE_DATA;
-
-    tc_info("[%hhu] Kernel Upload complete with %llu bytes at %u ms GoodPut=%u Mbps\n", stream_idx, bytes,
-            delay_ms, (uint32_t)rate_Mbps);
 }
 
 /* Wait for HTTP head response.
@@ -450,6 +367,9 @@ static int http_nf_hook(uint8_t stream_idx, struct sk_buff *skb, unsigned int ho
                     ** Because, if http_handle_response sends redirect msg into netlink queue too early,
                     ** will disturb msg sequence in queue.
                     */
+            /* for redirect, the app will disconnect and reconnect again with the right file,
+             * to avoid unexpected error due to transferred bytes size set it to '0' */
+            tcpspd_engine_set_expected_bytes(stream_idx, 0);
             do_gettimeofday(&_time_http_head_resp[stream_idx]);
             atomic_set(&http_state[stream_idx], HTTP_STATE_HEAD_RESP_DONE); 
         }
@@ -608,7 +528,7 @@ int tcpspd_prtcl_http_upload_request(uint8_t stream_idx, unsigned char *uri, uin
 
     g_tcpspd[stream_idx].action = SPDT_DIR_TX;
     
-    tcpspd_engine_init_tcb(stream_idx, 1, http_response_cb, http_upload_complete_cb);
+    tcpspd_engine_init_tcb(stream_idx, 1, http_response_cb, upload_complete_cb);
 
     /* set upload size */
     tcpspd_engine_set_expected_bytes(stream_idx, upload_size);

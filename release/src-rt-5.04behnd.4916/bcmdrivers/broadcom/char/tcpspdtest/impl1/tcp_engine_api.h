@@ -4,25 +4,19 @@
    Copyright (c) 2018 Broadcom 
    All Rights Reserved
 
-Unless you and Broadcom execute a separate written software license
-agreement governing use of this software, this software is licensed
-to you under the terms of the GNU General Public License version 2
-(the "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
-with the following added to such license:
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as published by
+the Free Software Foundation (the "GPL").
 
-   As a special exception, the copyright holders of this software give
-   you permission to link this software with independent modules, and
-   to copy and distribute the resulting executable under terms of your
-   choice, provided that you also meet, for each linked independent
-   module, the terms and conditions of the license of that module.
-   An independent module is a module which is not derived from this
-   software.  The special exception does not apply to any modifications
-   of the software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-Not withstanding the above, under no circumstances may you combine
-this software in any way with any other Broadcom software provided
-under a license other than the GPL, without Broadcom's express prior
-written consent.
+
+A copy of the GPL is available at http://www.broadcom.com/licenses/GPLv2.php, or by
+writing to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
 
 :>
 */
@@ -79,6 +73,7 @@ int tcpspd_engine_is_sock_learned(uint8_t stream_idx);
 void tcpspd_engine_set_sack(uint8_t stream_idx);
 void tcpspd_engine_set_mss(uint8_t stream_idx, uint32_t snd_mss, uint32_t adv_mss);
 void tcpspd_engine_set_resp_handle_token(uint8_t stream_idx, uint16_t num);
+void tcpspd_engine_set_txwscale(uint8_t stream_idx, uint8_t txwscale);
 void tcpspd_engine_set_rtt(uint8_t stream_idx, uint32_t rtt);
 void tcpspd_engine_set_rwnd(uint8_t stream_idx, uint32_t rwnd_bytes, uint32_t rtt, uint16_t wsacle, uint32_t rate_Mbps);
 int tcpspd_engine_set_rto(uint32_t initial_rto_usec, uint16_t rto_ratio, uint8_t is_dynamic_rto_time);

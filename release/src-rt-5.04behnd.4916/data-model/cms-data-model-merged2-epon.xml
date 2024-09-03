@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<xmlMandatorySingleRootNode copyright="Broadcom Ltd., 2006-2018"  warning="This file is auto-generated.  Edits to this file will be lost!" >
+
+
+
+
+
+<object name="Device." shortObjectName="Dev2DeviceObject" specSource="TR181" profile="Device2_Baseline:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" multiCompObj="true" oid="1000" lockZone="0" />
+  <description source="TRx">The top-level object for a Device.</description>
+
+  <parameter name="RootDataModelVersion" type="string" specSource="TR181" profile="Device2_Baseline:3" requirements="R" supportLevel="ReadOnly" defaultValue="2.15" maxLength="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Root data model version, e.g. 2.4.  For a vendor-defined root data model, this is the standard Broadband Forum model on which the vendor defined model is based.  Possible patters: 2\.\d+</description>
+
+  <parameter name="InterfaceStackNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the InterfaceStack table.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg." shortObjectName="AppCfgObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" multiCompObj="true" oid="3130" lockZone="7" />
+  <description source="BROADCOM">This object has child objects which contain defines for individual applications.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.BcmMsgdCfg." shortObjectName="BcmMsgdCfgObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="true" bbfProtocol="common" oid="3339" lockZone="0" />
+  <description source="BROADCOM">This objects contains config parameters for the BCM msgd (BDK message router).</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">BCM uLog Level for this app.&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestinationMask" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Bitmask of where the BCM uLog message go (1=Std Error, 2=Syslog)</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.EponMdCfg." shortObjectName="EponMdCfgObject" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="3327" lockZone="0" />
+  <description source="BROADCOM">This objects contains config parameters for the epon_md app.</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">BCM uLog Level for this app.&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestinationMask" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Bitmask of where the BCM uLog message go (1=Std Error, 2=Syslog)</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.EponHalThreadCfg." shortObjectName="EponHalThreadCfgObject" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="3328" lockZone="0" />
+  <description source="BROADCOM">This objects contains config parameters for the EPON HAL thread (part of epon_md app).</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">BCM uLog Level for the EPON HAL thread (part of epon_md app).&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestinationMask" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Bitmask of where the BCM uLog message go (1=Std Error, 2=Syslog)</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.EponappCfg." shortObjectName="EponappCfgObject" specSource="Broadcom" profile="X_BROADCOM_COM_Epon:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2500" lockZone="9" />
+  <description source="BROADCOM">This objects contains config parameters for the eponapp.</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">CMS Logging Level for this app.&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestination" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Standard Error" validValuesArray="LoggingDestinationValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Where does the CMS log message go.  Enumeration of:&#10;&quot;Standard Error&quot;&#10;&quot;Syslog&quot;</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_EPON." shortObjectName="EponObject" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2010" lockZone="9" />
+  <description source="BROADCOM">XPON(EPON/GPON) configuration</description>
+
+  <parameter name="AuthenticationId" type="string" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Logical ID authentication ID.</description>
+
+  <parameter name="AuthenticationPassword" type="string" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Logical ID authentication password.</description>
+
+  <parameter name="OamSelection" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Oam vendor TEK/CTC/DPoE.</description>        
+
+  <parameter name="ImageCrc" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">CTC upgrade image CRC.</description>        
+
+  <parameter name="ImageCrcBeforeCommit" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">CTC upgrade image CRC before commit.</description>        
+
+  <parameter name="Date" type="hexBinary" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="" maxLength="8" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Date of Manufacturer.</description>        
+
+  <parameter name="MaxLinkNum" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Max Link Number.</description>        
+
+  <parameter name="DpoeFileName" type="string" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="" maxLength="128" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The DPoE ONU firmware file name (0xD7/0x010E).</description>
+
+  <parameter name="DpoeMfgTime" type="hexBinary" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="" maxLength="26" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The DPoE firmware CVC and CVS validity times (0xD7/0x000F), used for secure software download.</description>        
+
+  <parameter name="EponSchMode" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Epon Schedule Mode.</description>     
+
+  <parameter name="EponIdleTimeOffset" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Epon Idle Time Offset.</description>
+
+  <parameter name="ExtendedId" type="string" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Customer Defined Extended Info.</description>
+
+  <parameter name="EponTxLaserPowerOff" type="boolean" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Epon Tx Laser Power Off.</description>
+
+  <parameter name="FailSafe" type="boolean" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Epon CPE device fail safe</description>
+
+  <parameter name="CucCfgCnt" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Cuc Configuration Counter</description>
+
+  <parameter name="DpoeCosignerName" type="string" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" defaultValue="" maxLength="8" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The DPoE SSD cosigner name (human readable string). </description>
+
+  <parameter name="DpoeCosignerTime" type="hexBinary" specSource="Broadcom" profile="X_BROADCOM_COM_EPON:1" supportLevel="ReadWrite" maxLength="26" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The DPoE SSD cosigner Code Access Start time as defined in DPoE-SP-OAMv2.0.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE." shortObjectName="DPoEObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="true" bbfProtocol="common" oid="2020" lockZone="9" />
+  <description source="Broadcom">This object is a root of all EPON DPOE related objects.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_OnuRebootReady." shortObjectName="DPoEOnuRebootReadyObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2021" lockZone="9" />
+  <description source="Broadcom">This object retrieve the Reboot Ready Status.</description>
+
+  <parameter name="Status" type="unsignedLong" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="2" minValue="1" maxValue="2" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The Reboot Ready Status.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_EponMode." shortObjectName="DPoEEponModeObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2022" lockZone="9" />
+  <description source="Broadcom">This attribute represents the EPON mode(s) supported by this ONU.</description>
+
+  <parameter name="EponMode" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The EPON mode(s) supported by this ONU.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_DynamicMacTableSetting." shortObjectName="DPoEDynamicMacSettingObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2023" lockZone="9" />
+  <description source="Broadcom">This object represents Dynamic MAC learning table settings.</description>
+
+  <parameter name="DynamicMacAddressAgeLimit" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The Dynamic MAC learning table age limit.</description>
+
+  <parameter name="DynamicMacLearningTableMaxSize" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The maximum size of the DPoE ONU MAC address learning table for the entire DPoE ONU.</description>
+
+  <parameter name="DynamicMacLearningAggregateLimit" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The maximum number of addresses that can be learned by all ports combined.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_DynamicMacTable.{i}." shortObjectName="DPoEDynamicMacTableObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="DynamicInstances" pruneWriteToConfigFile="true" hideObjectFromAcs="false" bbfProtocol="common" oid="2024" lockZone="9" />
+  <description source="Broadcom">This attribute represents the statically provisioned MAC address table.</description>
+
+  <parameter name="Port" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Port num.</description>
+
+  <parameter name="NumEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Num of Mac Entries.</description>
+
+  <parameter name="MacAddress" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Dynamically learned MAC address.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_StaticMacTable.{i}." shortObjectName="DPoEStaticMacTableObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="DynamicInstances" pruneWriteToConfigFile="true" hideObjectFromAcs="false" bbfProtocol="common" oid="2025" lockZone="9" />
+  <description source="Broadcom">This attribute represents the statically provisioned MAC address table.</description>
+
+  <parameter name="Port" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Port num.</description>
+
+  <parameter name="NumEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Num of Mac Entries.</description>
+
+  <parameter name="MacAddress" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Statically provisioned MAC address table.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_FirmwareInfo." shortObjectName="DPoEFirmwareInfoObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2026" lockZone="9" />
+  <description source="Broadcom">This object shows DPoE ONU firmware info.</description>
+
+  <parameter name="BootVersion" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Boot version.</description>
+
+  <parameter name="BootCrc32" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Boot CRC</description>
+
+  <parameter name="AppVersion" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">App version</description>
+
+  <parameter name="AppCrc32" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="64" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">App CRC.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_ChipInfo." shortObjectName="DPoEChipInfoObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2027" lockZone="9" />
+  <description source="Broadcom">This object shows chip info.</description>
+
+  <parameter name="JedecId" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">16-bit chip manufacturer ID code as assigned by JEDEC.</description>
+
+  <parameter name="ChipModel" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Identifies the particular kind of EPN chip. Format defined by chipset vendor.</description>
+
+  <parameter name="ChipVersion" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Identifies the version or stepping of the chip model. Format defined by chipset vendor.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_OnuId." shortObjectName="DPoEOnuIdObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2028" lockZone="9" />
+  <description source="Broadcom">This object shows ONU id.</description>
+
+  <parameter name="MacAddress" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="00:00:00:00:00:00" maxLength="255" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">ONU base link address.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_ManufacturerInfo." shortObjectName="DPoEManufacturerInfoObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2029" lockZone="9" />
+  <description source="Broadcom">This object shows manufacture info.</description>
+
+  <parameter name="Info" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Specific information that identifies the individual ONU.</description>
+
+  <parameter name="OrganizationName" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="255" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Organization which manufactured the DPoE ONU.</description>
+
+  <parameter name="Year" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The year the DPoE ONU was manufactured.</description>
+
+  <parameter name="Month" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The month the DPoE ONU was manufactured.</description>
+
+  <parameter name="Day" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The day the DPoE ONU was manufactured.</description>  
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_MaxLogicalLinks." shortObjectName="DPoEMaxLogicalLinksObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2030" lockZone="9" />
+  <description source="Broadcom">This object shows maximum number of logical links.</description>
+
+  <parameter name="Bidirectional" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Bidirection logical links.</description>
+
+  <parameter name="Downstreamonly" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Downstream only logical links.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_NetworkPorts." shortObjectName="DPoENetworkPortsObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2031" lockZone="9" />
+  <description source="Broadcom">This object shows number of TU interface ports.</description>
+
+  <parameter name="Total" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Total number.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_S1Interfaces." shortObjectName="DPoES1InterfacesObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2032" lockZone="9" />
+  <description source="Broadcom">This object shows S Interfaces.</description>
+
+  <parameter name="Total" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Total number.</description>
+
+  <parameter name="NameList" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">List all the S1 Interface name.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_OnuPacketBufferCapabilities." shortObjectName="DPoEOnuPacketBufferCapsObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2033" lockZone="9" />
+  <description source="Broadcom">This object shows onu packet buffer capabilities.</description>
+
+  <parameter name="UpstreamQueues" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Upstream Queues.</description>
+
+  <parameter name="UpQueuesMaxPerLink" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Upstream Max Queues Per Link.</description>
+
+  <parameter name="UpQueueIncrement" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Upstream Queue Increment.</description>
+
+  <parameter name="DownstreamQueues" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Downstream Queues.</description>
+
+  <parameter name="DnQueuesMaxPerPort" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Downstrem Max Queues Per Link.</description>
+
+  <parameter name="DnQueueIncrement" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Downstream Queue Increment.</description>
+
+  <parameter name="TotalPacketBuffer" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TotalPacket Buffer.</description>
+
+  <parameter name="UpPacketBuffer" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Upstream PacketBuffer.</description>
+
+  <parameter name="DnPacketBuffer" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Downstream PacketBuffer.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_LlidForwardingState.{i}." shortObjectName="DPoELlidForwardingStateObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="2034" lockZone="9" />
+  <description source="Broadcom">This object shows llid forwarding state.</description>
+
+  <parameter name="LinkId" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Link ID.</description>
+
+  <parameter name="ForwardingState" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Forwarding State.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_OamFrameRate.{i}." shortObjectName="DPoEOamFrameRateObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="DynamicInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="2035" lockZone="9" />
+  <description source="Broadcom">This object shows OAM frame rate.</description>
+
+  <parameter name="LinkId" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Link ID.</description>
+
+  <parameter name="MaxRate" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Max rate (PDUs/100ms).</description>
+
+  <parameter name="MinRate" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Min rate (Number of 100ms).</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_DeviceSysDescrInfo." shortObjectName="DPoEDeviceSysDescrInfoObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2036" lockZone="9" />
+  <description source="Broadcom">This object shows device sys description.</description>
+
+  <parameter name="VendorName" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Vendor Name.</description>
+
+  <parameter name="ModelNumber" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Model Number.</description>
+
+  <parameter name="HardwareVersion" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Hardware Version.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_OnuLinkStatistics.{i}." shortObjectName="DPoEOnuLinkStatisticsObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="DynamicInstances" pruneWriteToConfigFile="true" hideObjectFromAcs="false" bbfProtocol="common" oid="2037" lockZone="9" />
+  <description source="Broadcom">This object shows DPoE Onu link statistics.</description>
+
+  <parameter name="link" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="255" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">link index.</description>
+
+  <parameter name="RxUnicastFrames" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the count of frames received at one link.</description>
+
+  <parameter name="TxUnicastFrames" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the count of frames transmitted from one link.</description>
+
+  <parameter name="RxFrameTooShort" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrameTooShort counter.</description>
+
+  <parameter name="RxFrame64" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame64 counter.</description>
+
+  <parameter name="RxFrame65_127" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame65_127 counter.</description>
+
+  <parameter name="RxFrame128_255" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame128_255 counter.</description>
+
+  <parameter name="RxFrame256_511" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame256_511 counter.</description>
+
+  <parameter name="RxFrame512_1023" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame512_1023 counter.</description>
+
+  <parameter name="RxFrame1024_1518" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame1024_1518 counter.</description>
+
+  <parameter name="RxFrame1519_Plus" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">RxFrame1519_Plus counter.</description>
+
+  <parameter name="TxFrame64" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame64 counter.</description>
+
+  <parameter name="TxFrame65_127" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame65_127 counter.</description>
+
+  <parameter name="TxFrame128_255" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame128_255 counter.</description>
+
+  <parameter name="TxFrame256_511" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame256_511 counter.</description>
+
+  <parameter name="TxFrame512_1023" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame512_1023 counter.</description>
+
+  <parameter name="TxFrame_1024_1518" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame_1024_1518 counter.</description>
+
+  <parameter name="TxFrame_1519_Plus" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">TxFrame_1519_Plus counter.</description>
+
+  <parameter name="FramesDropped" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the frames dropped due to queue overflow or rate control discard.</description>
+
+  <parameter name="BytesDropped" type="unsignedLong" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the bytes dropped due to queue overflow or rate control discard.</description>
+
+  <parameter name="OpticalMonVcc" type="unsignedInt" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the current optical module Vcc.</description>
+
+  <parameter name="OpticalMonTxBiasCurrent" type="unsignedInt" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the current optical module Tx bias current.</description>
+
+  <parameter name="OpticalMonTxPower" type="unsignedInt" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the current optical module Tx power.</description>
+
+  <parameter name="OpticalMonRxPower" type="unsignedInt" specSource="Broadcom" profile="Unspecified" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">the current optical module Rx power.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_ClearOnuLinkStatistics." shortObjectName="DPoEClearOnuLinkStatisticsObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2038" lockZone="9" />
+  <description source="Broadcom">Clear DPoE Onu link statistics.</description>
+
+  <parameter name="SetClearOnuLinkStats" type="boolean" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Clear Onu Link statistics.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_ReinitMac." shortObjectName="DPoEReinitMacObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2039" lockZone="9" />
+  <description source="Broadcom">Reinit DPoE. Performs reinit MAC only to same DS/US.t.</description>
+
+  <parameter name="ReinitDPoE" type="boolean" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Reinit DPoE.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_LogicLinkNum." shortObjectName="DPoELogicLinkObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2040" lockZone="9" />
+  <description source="Broadcom">Show the max logic link number.</description>
+
+  <parameter name="CfgLinkNum" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" minValue="0" maxValue="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">Config Logic Link Number.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_DPoE.DPoE_ResetCount." shortObjectName="DPoEResetCountObject" specSource="Broadcom" profile="X_BROADCOM_COM_DPOE:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="2041" lockZone="9" />
+  <description source="Broadcom">This object retrieve the count of ONU reset.</description>
+
+  <parameter name="LocalResetCount" type="unsignedLong" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The count of local reset.</description>
+
+  <parameter name="OamResetCount" type="unsignedLong" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" minValue="0" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="Broadcom">The count of Oam reset.</description>
+
+
+
+
+<vsaInfo>
+
+<validstringarray name="minimumSingleVsaValues" />
+  <element>IgnoreThis</element>
+
+<validstringarray name="ponTypeValues" />
+  <element>GPON</element>
+  <element>EPON</element>
+  <element>BPON</element>
+  <element>GEPON</element>
+  <element>PONTYPE_NONE</element>
+  <element>AE</element>
+  <element>XGPON</element>
+  <element>XGS-PON</element>
+  <element>NGPON2</element>
+
+<validstringarray name="ponRateValues" />
+  <element>1010</element>
+  <element>2510</element>
+  <element>1025</element>
+  <element>0202</element>
+  <element>1001</element>
+  <element>0101</element>
+  <element>0201</element>
+  <element>2501</element>
+
+<validstringarray name="LoggingLevelValues" />
+  <element>Error</element>
+  <element>Notice</element>
+  <element>Debug</element>
+
+<validstringarray name="LoggingDestinationValues" />
+  <element>Standard Error</element>
+  <element>Syslog</element>
+  <element>Telnet</element>
+
+</vsaInfo>
+
+<profileInfo>
+<profile name="Device2_Baseline:1" />
+<profile name="Device2_Baseline:2" />
+<profile name="Device2_Baseline:3" />
+<profile name="Device2_Reboot:1" />
+<profile name="Unspecified" />
+<profile name="Baseline:1" />
+<profile name="X_BROADCOM_COM_Baseline:1" />
+<profile name="X_BROADCOM_COM_Epon:1" />
+<profile name="X_BROADCOM_COM_EPON:1" />
+<profile name="X_BROADCOM_COM_DPOE:1" />
+</profileInfo>
+
+
+</xmlMandatorySingleRootNode>

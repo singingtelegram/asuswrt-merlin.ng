@@ -148,7 +148,7 @@ static int ubus_master_decode_wnd_cfg(int master_port_id, int win, phys_addr_t p
     if(master_addr)
     {
 #if IS_BCMCHIP(63158) || IS_BCMCHIP(63178) || IS_BCMCHIP(47622) || IS_BCMCHIP(63146) || \
-    IS_BCMCHIP(6756) || IS_BCMCHIP(6765) || IS_BCMCHIP(6855) || IS_BCMCHIP(6888) || \
+    IS_BCMCHIP(6756) || IS_BCMCHIP(6765) || IS_BCMCHIP(6766) || IS_BCMCHIP(6855) || IS_BCMCHIP(6888) || \
     IS_BCMCHIP(6813) || IS_BCMCHIP(68880) || IS_BCMCHIP(6837)
         /* 63158 has the all the master connected to the CCI as default so no need to
            configure the map. Just turn on the cache configuration */
@@ -277,7 +277,7 @@ int ubus_remap_to_biu_cfg_wlu_srcpid(int srcpid, int enable)
 }
 #endif
 
-#if !IS_BCMCHIP(63158) && !IS_BCMCHIP(63178) && !IS_BCMCHIP(47622) && !IS_BCMCHIP(63146) && !IS_BCMCHIP(6756) && !IS_BCMCHIP(6765)
+#if !IS_BCMCHIP(63158) && !IS_BCMCHIP(63178) && !IS_BCMCHIP(47622) && !IS_BCMCHIP(63146) && !IS_BCMCHIP(6756) && !IS_BCMCHIP(6765) && !IS_BCMCHIP(6766)
 #if !IS_BCMCHIP(4912) && !IS_BCMCHIP(6813) && !IS_BCMCHIP(68880) && !IS_BCMCHIP(6837)
 static int ubus_remap_to_biu_cfg_queue_srcpid(unsigned long lut_idx, unsigned int *p_srcpid_queus_value)
 {

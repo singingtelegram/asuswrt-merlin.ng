@@ -30,9 +30,9 @@ void bcm_ubus4_dcm_clk_bypass(int enable)
     if(ubus_dcm_sys&&ubus_dcm_sys->clk) {
         clk = (volatile Ubus4ClkCtrlCfgRegs*)ubus_dcm_sys->clk;
         if(enable)
-            clk->ClockCtrl = UBUS4_CLK_BYPASS_MASK;
+            clk->ClockCtrl |= UBUS4_CLK_BYPASS_MASK;
         else
-            clk->ClockCtrl = 0;
+            clk->ClockCtrl &= ~UBUS4_CLK_BYPASS_MASK;
     }
 }
 #endif

@@ -1,0 +1,1295 @@
+<?xml version="1.0"?>
+<xmlMandatorySingleRootNode copyright="Broadcom Ltd., 2006-2018"  warning="This file is auto-generated.  Edits to this file will be lost!" >
+
+
+
+
+
+<object name="Device." shortObjectName="Dev2DeviceObject" specSource="TR181" profile="Device2_Baseline:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" multiCompObj="true" oid="1000" lockZone="0" />
+  <description source="TRx">The top-level object for a Device.</description>
+
+  <parameter name="RootDataModelVersion" type="string" specSource="TR181" profile="Device2_Baseline:3" requirements="R" supportLevel="ReadOnly" defaultValue="2.15" maxLength="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Root data model version, e.g. 2.4.  For a vendor-defined root data model, this is the standard Broadband Forum model on which the vendor defined model is based.  Possible patters: 2\.\d+</description>
+
+  <parameter name="InterfaceStackNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_Baseline:1" requirements="R" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the InterfaceStack table.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg." shortObjectName="AppCfgObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" multiCompObj="true" oid="3130" lockZone="7" />
+  <description source="BROADCOM">This object has child objects which contain defines for individual applications.</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.BcmMsgdCfg." shortObjectName="BcmMsgdCfgObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="true" bbfProtocol="common" oid="3339" lockZone="0" />
+  <description source="BROADCOM">This objects contains config parameters for the BCM msgd (BDK message router).</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">BCM uLog Level for this app.&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestinationMask" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Bitmask of where the BCM uLog message go (1=Std Error, 2=Syslog)</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.DiagMdCfg." shortObjectName="DiagMdCfgObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="3360" lockZone="7" />
+  <description source="BROADCOM">This objects contains config parameters for the diag_md app.</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">BCM uLog Level for this app.&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestinationMask" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Bitmask of where the BCM uLog message go (1=Std Error, 2=Syslog)</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_AppCfg.DiagSskCfg." shortObjectName="DiagSskCfgObject" specSource="Broadcom" profile="Unspecified" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="3361" lockZone="7" />
+  <description source="BROADCOM">This objects contains config parameters for the diagssk app.</description>
+
+  <parameter name="LoggingLevel" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Error" validValuesArray="LoggingLevelValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">BCM uLog Level for this app.&#10;Enumeration of:&#10;&quot;Error&quot;&#10;&quot;Notice&quot;&#10;&quot;Debug&quot;&#10;</description>
+
+  <parameter name="LoggingDestinationMask" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Bitmask of where the BCM uLog message go (1=Std Error, 2=Syslog)</description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_SpeedService." shortObjectName="SpeedServiceObject" specSource="Broadcom" profile="X_BROADCOM_COM_SPDSVC:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="3580" lockZone="0" />
+  <description source="BROADCOM">Object for Speed Service and last testing result </description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="spdsvcStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicate the availability of diagnostic data.  {{enum}} If the ACS sets the value of this parameter to {{enum|Requested}}, the CPE MUST initiate the corresponding diagnostic test.  When writing, the only allowed value is {{enum|Requested}}.  To ensure the use of the proper test parameters (the writable parameters in this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the {{param}} to {{enum|Requested}}.When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic. When the test is completed, the value of this parameter MUST be either {{enum|Completed}} (if the test completed successfully), or one of the ''Error'' values listed above.If the value of this parameter is anything other than {{enum|Completed}}, the values of the results parameters for this test are indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to allow the ACS to view the results, indicating the Event code ''8 DIAGNOSTICS COMPLETE'' in the Inform message.After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by the CPE until either this diagnostic is run again, or the CPE reboots.  After a reboot, if the CPE has not retained the result parameters from the most recent test, it MUST set the value of this parameter to {{enum|None}}.Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to {{enum|None}}. While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test being terminated and the value of this parameter being set to {{enum|None}}.While the test is in progress, setting this parameter to {{enum|Requested}} (and possibly modifying other writable parameters in this object) MUST result in the test being terminated and then restarted using the current values of the test parameters. </description>
+
+  <parameter name="Mode" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="client_bw" validValuesArray="modeValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the mode of a speed test. client_bw is for bandwidth capacity detection. </description>
+
+  <parameter name="Direction" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="bothstream" validValuesArray="directionValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the direction of a speed test. upstream, downstream, or both. </description>
+
+  <parameter name="DataPath" type="string" specSource="Broadcom" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="HW" validValuesArray="dataPathValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the selection of HW or SW Packet Generator/Packet Analyzer. </description>
+
+  <parameter name="ServerIpAddr" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0.0.0.0" maxLength="46" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Peer IP address which the speedtest is communicating with (dotted decimal format). </description>
+
+  <parameter name="TcpPort" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="50000" minValue="0" maxValue="65535" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">TCP port used for control </description>
+
+  <parameter name="UdpPort" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="65535" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">UDP port used for test data, can leave 0 to allow app to decide </description> 
+
+  <parameter name="StepDuration" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1000" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Duration of each step in milliseconds </description>
+
+  <parameter name="PacketLength" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1472" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Test packet length in bytes </description>
+
+  <parameter name="StartingBwKbps" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Kilo (1000)) bits per second, only valid in client mode. </description>
+
+  <parameter name="Algorithm" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="Fast" validValuesArray="AlgorithmValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Only for client_bw mode, algorithm to use to detect bandwidth capacity. </description>
+
+  <parameter name="MaxSteps" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="10" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Only for client_bw mode. </description>
+
+  <parameter name="AcceptablePercentageLoss" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Only for client_bw mode. Increments of 1 percent </description>
+
+  <parameter name="LatencyTolerancePercentage" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="-1" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Only use when algorithm is Bin or Ramp. A value of -1 indicates that it's optional and not be used. </description>
+
+  <parameter name="MaxLossPercentage" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The maximum loss percentage can be allowed. Only use when algorithm is Ramp. </description>
+
+  <parameter name="LogBuffer" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" maxLength="16" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Last 512 bytes of the output of speedtest </description>
+
+  <parameter name="GoodPut" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Total rate including overhead and payload in Kbps </description>
+
+  <parameter name="PayloadRate" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Only payload rate in Kbps </description>
+
+  <parameter name="PacketLoss" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Number of packet lost </description>
+
+  <parameter name="AvgLatency" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Average latency in us</description>
+
+  <parameter name="AdjustReceivedRate" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Ajusted received rate in Kbps </description>
+
+  <parameter name="ReceivedTime" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Time that packets are received in us</description>
+
+  <parameter name="Overhead" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Packet Headers plus IFG and FCS, which are sent in addition to the payload. This is detected by the speed service driver and reported to the app. </description>
+
+  <parameter name="LastRunTime" type="dateTime" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Date and time last result were saved</description>
+
+  <parameter name="ResultHistoryNumberOfEntries" type="unsignedInt" specSource="Broadcom" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Number of entries under ResultHistory. The 5th most recent results will be overwritten with the most recent results. </description>
+
+
+
+
+<object name="Device.X_BROADCOM_COM_SpeedService.ResultHistory.{i}." shortObjectName="ResultHistoryObject" specSource="Broadcom" profile="X_BROADCOM_COM_SPDSVC:1" supportLevel="DynamicInstances" pruneWriteToConfigFile="true" hideObjectFromAcs="false" bbfProtocol="common" oid="3581" lockZone="0" />
+  <description source="BROADCOM">Object containing the results of the last 4 attempts </description>
+
+  <parameter name="GoodPut" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Total rate including overhead and payload in Kbps </description>
+
+  <parameter name="PayloadRate" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Only payload rate in Kbps </description>
+
+  <parameter name="PacketLoss" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Number of packet lost </description>
+
+  <parameter name="AvgLatency" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Average latency in us</description>
+
+  <parameter name="AdjustReceivedRate" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Ajusted received rate in Kbps </description>
+
+  <parameter name="ReceivedTime" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Time that packets are received in us</description>
+
+  <parameter name="Overhead" type="unsignedInt" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Packet Headers plus IFG and FCS, which are sent in addition to the payload. This is detected by the speed service driver and reported to the app. </description>
+
+  <parameter name="RunTime" type="dateTime" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Date and time last result were saved</description>
+
+  <parameter name="Direction" type="string" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the direction of a speed test. upstream or downstream. </description>
+
+
+
+
+<object name="Device.IP." shortObjectName="Dev2IpObject" specSource="TR181" profile="Device2_IPInterface:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" multiCompObj="true" oid="1400" lockZone="0" />
+  <description source="TRx">IP object that contains the Interface, ActivePort, and Diagnostics objects.</description>
+
+  <parameter name="IPv4Capable" type="boolean" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates whether the device is IPv4 capable.</description>
+
+  <parameter name="IPv4Enable" type="boolean" specSource="TR181" profile="Device2_IPInterface:2" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Enables or disables the IPv4 stack, and so the use of IPv4 on the device. This affects only layer 3 and above.&#10;&#10;When false, IP interfaces that had been operationally up and passing IPv4 packets will now no longer be able to do so, and will be operationally down (unless also attached to an enabled IPv6 stack).</description>
+
+  <parameter name="IPv4Status" type="string" specSource="TR181" profile="Device2_IPInterface:2" requirements="R" supportLevel="ReadOnly" defaultValue="Disabled" validValuesArray="status3eValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the status of the IPv4 stack. Enumeration of:&#10;&#10;    * Disabled&#10;    * Enabled&#10;    * Error (OPTIONAL) &#10;&#10;The Error value MAY be used by the CPE to indicate a locally defined error condition.</description>
+
+  <parameter name="IPv6Capable" type="boolean" specSource="TR181" profile="Device2_IPv6Interface:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates whether the device is IPv6 capable.&#10;&#10;Note: If false, it is expected that IPv6-related parameters, enumeration values, etc will not be implemented by the device.</description>
+
+  <parameter name="IPv6Enable" type="boolean" specSource="TR181" profile="Device2_IPv6Interface:1" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Enables or disables the IPv6 stack, and so the use of IPv6 on the device. This affects only layer 3 and above.&#10;&#10;When false, IP interfaces that had been operationally up and passing IPv6 packets will now no longer be able to do so, and will be operationally down (unless also attached to an enabled IPv4 stack).</description>
+
+  <parameter name="IPv6Status" type="string" specSource="TR181" profile="Device2_IPv6Interface:1" requirements="R" supportLevel="ReadOnly" defaultValue="Disabled" validValuesArray="status3eValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the status of the IPv6 stack. Enumeration of:&#10;&#10;    * Disabled&#10;    * Enabled&#10;    * Error (OPTIONAL) &#10;&#10;The Error value MAY be used by the CPE to indicate a locally defined error condition.</description>
+
+  <parameter name="ULAPrefix" type="string" specSource="TR181" profile="Device2_IPv6Interface:1" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">[IPv6Prefix] The ULA /48 prefix [Section 3/RFC4193].</description>
+
+  <parameter name="InterfaceNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_IPInterface:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" alwaysWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the Interface table.</description>
+    <description source="BROADCOM">REPORT_PROFILE: Device2_IPInterface:1, Device2_IPv6Interface:1 </description>
+
+  <parameter name="ActivePortNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="NotSupported" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the ActivePort table.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics." shortObjectName="Dev2IpDiagnosticsObject" specSource="TR181" profile="Unspecified" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1410" lockZone="0" />
+  <description source="TRx">The IP Diagnostics object. </description>
+
+  <parameter name="IPv4PingSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that Ping over IPv4 is supported.</description>
+
+  <parameter name="IPv6PingSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that Ping over IPv6 is supported.</description>
+
+  <parameter name="IPv4TraceRouteSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that TraceRoute over IPv4 is supported.</description>
+
+  <parameter name="IPv6TraceRouteSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that TraceRoute over IPv6 is supported.</description>
+
+  <parameter name="DownloadTransports" type="string" specSource="TR181" profile="Device2_Download:1" requirements="R" supportLevel="ReadOnly" defaultValue="HTTP,FTP" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="usp" />
+    <description source="TRx">Supported ''DownloadDiagnostics'' transport protocols for a CPE device. </description>
+
+  <parameter name="IPv4DownloadDiagnosticsSupported" type="boolean" specSource="TR181" profile="Device2_Download:1" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that Download Diagnostics over IPv4 is supported.</description>
+
+  <parameter name="IPv6DownloadDiagnosticsSupported" type="boolean" specSource="TR181" profile="Device2_Download:1" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that Download Diagnostics over IPv6 is supported.</description>
+
+  <parameter name="IPv4UploadDiagnosticsSupported" type="boolean" specSource="TR181" profile="Device2_Upload:1" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that Upload Diagnostics over IPv4 is supported.</description>
+
+  <parameter name="IPv6UploadDiagnosticsSupported" type="boolean" specSource="TR181" profile="Device2_Upload:1" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that Upload Diagnostics over IPv6 is supported</description>
+
+  <parameter name="UploadTransports" type="string" specSource="TR181" profile="Device2_Upload:1" requirements="R" supportLevel="ReadOnly" defaultValue="HTTP,FTP" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="usp" />
+    <description source="TRx">Supported ''UploadDiagnostics'' transport protocols for a CPE device. </description>
+
+  <parameter name="IPv4UDPEchoDiagnosticsSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that UDPEcho Diagnostics over IPv4 is supported</description>
+
+  <parameter name="IPv6UDPEchoDiagnosticsSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that UDPEcho Diagnostics over IPv6 is supported</description>
+
+  <parameter name="IPLayerCapacitySupported" type="boolean" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates that IP Layer Capacity measurement is supported. </description>
+
+  <parameter name="IPv4ServerSelectionDiagnosticsSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that ServerSelection Diagnostics over IPv4 is supported.</description>
+
+  <parameter name="IPv6ServerSelectionDiagnosticsSupported" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates that ServerSelection Diagnostics over IPv6 is supported.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.IPPing." shortObjectName="Dev2IpPingDiagObject" specSource="TR181" profile="Device2_IPPing:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1411" lockZone="0" />
+  <description source="TRx">This object provides access to an IP-layer ping test. </description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_IPPing:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates availability of diagnostic data.  {{enum}} If the ACS sets the value of this parameter to {{enum|Requested}}, the CPE MUST initiate the corresponding diagnostic test.  When  writing, the only allowed value is {{enum|Requested}}.  To ensure the use of the proper test parameters (the writable parameters in  this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the  {{param}} to {{enum|Requested}}.When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic. When the test is completed, the value of this parameter MUST be either {{enum|Complete}} (if the test completed successfully), or one  of the ''Error'' values listed above.If the value of this parameter is anything other than {{enum|Complete}}, the values of the results parameters for this test are  indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to  allow the ACS to view the results, indicating the Event code ''8 DIAGNOSTICS COMPLETE'' in the Inform message.After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by  the CPE until either this diagnostic is run again, or the CPE reboots.  After a reboot, if the CPE has not retained the result  parameters from the most recent test, it MUST set the value of this parameter to {{enum|None}}. Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to  {{enum|None}}.While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test  being terminated and the value of this parameter being set to {{enum|None}}. While the test is in progress, setting this parameter to {{enum|Requested}} (and possibly modifying other writable parameters in this  object) MUST result in the test being terminated and then restarted using the current values of the test parameters. </description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_IPPing:1" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{reference}} The IP-layer interface over which the test is to be performed. This identifies the source IP address to use when performing the test. Example: Device.IP.Interface.1  If {{empty}} is specified, the CPE MUST use the interface as directed by its routing policy (''Forwarding'' table entries) to determine the appropriate interface. </description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">ndicates the IP protocol to be used. Enumeration of:&#10;Any (Use either IPv4 or IPv6 depending on the system preference)&#10;IPv4 (Use IPv4 for the Ping requests)&#10;IPv6 (Use IPv6 for the Ping requests)</description>
+
+  <parameter name="Host" type="string" specSource="TR181" profile="Device2_IPPing:1" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Host name or address of the host to ping. In the case where {{param}} is specified by name, and the name resolves to more than one address, it is up to the device implementation to choose which address to use. </description>
+
+  <parameter name="NumberOfRepetitions" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="W" supportLevel="ReadWrite" defaultValue="3" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Number of repetitions of the ping test to perform before reporting the results. </description>
+    <description source="BROADCOM">TR181 spec does not specify default, using the same value as Traceroute</description>
+
+  <parameter name="Timeout" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="W" supportLevel="ReadWrite" defaultValue="5000" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Timeout in milliseconds for the ping test. </description>
+    <description source="BROADCOM">TR181 spec does not specify default, using the same value as Traceroute</description>
+
+  <parameter name="DataBlockSize" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="W" supportLevel="ReadWrite" defaultValue="38" minValue="1" maxValue="65535" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Size of the data block in bytes to be sent for each ping. </description>
+    <description source="BROADCOM">TR181 spec does not specify default, using the same value as Traceroute</description>
+
+  <parameter name="DSCP" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="63" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">DiffServ codepoint to be used for the test packets.  By default the CPE SHOULD set this value to  zero. </description>
+
+  <parameter name="IPAddressUsed" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="" maxLength="45" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">IPAddress] Indicates which IP address was used to send the Ping request. The parameter is only valid if the DiagnosticsState is Complete.</description>
+
+  <parameter name="SuccessCount" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the number of successful pings (those in which a successful response was received  prior to the timeout) in the most recent ping test. </description>
+
+  <parameter name="FailureCount" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the number of failed pings in the most recent ping test. </description>
+
+  <parameter name="AverageResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the average response time in {{units}} over all repetitions with successful  responses of the most recent ping test.  If there were no successful responses, this value MUST be zero. </description>
+
+  <parameter name="MinimumResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the minimum response time in {{units}} over all repetitions with successful  responses of the most recent ping test.  If there were no successful responses, this value MUST be zero. </description>
+
+  <parameter name="MaximumResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_IPPing:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the maximum response time in {{units}} over all repetitions with successful  responses of the most recent ping test.  If there were no successful responses, this value MUST be zero. </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the ping app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.TraceRoute." shortObjectName="Dev2IpDiagTraceRouteObject" specSource="TR181" profile="Device2_TraceRoute:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1412" lockZone="0" />
+  <description source="TRx">This object is defines access to an IP-layer trace-route test for the specified IP interface. </description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates availability of diagnostic data.  {{enum}} If the ACS sets the value of this parameter to {{enum|Requested}}, the CPE MUST initiate the corresponding diagnostic test.  When  writing, the only allowed value is {{enum|Requested}}.  To ensure the use of the proper test parameters (the writable parameters in  this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the  {{param}} to {{enum|Requested}}.When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to  allow the ACS to view the results, indicating the Event code ''8 DIAGNOSTICS COMPLETE'' in the Inform message. </description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{reference}} The IP-layer interface over which the test is to be performed. This identifies the source IP address to use when performing the test.  Example: Device.IP.Interface.1 </description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the IP protocol to be used. Enumeration of:&#10;Any (Use either IPv4 or IPv6 depending on the system preference)&#10;IPv4 (Use IPv4 for the TraceRoute)&#10;IPv6 (Use IPv6 for the TraceRoute)</description>
+
+  <parameter name="Host" type="string" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Host name or address of the host to find a route to. In the case where {{param}} is specified by name, and the name resolves to more than one address, it is up to the device implementation to choose which address to use. </description>
+
+  <parameter name="NumberOfTries" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" defaultValue="3" minValue="1" maxValue="3" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Number of tries per hop. Set prior to running Diagnostic.  By default, the CPE SHOULD set this value to  3. </description>
+
+  <parameter name="Timeout" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" defaultValue="5000" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Timeout in milliseconds for each hop of the trace route test.  By default the CPE SHOULD set this value to 5000. </description>
+
+  <parameter name="DataBlockSize" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" defaultValue="38" minValue="1" maxValue="65535" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Size of the data block in bytes to be sent for each trace route.  By default, the CPE SHOULD set this value to  38. </description>
+
+  <parameter name="DSCP" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="63" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">DiffServ codepoint to be used for the test packets.  By default the CPE SHOULD set this value to  0. </description>
+
+  <parameter name="MaxHopCount" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="W" supportLevel="ReadWrite" defaultValue="30" minValue="1" maxValue="64" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The maximum number of hop used in outgoing probe packets (max TTL).  By default the CPE SHOULD set this value to  30. </description>
+
+  <parameter name="IPAddressUsed" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="" maxLength="45" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">[IPAddress] Indicates which IP address was used for TraceRoute. The parameter is only valid if the DiagnosticsState is Complete.</description>
+
+  <parameter name="ResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the response time in {{units}} the most recent trace route test.  If a route  could not be determined, this value MUST be zero. </description>
+
+  <parameter name="RouteHopsNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{numentries}} </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the traceroute app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.TraceRoute.RouteHops.{i}." shortObjectName="Dev2IpDiagTraceRouteRouteHopsObject" specSource="TR181" profile="Device2_TraceRoute:1" supportLevel="DynamicInstances" pruneWriteToConfigFile="true" hideObjectFromAcs="false" bbfProtocol="common" oid="1413" lockZone="0" />
+  <description source="TRx">Contains the array of hop results returned. If a route could not be determined, this array will be empty </description>
+
+  <parameter name="Host" type="string" specSource="TR181" profile="Device2_TraceRoute:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" maxLength="256" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the Host Name if DNS is able to resolve or IP Address of a hop along the discovered  route. </description>
+
+  <parameter name="HostAddress" type="string" specSource="TR181" profile="Device2_TraceRoute:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">If this parameter is not {{empty}} it will contain the last IP address of the host returned for this hop and the  {{param|Host}} will contain the Host Name returned from the reverse DNS query. </description>
+
+  <parameter name="ErrorCode" type="unsignedInt" specSource="TR181" profile="Device2_TraceRoute:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Contains the error code returned for this hop. This code is directly from the ICMP CODE field. </description>
+
+  <parameter name="RTTimes" type="string" specSource="TR181" profile="Device2_TraceRoute:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" maxLength="16" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{list}} Each list item contains one or more round trip times in {{units}} (one for each repetition) for this hop. </description>
+
+
+
+
+<object name="Device.IP.Diagnostics.DownloadDiagnostics." shortObjectName="Dev2IpDiagDownloadObject" specSource="TR181" profile="Device2_Download:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1414" lockZone="0" />
+  <description source="TRx">This object defines the diagnostics configuration for a HTTP and FTP DownloadDiagnostics Test. Files received in the DownloadDiagnostics do not require file storage on the CPE device. </description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_Download:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicate the availability of diagnostic data.  {{enum}} If the ACS sets the value of this parameter to {{enum|Requested}}, the CPE MUST initiate the corresponding diagnostic test.  When writing, the only allowed value is {{enum|Requested}}.  To ensure the use of the proper test parameters (the writable parameters in this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the {{param}} to {{enum|Requested}}.When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic. When the test is completed, the value of this parameter MUST be either {{enum|Completed}} (if the test completed successfully), or one of the ''Error'' values listed above.If the value of this parameter is anything other than {{enum|Completed}}, the values of the results parameters for this test are indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to allow the ACS to view the results, indicating the Event code ''8 DIAGNOSTICS COMPLETE'' in the Inform message.After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by the CPE until either this diagnostic is run again, or the CPE reboots.  After a reboot, if the CPE has not retained the result parameters from the most recent test, it MUST set the value of this parameter to {{enum|None}}. Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to {{enum|None}}.While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test being terminated and the value of this parameter being set to {{enum|None}}. While the test is in progress, setting this parameter to {{enum|Requested}} (and possibly modifying other writable parameters in this object) MUST result in the test being terminated and then restarted using the current values of the test parameters. </description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_Download:1" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{reference|the IP-layer interface over which the test is to be performed}} The value of this parameter MUST be either a valid interface or {{empty}}.  An attempt to set this parameter to a different value MUST be rejected as an invalid parameter value.If {{empty}} is specified, the CPE MUST use the default routing interface. </description>
+
+  <parameter name="DownloadURL" type="string" specSource="TR181" profile="Device2_Download:1" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The URL, as defined in {{bibref|RFC3986}}, for the CPE to perform the download on. This parameter MUST be in the form of a valid HTTP {{bibref|RFC2616}} or FTP {{bibref|RFC959}} URL. * When using FTP transport, FTP binary transfer MUST be used.* When using HTTP transport, persistent connections MUST be used and pipelining MUST NOT be used. * When using HTTP transport the HTTP Authentication MUST NOT be used. </description>
+
+  <parameter name="DownloadTransports" type="string" specSource="TR181" profile="Device2_Download:1" requirements="R" supportLevel="ReadOnly" defaultValue="HTTP,FTP" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="cwmp" />
+    <description source="TRx">Supported ''DownloadDiagnostics'' transport protocols for a CPE device. </description>
+
+  <parameter name="DownloadDiagnosticMaxConnections" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="8" minValue="1" maxValue="16" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the maximum number of connections that are supported by Download Diagnostics.</description>
+
+  <parameter name="DownloadDiagnosticsMaxIncrementalResult" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The maximum number of rows in IncrementalResult that the CPE will store.</description>
+
+  <parameter name="DSCP" type="unsignedInt" specSource="TR181" profile="Device2_Download:1" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="63" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The DiffServ code point for marking packets transmitted in the test.  The default value SHOULD be zero. </description>
+
+  <parameter name="EthernetPriority" type="unsignedInt" specSource="TR181" profile="Device2_Download:1" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="7" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Ethernet priority code for marking packets transmitted in the test (if applicable).  The default value SHOULD be zero. </description>
+
+  <parameter name="TimeBasedTestDuration" type="unsignedInt" specSource="TR181" profile="Unspecified" supportLevel="NotSupported" defaultValue="0" minValue="0" maxValue="999" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Controls time based testing [Section 4.3/TR-143a1]. When TimeBasedTestDuration &gt; 0, TimeBasedTestDuration is the duration in seconds of a time based test. If TimeBasedTestDuration is 0, the test is not based on time, but on the size of the file to be downloaded. The default value SHOULD be 0.</description>
+
+  <parameter name="TimeBasedTestMeasurementInterval" type="unsignedInt" specSource="TR181" profile="Unspecified" supportLevel="NotSupported" defaultValue="0" minValue="0" maxValue="999" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The measurement interval duration in seconds for objects in IncrementalResult for a time based FTP/HTTP download test (when TimeBasedTestDuration &gt; 0). The default value SHOULD be 0, which implies IncrementalResult collection is disabled. For example if TimeBasedTestDuration is 90 seconds and TimeBasedTestMeasurementInterval is 10 seconds, there will be 9 results in IncrementalResult, each with a 10 seconds duration.</description>
+
+  <parameter name="TimeBasedMeasurementOffset" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" minValue="0" maxValue="255" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">This TimeBasedTestMeasurementOffset works in conjunction with TimeBasedTestMeasurementInterval to allow the interval measurement to start a number of seconds after BOMTime. The test measurement interval in IncrementalResult starts at time BOMTime + TimeBasedTestMeasurementOffset to allow for slow start window removal of file transfers. This TimeBasedTestMeasurementOffset is in seconds. The default value SHOULD be 0.</description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the IP protocol version to be used. The default value SHOULD be Any. Enumeration of:&#10;Any (Use either IPv4 or IPv6 depending on the system preference)&#10;IPv4 (Use IPv4 for the requests)&#10;IPv6 (Use IPv6 for the requests)</description>
+
+  <parameter name="NumberOfConnections" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="1" minValue="1" maxValue="16" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of connections to be used in the test. The default value SHOULD be 1. NumberOfConnections MUST NOT be set to a value greater than DownloadDiagnosticMaxConnections.</description>
+
+  <parameter name="IPAddressUsed" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" maxLength="45" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">[IPAddress] Indicates which IP address was used to send the request.</description>
+
+  <parameter name="ROMTime" type="dateTime" specSource="TR181" profile="Device2_Download:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456* For HTTP this is the time at which the client sends the GET command. * For FTP this is the time at which the client sends the RTRV command. </description>
+
+  <parameter name="BOMTime" type="dateTime" specSource="TR181" profile="Device2_Download:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Begin of transmission time in UTC, which MUST be specified to microsecond precision For example: 2008-04-09T15:01:05.123456* For HTTP this is the time at which the first data packet is received. * For FTP this is the time at which the client receives the first data packet on the data connection. </description>
+
+  <parameter name="EOMTime" type="dateTime" specSource="TR181" profile="Device2_Download:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">End of transmission in UTC, which MUST be specified to microsecond precision.  For example: 2008-04-09T15:01:05.123456* For HTTP this is the time at which the last data packet is received. * For FTP this is the time at which the client receives the last packet on the data connection. </description>
+
+  <parameter name="TestBytesReceived" type="unsignedInt" specSource="TR181" profile="Device2_Download:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The test traffic received in bytes during the FTP/HTTP transaction including FTP/HTTP headers, between {{param|BOMTime}} and {{param|EOMTime}}, </description>
+
+  <parameter name="TotalBytesReceived" type="unsignedInt" specSource="TR181" profile="Device2_Download:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes received on the Interface between {{param|BOMTime}} and {{param|EOMTime}}. </description>
+
+  <parameter name="TotalBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TestBytesReceivedUnderFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of bytes of the test file received between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime across all connections.</description>
+
+  <parameter name="TotalBytesReceivedUnderFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received in between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at the latest PerConnectionResult.{i}.BOMTime and at the earliest PerConnectionResult.{i}.EOMTime and subtracting.</description>
+
+  <parameter name="TotalBytesSentUnderFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at the latest PerConnectionResult.{i}.BOMTime and at the earliest PerConnectionResult.{i}.EOMTime and subtracting.</description>
+
+  <parameter name="PeriodOfFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The period of time in microseconds between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime of the test.</description>
+
+  <parameter name="TCPOpenRequestTime" type="dateTime" specSource="TR181" profile="Device2_DownloadTCP:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision.&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the TCP socket open (SYN) was sent for the HTTP connection.&#10;For FTP this is the time at which the TCP socket open (SYN) was sent for the data connection.&#10;Note: Interval of 1 microsecond SHOULD be supported.&#10;If multiple connections are used, then TCPOpenRequestTime is set to the latest TCPOpenRequestTime across all connections.</description>
+
+  <parameter name="TCPOpenResponseTime" type="dateTime" specSource="TR181" profile="Device2_DownloadTCP:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Response time in UTC, which MUST be specified to microsecond precision.&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the TCP ACK to the socket opening the HTTP connection was received.&#10;For FTP this is the time at which the TCP ACK to the socket opening the data connection was received.&#10;Note: Interval of 1 microsecond SHOULD be supported.&#10;If multiple connections are used, then TCPOpenResponseTime is set to the latest TCPOpenResponseTime across all connections.</description>
+
+  <parameter name="PerConnectionResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the PerConnectionResult table.</description>
+
+  <parameter name="EnablePerConnectionResults" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The results must be returned in the PerConnectionResult table for every connection when set to true. The default value SHOULD be false.</description>
+
+  <parameter name="IncrementalResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the IncrementalResult table.</description>
+
+  <parameter name="X_BROADCOM_COM_LogLevel" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_Baseline:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="3" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the message log level when doing diagnostics {ERR:3, NOTICE:5 DEBUG:7}. </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the download app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+  <parameter name="X_BROADCOM_COM_UserStop" type="boolean" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate whether this diagnostics is stopped by users</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.DownloadDiagnostics.PerConnectionResult.{i}." shortObjectName="Dev2DownloadPerConnResultObject" specSource="TR181" profile="Unspecified" supportLevel="MultipleInstances" hideObjectFromAcs="false" bbfProtocol="common" resetOnEmpty="true" oid="1415" lockZone="0" />
+  <description source="TRx">Results for individual connections. This table is only populated when EnablePerConnectionResults is true. A new object is created for each connection specified in NumberOfConnections. Instance numbers MUST start at 1 and sequentially increment as new instances are created. All instances are removed when DiagnosticsState is set to Requested or None.</description>
+
+  <parameter name="ROMTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the client sends the GET command.&#10;For FTP this is the time at which the client sends the RTRV command.</description>
+
+  <parameter name="BOMTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Begin of transmission time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the first data packet is received.&#10;For FTP this is the time at which the client receives the first data packet on the data connection.</description>
+
+  <parameter name="EOMTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">End of transmission in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the last data packet is received.&#10;For FTP this is the time at which the client receives the last packet on the data connection.</description>
+
+  <parameter name="TestBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of bytes of the test file received during the FTP/HTTP transaction including FTP/HTTP headers, between BOMTime and EOMTime.</description>
+
+  <parameter name="TotalBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TotalBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TCPOpenRequestTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the TCP socket open (SYN) was sent for the HTTP connection.&#10;For FTP this is the time at which the TCP socket open (SYN) was sent for the data connection.</description>
+
+  <parameter name="TCPOpenResponseTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Response time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the TCP ACK to the socket opening the HTTP connection was received.&#10;For FTP this is the time at which the TCP ACK to the socket opening the data connection was received.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.DownloadDiagnostics.IncrementalResult.{i}." shortObjectName="Dev2DownloadDiagIncResultObject" specSource="TR181" profile="Unspecified" supportLevel="NotSupported" hideObjectFromAcs="false" bbfProtocol="common" resetOnEmpty="true" oid="1416" lockZone="0" />
+  <description source="TRx">Results for time segmented tests (tests where TimeBasedTestDuration &gt; 0 and TimeBasedTestMeasurementInterval &gt; 0). This data is totaled across all connections in the test. A new object is created every TimeBasedTestMeasurementInterval after that interval has completed. Instance numbers MUST start at 1 and sequentially increment as new instances are created. All instances are removed when DiagnosticsState is set to Requested or None.</description>
+
+  <parameter name="TestBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Change in the value of TestBytesReceivedUnderFullLoading between StartTime and EndTime.</description>
+
+  <parameter name="TotalBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received on the Interface between StartTime and EndTime. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at StartTime and at EndTime and subtracting.</description>
+
+  <parameter name="TotalBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent on the Interface between StartTime and EndTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at StartTime and at EndTime and subtracting.</description>
+
+  <parameter name="StartTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The start time of this interval which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z</description>
+
+  <parameter name="EndTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The end time of this interval which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.UploadDiagnostics." shortObjectName="Dev2IpDiagUploadObject" specSource="TR181" profile="Device2_Upload:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1417" lockZone="0" />
+  <description source="TRx">This object defines the diagnostics configuration for a HTTP or FTP UploadDiagnostics test.  Files sent by the UploadDiagnostics do not require file storage on the CPE device, and MAY be an arbitrary stream of bytes. </description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_Upload:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicate the availability of diagnostic data.  {{enum}} If the ACS sets the value of this parameter to {{enum|Requested}}, the CPE MUST initiate the corresponding diagnostic test.  When writing, the only allowed value is {{enum|Requested}}.  To ensure the use of the proper test parameters (the writable parameters in this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the {{param}} to {{enum|Requested}}.When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic. When the test is completed, the value of this parameter MUST be either {{enum|Completed}} (if the test completed successfully), or one of the ''Error'' values listed above.If the value of this parameter is anything other than {{enum|Completed}}, the values of the results parameters for this test are indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to allow the ACS to view the results, indicating the Event code ''8 DIAGNOSTICS COMPLETE'' in the Inform message.After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by the CPE until either this diagnostic is run again, or the CPE reboots.  After a reboot, if the CPE has not retained the result parameters from the most recent test, it MUST set the value of this parameter to {{enum|None}}. Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to {{enum|None}}.While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test being terminated and the value of this parameter being set to {{enum|None}}. While the test is in progress, setting this parameter to {{enum|Requested}} (and possibly modifying other writable parameters in this object) MUST result in the test being terminated and then restarted using the current values of the test parameters. </description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_Upload:1" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{reference|the IP-layer interface over which the test is to be performed}} The value of this parameter MUST be either a valid interface or an empty string.  An attempt to set this parameter to a different value MUST be rejected as an invalid parameter value.If {{empty}} is specified, the CPE MUST use the default routing interface. </description>
+
+  <parameter name="UploadURL" type="string" specSource="TR181" profile="Device2_Upload:1" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The URL, as defined in {{bibref|RFC3986}}, for the CPE to Upload to. This parameter MUST be in the form of a valid HTTP {{bibref|RFC2616}} or FTP {{bibref|RFC959}} URL.* When using FTP transport, FTP binary transfer MUST be used. * When using HTTP transport, persistent connections MUST be used and pipelining MUST NOT be used.* When using HTTP transport the HTTP Authentication MUST NOT be used. </description>
+
+  <parameter name="UploadTransports" type="string" specSource="TR181" profile="Device2_Upload:1" requirements="R" supportLevel="ReadOnly" defaultValue="HTTP,FTP" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="cwmp" />
+    <description source="TRx">Supported ''UploadDiagnostics'' transport protocols for a CPE device. </description>
+
+  <parameter name="UploadDiagnosticsMaxConnections" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="8" minValue="1" maxValue="16" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the maximum number of connections that are supported by Upload Diagnostics.</description>
+
+  <parameter name="UploadDiagnosticsMaxIncrementalResult" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="1" minValue="1" maxValue="16" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The maximum number of rows in IncrementalResult that the CPE will store.</description>
+
+  <parameter name="DSCP" type="unsignedInt" specSource="TR181" profile="Device2_Upload:1" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="63" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">DiffServ code point for marking packets transmitted in the test.  The default value SHOULD be zero. </description>
+
+  <parameter name="EthernetPriority" type="unsignedInt" specSource="TR181" profile="Device2_Upload:1" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="7" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Ethernet priority code for marking packets transmitted in the test (if applicable). The default value SHOULD be zero. </description>
+
+  <parameter name="TestFileLength" type="unsignedInt" specSource="TR181" profile="Device2_Upload:1" requirements="W" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The size of the file (in bytes) to be uploaded to the server. The CPE MUST insure the appropriate number of bytes are sent. </description>
+
+  <parameter name="TimeBasedTestDuration" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Controls time based testing [Section 4.3/TR-143a1]. When TimeBasedTestDuration &gt; 0, TimeBasedTestDuration is the duration in seconds of a time based test. If TimeBasedTestDuration is 0, the test is not based on time, but on the size of the file to be uploaded. The default value SHOULD be 0.</description>
+
+  <parameter name="TimeBasedTestMeasurementInterval" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The measurement interval duration in seconds for objects in IncrementalResult for a time based FTP/HTTP upload test (when TimeBasedTestDuration &gt; 0). The default value SHOULD be 0, which implies IncrementalResult collection is disabled. For example if TimeBasedTestDuration is 90 seconds and TimeBasedTestMeasurementInterval is 10 seconds, there will be 9 results in IncrementalResult, each with a 10 seconds duration.</description>
+
+  <parameter name="TimeBasedTestMeasurementOffset" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">This TimeBasedTestMeasurementOffset works in conjunction with TimeBasedTestMeasurementInterval and allows the interval measurement to start a number of seconds after BOMTime. The test measurement interval in IncrementalResult starts at time BOMTime + TimeBasedTestMeasurementOffset to allow for slow start window removal of file transfers. This TimeBasedTestMeasurementOffset is in seconds. The default value SHOULD be 0.</description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the IP protocol version to be used. The default value SHOULD be Any. Enumeration of:&#10;Any (Use either IPv4 or IPv6 depending on the system preference)&#10;IPv4 (Use IPv4 for the requests)&#10;IPv6 (Use IPv6 for the requests)</description>
+
+  <parameter name="NumberOfConnections" type="unsignedInt" specSource="TR181" profile="Unspecified" supportLevel="ReadWrite" defaultValue="1" minValue="1" maxValue="16" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of connections to be used in the test. The default value SHOULD be 1. NumberOfConnections MUST NOT be set to a value greater than UploadDiagnosticsMaxConnections.</description>
+
+  <parameter name="IPAddressUsed" type="string" specSource="TR181" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="45" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">[IPAddress] Indicates which IP address was used to send the request.</description>
+
+  <parameter name="ROMTime" type="dateTime" specSource="TR181" profile="Device2_Upload:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456* For HTTP this is the time at which the client sends the PUT command * For FTP this is the time at which the STOR command is sent. </description>
+
+  <parameter name="BOMTime" type="dateTime" specSource="TR181" profile="Device2_Upload:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Begin of transmission time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456* For HTTP this is the time at which the first data packet is sent. * For FTP this is the time at which the client receives the ready for transfer notification. </description>
+
+  <parameter name="EOMTime" type="dateTime" specSource="TR181" profile="Device2_Upload:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">End of transmission in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456* For HTTP this is the time when the HTTP successful response code is received. * For FTP this is the time when the client receives a transfer complete. </description>
+
+  <parameter name="TestBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of bytes of the test file sent during the FTP/HTTP transaction including FTP/HTTP headers, between BOMTime and EOMTime acrosss all connections.</description>
+
+  <parameter name="TotalBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TotalBytesSent" type="unsignedInt" specSource="TR181" profile="Device2_Upload:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TestBytesSentUnderFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of bytes of the test file sent between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime across all connections.</description>
+
+  <parameter name="TotalBytesReceivedUnderFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime across all connections in the test. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at the latest PerConnectionResult.{i}.BOMTime and at the earliest PerConnectionResult.{i}.EOMTime and subtracting.</description>
+
+  <parameter name="TotalBytesSentUnderFullLoading" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent between the latest PerConnectionResult.{i}.BOMTime and the earliest PerConnectionResult.{i}.EOMTime across all connections in the test. This MAY be calculated by sampling Stats.bytesSent on the Interface object at the latest PerConnectionResult.{i}.BOMTime and at the earliest PerConnectionResult.{i}.EOMTime and subtracting.</description>
+
+  <parameter name="TCPOpenRequestTime" type="dateTime" specSource="TR181" profile="Device2_UploadTCP:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456* For HTTP this is the time at which the TCP socket open (SYN) was sent for the HTTP connection. * For FTP this is the time at which the TCP socket open (SYN) was sent for the data connectionNote: Interval of 1 microsecond SHOULD be supported.&#10;If multiple connections are used, then TCPOpenRequestTime is set to the latest TCPOpenRequestTime across all connections.</description>
+
+  <parameter name="TCPOpenResponseTime" type="dateTime" specSource="TR181" profile="Device2_UploadTCP:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Response time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456* For HTTP this is the Time at which the TCP ACK to the socket opening the HTTP connection was received. * For FTP this is  the Time at which the TCP ACK to the socket opening the Data connection was received.Note: Interval of 1 microsecond SHOULD be supported.&#10;If multiple connections are used, then TCPOpenRequestTime is set to the latest TCPOpenRequestTime across all connections.</description>
+
+  <parameter name="PerConnectionResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the PerConnectionResult table.</description>
+
+  <parameter name="EnablePerConnectionResults" type="boolean" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The results must be returned in the PerConnectionResult table for every connection when set to true. The default value SHOULD be false.</description>
+
+  <parameter name="IncrementalResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the IncrementalResult table.</description>
+
+  <parameter name="X_BROADCOM_COM_LogLevel" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_Baseline:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="3" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the message log level when doing diagnostics {ERR:3, NOTICE:5 DEBUG:7}. </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the upload app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+  <parameter name="X_BROADCOM_COM_UserStop" type="boolean" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate whether this diagnostics is stopped by users</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.UploadDiagnostics.PerConnectionResult.{i}." shortObjectName="Dev2UploadPerConnResultObject" specSource="TR181" profile="Unspecified" supportLevel="MultipleInstances" hideObjectFromAcs="false" bbfProtocol="common" resetOnEmpty="true" oid="1418" lockZone="0" />
+  <description source="TRx">Results for individual connections. This table is only populated when EnablePerConnectionResults is true. A new object is created for each connection specified in NumberOfConnections. Instance numbers MUST start at 1 and sequentially increment as new instances are created. All instances are removed when DiagnosticsState is set to Requested or None.</description>
+
+  <parameter name="ROMTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision.&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the client sends the GET command.&#10;For FTP this is the time at which the client sends the RTRV command.</description>
+
+  <parameter name="BOMTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Begin of transmission time in UTC, which MUST be specified to microsecond precision&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the first data packet is received.&#10;For FTP this is the time at which the client receives the first data packet on the data connection.</description>
+
+  <parameter name="EOMTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">End of transmission in UTC, which MUST be specified to microsecond precision.&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the last data packet is received.&#10;For FTP this is the time at which the client receives the last packet on the data connection.</description>
+
+  <parameter name="TestBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of bytes of the test file sent during the FTP/HTTP transaction including FTP/HTTP headers, between BOMTime and EOMTime.</description>
+
+  <parameter name="TotalBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TotalBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent on the Interface between BOMTime and EOMTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at BOMTime and at EOMTime and subtracting.</description>
+
+  <parameter name="TCPOpenRequestTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Request time in UTC, which MUST be specified to microsecond precision.&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the TCP socket open (SYN) was sent for the HTTP connection.&#10;For FTP this is the time at which the TCP socket open (SYN) was sent for the data connection.</description>
+
+  <parameter name="TCPOpenResponseTime" type="dateTime" specSource="TR181" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Response time in UTC, which MUST be specified to microsecond precision.&#10;For example: 2008-04-09T15:01:05.123456Z&#10;For HTTP this is the time at which the TCP ACK to the socket opening the HTTP connection was received.&#10;For FTP this is the time at which the TCP ACK to the socket opening the data connection was received.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.UploadDiagnostics.IncrementalResult.{i}." shortObjectName="Dev2UploadIncResultObject" specSource="TR181" profile="Unspecified" supportLevel="NotSupported" hideObjectFromAcs="false" bbfProtocol="common" resetOnEmpty="true" oid="1419" lockZone="0" />
+  <description source="TRx">Results for time segmented tests (tests where TimeBasedTestDuration &gt; 0 and TimeBasedTestMeasurementInterval &gt; 0). This data is totaled across all connections in the test. A new object is created every TimeBasedTestMeasurementInterval after that interval has completed. Instance numbers MUST start at 1 and sequentially increment as new instances are created. All instances are removed when DiagnosticsState is set to Requested or None.</description>
+
+  <parameter name="TestBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Change in the value of TestBytesSent between StartTime and EndTime.</description>
+
+  <parameter name="TotalBytesReceived" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) received on the Interface between StartTime and EndTime. This MAY be calculated by sampling Stats.bytesReceived on the Interface object at StartTime and at EndTime and subtracting.</description>
+
+  <parameter name="TotalBytesSent" type="unsignedInt" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The total number of bytes (at the IP layer) sent on the Interface between StartTime and EndTime. This MAY be calculated by sampling Stats.bytesSent on the Interface object at StartTime and at EndTime and subtracting.</description>
+
+  <parameter name="StartTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The start time of this interval which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z</description>
+
+  <parameter name="EndTime" type="dateTime" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="NotSupported" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The end time of this interval which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456Z</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.UDPEchoConfig." shortObjectName="Dev2IpDiagUDPEchoConfigObject" specSource="TR181" profile="Device2_UDPEcho:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1420" lockZone="0" />
+  <description source="TRx">This object allows the CPE to be configured to perform the UDP Echo Service defined in {{bibref|RFC862}} and UDP Echo Plus Service defined in {{bibref|TR-143|Appendix A.1}}. </description>
+
+  <parameter name="Enable" type="boolean" specSource="TR181" profile="Device2_UDPEcho:1" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">MUST be enabled to receive UDP echo. When enabled from a disabled state all related timestamps, statistics and UDP Echo Plus counters are cleared. </description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_UDPEcho:1" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{reference|IP-layer interface over which the CPE MUST listen and receive UDP echo requests on}} The value of this parameter MUST be either a valid interface or {{empty}}.  An attempt to set this parameter to a different value MUST be rejected as an invalid parameter value.If {{empty}} is specified, the CPE MUST listen and receive UDP echo requests on all interfaces. Note: Interfaces behind a NAT MAY require port forwarding rules configured in the Gateway to enable receiving the UDP packets. </description>
+
+  <parameter name="SourceIPAddress" type="IPAddress" specSource="TR181" profile="Device2_UDPEcho:1" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="45" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The Source IP address of the UDP echo packet. The CPE MUST only respond to a UDP echo from this source IP address. </description>
+
+  <parameter name="UDPPort" type="unsignedInt" specSource="TR181" profile="Device2_UDPEcho:1" requirements="W" supportLevel="ReadWrite" defaultValue="30006" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The UDP port on which the UDP server MUST listen and respond to UDP echo requests. </description>
+
+  <parameter name="EchoPlusEnabled" type="boolean" specSource="TR181" profile="Device2_UDPEchoPlus:1" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">If {{true}} the CPE will perform necessary packet processing for UDP Echo Plus packets. </description>
+
+  <parameter name="EchoPlusSupported" type="boolean" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" supportLevel="ReadOnly" defaultValue="true" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">{{true}} if UDP Echo Plus is supported. </description>
+
+  <parameter name="PacketsReceived" type="unsignedInt" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Incremented upon each valid UDP echo packet received. </description>
+
+  <parameter name="PacketsResponded" type="unsignedInt" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Incremented for each UDP echo response sent. </description>
+
+  <parameter name="X_BROADCOM_COM_PacketsRespondedFail" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_Baseline:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Incremented for each UDP echo response failed. </description>
+
+  <parameter name="BytesReceived" type="unsignedInt" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of UDP received bytes including payload and UDP header after the UDPEchoConfig is enabled. </description>
+
+  <parameter name="BytesResponded" type="unsignedInt" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of UDP responded bytes, including payload and UDP header sent after the UDPEchoConfig is enabled. </description>
+
+  <parameter name="TimeFirstPacketReceived" type="dateTime" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456,The time that the server receives the first UDP echo packet after the UDPEchoConfig is enabled. </description>
+
+  <parameter name="TimeLastPacketReceived" type="dateTime" specSource="TR181" profile="Device2_UDPEcho:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" defaultValue="0001-01-01T00:00:00Z" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Time in UTC, which MUST be specified to microsecond precision. For example: 2008-04-09T15:01:05.123456The time that the server receives the most recent UDP echo packet. </description>
+
+  <parameter name="X_BROADCOM_COM_LogLevel" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_Baseline:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="3" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the message log level when doing diagnostics {ERR:3, NOTICE:5 DEBUG:7}. </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the echo app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.UDPEchoDiagnostics." shortObjectName="Dev2UDPEchoDiagObject" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1421" lockZone="0" />
+  <description source="TRx">This object defines the diagnostics configuration for a UDP Echo test [Appendix A.1/TR-143a1] defined in [RFC862] or a UDP Echo Plus test defined in [Appendix A.1/TR-143a1].</description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicate the availability of diagnostic data. Enumeration of:&#10;None (READONLY)&#10;Requested&#10;Completed (READONLY)&#10;Error_CannotResolveHostName (READONLY)&#10;Error_Internal (READONLY)&#10;Error_Other (READONLY)&#10;If the ACS sets the value of this parameter to Requested, the CPE MUST initiate the corresponding diagnostic test. When writing, the only allowed value is Requested. To ensure the use of the proper test parameters (the writable parameters in this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the DiagnosticsState to Requested. When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic. When the test is completed, the value of this parameter MUST be either Completed (if the test completed successfully), or one of the Error values listed above. If the value of this parameter is anything other than Completed, the values of the results parameters for this test are indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to allow the ACS to view the results, indicating the Event code 8 DIAGNOSTICS COMPLETE in the Inform message. After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by the CPE until either this diagnostic is run again, or the CPE reboots. After a reboot, if the CPE has not retained the result parameters from the most recent test, it MUST set the value of this parameter to None and remove all object instances from IndividualPacketResult. Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to None and remove all object instances from IndividualPacketResult. While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test being terminated and the value of this parameter being set to None and remove all object instances from IndividualPacketResult.&#10;&#10;While the test is in progress, setting this parameter to Requested (and possibly modifying other writable parameters in this object) MUST result in the test being terminated and then restarted using the current values of the test parameters.</description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">	&#10;The value MUST be the path name of the IP-layer interface over which the test is to be performed. If the referenced object is deleted, the parameter value MUST be set to an empty string. Example: Device.IP.Interface.1&#10;If an empty string is specified, the CPE MUST use the interface as directed by its routing policy (Forwarding table entries) to determine the appropriate interface.</description>
+
+  <parameter name="Host" type="string" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Host name or address of the host to perform tests to. </description>
+
+  <parameter name="Port" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Port on the host to perform tests to. </description>
+
+  <parameter name="NumberOfRepetitions" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="1" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Number of repetitions of the test to perform before reporting the results. The default value SHOULD be 1. </description>
+
+  <parameter name="Timeout" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="3000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Timeout in milliseconds for the test. That is, the amount of time to wait for the return of a packet that was sent to the Host. </description>
+
+  <parameter name="DataBlockSize" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="24" minValue="1" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Size of the data block in bytes to be sent for each packet. The default value SHOULD be 24. </description>
+
+  <parameter name="DSCP" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="63" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">DiffServ codepoint to be used for the test packets. The default value SHOULD be zero. </description>
+
+  <parameter name="InterTransmissionTime" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" mayDenyActiveNotification="true" supportLevel="ReadWrite" defaultValue="1000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The time in milliseconds between the NumberOfRepetitions of packets sent during a given test. The default value SHOULD be 1000. </description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the IP protocol version to be used. The default value SHOULD be Any. Enumeration of:&#10;Any (Use either IPv4 or IPv6 depending on the system preference)&#10;IPv4 (Use IPv4 for the requests)&#10;IPv6 (Use IPv6 for the requests)</description>
+
+  <parameter name="IPAddressUsed" type="string" specSource="TR181" profile="Unspecified" supportLevel="ReadOnly" defaultValue="" maxLength="45" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">[IPAddress] Indicates which IP address was used to send the request.</description>
+
+  <parameter name="SuccessCount" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the number of successful packets (those in which a successful response was received prior to the timeout) in the most recent test.</description>
+
+  <parameter name="FailureCount" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the number of failed packets (those in which a successful response was not received prior to the timeout) in the most recent test.</description>
+
+  <parameter name="AverageResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the average response time in microseconds over all repetitions with successful responses of the most recent test. If there were no successful responses, this value MUST be zero.</description>
+
+  <parameter name="MinimumResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the minimum response time in microseconds over all repetitions with successful responses of the most recent test. If there were no successful responses, this value MUST be zero.</description>
+
+  <parameter name="MaximumResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the maximum response time in microseconds over all repetitions with successful responses of the most recent test. If there were no successful responses, this value MUST be zero.</description>
+
+  <parameter name="EnableIndividualPacketResults" type="boolean" specSource="TR181" profile="Device2_UDPEchoDiag:1" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The results must be returned in the IndividualPacketResult table for every repetition of the test when set to true. The default value SHOULD be false. </description>
+
+  <parameter name="IndividualPacketResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Device2_UDPEchoDiag:1" supportLevel="ReadOnly" defaultValue="0" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The number of entries in the IndividualPacketResult table.</description>
+
+  <parameter name="X_BROADCOM_COM_LogLevel" type="unsignedInt" specSource="Broadcom" profile="X_BROADCOM_COM_Baseline:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="3" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate the message log level when doing diagnostics {ERR:3, NOTICE:5 DEBUG:7}. </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the download app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+  <parameter name="X_BROADCOM_COM_UserStop" type="boolean" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="false" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">Indicate whether this diagnostics is stopped by users</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.IPLayerCapacityMetrics." shortObjectName="Dev2IpDiagIPCapObject" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="P" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1422" lockZone="0" />
+  <description source="TRx"> This object defines the diagnostics configuration for a IP Layer Capacity test. IP Layer Capacity measurement is specified in {{bibref|TR-471}}. Files received in the IP Layer Capacity test do not require file storage on the CPE device. </description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the availability of diagnostics data. If the ACS sets the value of this parameter to Requested, the CPE MUST initiate the corresponding diagnostic test. When writing, the only allowed values are Requested and Canceled. To ensure the use of the proper test parameters (the writable parameters in this object), the test parameters MUST be set, and any errors or inconsistencies in the test parameters MUST be detected, either prior to or at the same time as (in the same SetParameterValues) setting this parameter to Requested. When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic test. When the test is completed, the value of this parameter MUST be either Complete (if the test completed successfully), or one of the Error values listed. If the value of this parameter is anything other than Complete, the values of the results parameters for this test are indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), but not if it is canceled for any reason, the CPE MUST establish a new connection to the ACS to allow the ACS to view the results, indicating the Event code 8 DIAGNOSTICS COMPLETE in the Inform message. After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by the CPE until either this diagnostic is run again, or the CPE reboots. After a reboot, if the CPE has not retained the result parameters from the most recent test, it MUST set the value of this parameter to None. Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to None. While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test being terminated and the value of this parameter being set to None. While the test is in progress, setting this parameter to Requested (and possibly modifying other writable parameters in this object) MUST result in the test being terminated and then restarted using the current values of the test parameters. While the test is in progress, setting this parameter to Canceled MUST result in the test being canceled and the value of this parameter being set to None. If the CPE does not support the Canceled value, it MUST return a SPV error with "Invalid Parameter value" (9007) to the ACS instead.</description>
+
+  <parameter name="IPLayerMaxConnections" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" defaultValue="1" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the maximum number of connections that are supported for an IP-Layer Capacity test. </description>
+
+  <parameter name="IPLayerMaxIncrementalResult" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The maximum number of rows in {{object|IncrementalResult}} that the device will store. </description>
+
+  <parameter name="IPLayerCapSupportedSoftwareVersion" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the installed version of the test software. The software version string will be implementation-dependent, and SHOULD identify both the implementation and the version (e.g., UDPST-7.2.1). </description>
+
+  <parameter name="IPLayerCapSupportedControlProtocolVersion" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" maxLength="64" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the control protocol version supported by the test software. Refer to {{bibref|TR-471}} for more information. </description>
+
+  <parameter name="IPLayerCapSupportedMetrics" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" validValuesArray="IPLayerCapSupportedMetricsValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the test metrics from {{bibref|TR-471|Section 5.2}} that are supported by the device. Note that {{bibref|TR-471}} mandates support for and use of IPLR and Sampled RTT. </description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> {{reference}} The IP-layer interface over which the test is to be performed. Example: Device.IP.Interface.1 If {{empty}} is specified, the device MUST use the interface as directed by its routing policy (''Forwarding'' table entries) to determine the appropriate interface. </description>
+
+  <parameter name="Role" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="Receiver" validValuesArray="IPLayerRoleValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates whether the device will act as Sender or Receiver of test packets. </description>
+
+  <parameter name="Host" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The Fully Qualified Domain Name (FQDN) or IP address of the Test Endpoint to perform the UDP Capacity tests with. </description>
+
+  <parameter name="Port" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="25000" minValue="1" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Port on the Test Endpoint host. </description>
+
+  <parameter name="JumboFramesPermitted" type="boolean" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="false" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> If {{true}}, jumbo frames are allowed above 1 Gbps. The default value SHOULD be {{true}}. </description>
+
+  <parameter name="NumberOfConnections" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="1" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of connections to be used in the test. The default value SHOULD be 1. {{param}} MUST NOT be set to a value greater than {{param|#.IPLayerMaxConnections}}. </description>
+
+  <parameter name="EthernetPriority" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="7" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ethernet priority code for marking packets transmitted in the test (if applicable). The default value SHOULD be zero. </description>
+
+  <parameter name="DSCP" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="0" minValue="0" maxValue="63" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The DiffServ code point for marking packets transmitted in the test. The default value SHOULD be zero. </description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the IP protocol version to be used. The default value SHOULD be {{enum|Any}}. </description>
+
+  <parameter name="UDPPayloadMin" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="35" maxValue="8972" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Minimum reference size of UDP payload in {{units}}. No default. The implementation will algorithmically determine a value if none is configured. The value SHOULD be set to a value that avoids fragmentation (i.e., using path MTU discovery). </description>
+
+  <parameter name="UDPPayloadMax" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="35" maxValue="8972" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Maximum reference size of UDP payload in {{units}}. No default. The implementation will algorithmically determine a value if none is configured. The value SHOULD be set to the largest value that avoids fragmentation (i.e., using path MTU discovery). If {{param|JumboFramesPermitted}} is {{false}}, the maximum value MUST be 1472 octets. If {{param|JumboFramesPermitted}} is {{true}}, this value can be as large as 8972 octets. {{param}} MUST be greater than or equal to {{param|UDPPayloadMin}}. </description>
+
+  <parameter name="UDPPayloadContent" type="string" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> UDP Payload Content Type, If there is payload compression in the path and tests intend to characterize a possible advantage due to compression, then payload content SHOULD be supplied by a pseudo-random sequence generator, by using part of a compressed file, or by other means. Payload may also contain the test protocol PDUs. The default value SHOULD be {{enum|zeroes}}. </description>
+
+  <parameter name="PortMin" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="49152" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Starting value for range of Dynamic Ports supported for test traffic and status feedback messages. {{param}} MUST be less than or equal to {{param|PortMax}}, if specified. If {{param}} and {{param|PortMax}} are not specified, the full range of Ports in the Dynamic Ports range (49152-65535) that have been specifically set aside by IANA MAY be used. </description>
+
+  <parameter name="PortMax" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="49152" maxValue="65535" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the upper bound of the supported Dynamic Port range, where {{param|PortMin}} indicates the starting port number. {{param}} MUST be greater than or equal to {{param|PortMin}}, if specified. If {{param|PortMin}} and {{param}} are not specified, the full range of Ports in the Dynamic Ports range (49152-65535) that have been specifically set aside by IANA MAY be used. </description>
+
+  <parameter name="PortOptionalMin" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="49151" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Starting value for range of User Ports supported for test traffic and status feedback messages. A value of zero (0) indicates no User Ports are used for test traffic or status feedback messages. </description>
+
+  <parameter name="PortOptionalMax" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="49151" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the upper bound of the supported User Port range, where {{param|PortOptionalMin}} indicates the starting port number. {{param}} MUST be greater than or equal to {{param|PortOptionalMin}}. A value of zero (0) indicates no User Ports are used for test traffic or status feedback messages. </description>
+
+  <parameter name="TestType" type="string" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="Search" validValuesArray="TestTypeValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the type of IP-Layer Capacity test being run. The default value SHOULD be {{enum|Search}}. </description>
+
+  <parameter name="IPDVEnable" type="boolean" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Enables one-way IPDV (IP Packet Delay Variation) metric for load rate adjustment algorithm. When {{true}} (enabled), one-way delay variation is used, otherwise round-trip delay variation is used. The default value SHOULD be {{false}}. </description>
+
+  <parameter name="IPRREnable" type="boolean" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Enables IPRR (IP packet Reordering Ratio) metric. The default value SHOULD be {{false}}. </description>
+
+  <parameter name="RIPREnable" type="boolean" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Enables RIPRR (Replicated IP Packet Ratio) metric. The default value SHOULD be {{false}}. </description>
+
+  <parameter name="PreambleDuration" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="5" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Duration of the preamble testing, when traffic is being sent and/or received but the test clock has not been started. This is done to ensure all network elements in the path are "awake". The default value SHOULD be 2 {{units}}. Value specified in {{units}}. </description>
+
+  <parameter name="StartSendingRate" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="500" maxValue="10000000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The Sending Rate for a {{enum|Fixed|TestType}} test or the initial Sending Rate value for a {{enum|Search|TestType}} test. Value specified in {{units}}. The default value SHOULD be 500 {{units}}. </description>
+
+  <parameter name="NumberTestSubIntervals" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="10" minValue="1" maxValue="100" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Number of intermediate measurement reporting intervals. The value MUST NOT be greater than {{param|#.IPLayerMaxIncrementalResult}}. The default value SHOULD be 10. </description>
+
+  <parameter name="NumberFirstModeTestSubIntervals" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="100" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> When the value >= 1, bimodal test mode is requested and the value represents the number of sub-intervals to be included in the first capacity test mode. The remaining sub-intervals of {{param|NumberTestSubIntervals}} are for the second capacity test mode. Value = 0 indicates that bimodal testing is disabled. The value MUST NOT be greater than {{param|NumberTestSubIntervals}}. The default value SHOULD be 0. </description>
+
+  <parameter name="TestSubInterval" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="1000" minValue="100" maxValue="6000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Duration of intermediate measurement reporting intervals. {{param}} * {{param|NumberTestSubIntervals}} MUST result in an integer value in seconds, in the range 5 seconds <= {{param}} * {{param|NumberTestSubIntervals}} <= 60 seconds. The default value SHOULD be 1000 {{units}}. Value specified in {{units}}. </description>
+
+  <parameter name="StatusFeedbackInterval" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="50" minValue="5" maxValue="250" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Period of status feedback message (receiver of offered load returns messages to the sender with results of measured metrics). Value specified in {{units}}. The default value SHOULD be 50 {{units}}. </description>
+
+  <parameter name="TimeoutNoTraffic" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="5" minValue="5" maxValue="30" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Timeout value. Value specified in {{units}}. The default value SHOULD be 5 {{units}}. {{deprecated|2.15|because it is superseded by {{param|TimeoutNoTestTraffic}} due to new precision requirement. Refer to {{bibref|TR-471}} for details}} </description>
+
+  <parameter name="TimeoutNoTestTraffic" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="1000" minValue="500" maxValue="1000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Timeout value. If no test traffic packets are received for {{param}} {{units}}, test will timeout. Value specified in {{units}}. The default value SHOULD be 1000 {{units}}. </description>
+
+  <parameter name="TimeoutNoStatusMessage" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="1000" minValue="500" maxValue="1000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Timeout value. If no status message packets are received for {{param}} {{units}}, test will timeout. Value specified in {{units}}. The default value SHOULD be 1000 {{units}}. </description>
+
+  <parameter name="Tmax" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="1000" minValue="50" maxValue="3000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Maximum waiting time for packets to arrive. Value specified in {{units}}. The default value SHOULD be 1000 {{units}}. </description>
+
+  <parameter name="TmaxRTT" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="3000" minValue="50" maxValue="3000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Maximum Round Trip Time waiting time for packets to arrive. Value specified in {{units}}. The default value SHOULD be 3000 {{units}}. </description>
+
+  <parameter name="TimestampResolution" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="1" minValue="1" maxValue="1000" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the requested precision of timestamp values. The test implementation will determine the actual precision to use based on the implemented resolution capabilities of the protocols used and this requested value. If the implemented resolution capabilities of the {{param|#.IPLayerCapSupportedMetrics}} protocols being used are able to provide the requested resolution, this resolution SHOULD be provided. Value specified in {{units}}. The default value SHOULD be 1 {{units}}. </description>
+
+  <parameter name="SeqErrThresh" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" minValue="0" maxValue="100" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. Threshold for Loss or Reordering or Replication impairments measured (events where received packet sequence number did not increase by one). The default value SHOULD be 10. </description>
+
+  <parameter name="ReordDupIgnoreEnable" type="boolean" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. When {{true}} (enabled) only Loss counts toward received packet sequence number errors, and reordering and Duplication impairments are ignored. When {{false}} (disabled), Loss, Reordering and Duplication are all counted as sequence number errors. The default value SHOULD be {{false}} (disabled). </description>
+
+  <parameter name="LowerThresh" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="30" minValue="5" maxValue="250" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. The lower threshold on the range of Round Trip Time (RTT) variation. Value specified in {{units}}. The default value SHOULD be 30 {{units}}. </description>
+
+  <parameter name="UpperThresh" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="90" minValue="5" maxValue="250" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. The upper threshold on the range of Round Trip Time (RTT) variation. Value specified in {{units}}. The default value SHOULD be 90 {{units}}. </description>
+
+  <parameter name="HighSpeedDelta" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="10" minValue="2" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. The number of rows to move in a single adjustment when initially increasing offered load (to ramp up quickly). The default value SHOULD be 10. </description>
+
+  <parameter name="SlowAdjThresh" type="unsignedInt" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="W" supportLevel="ReadWrite" defaultValue="3" minValue="2" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. Threshold on the measured number of consecutive status reports indicating loss and/or delay variation above {{param|UpperThresh}} (SlowAdjCount). The default value SHOULD be 3. </description>
+
+  <parameter name="HSpeedThresh" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="1000000000" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> This parameter is only meaningful if {{param|TestType}} is {{enum|Search|TestType}}. Threshold for transition between low and high sending rate step sizes (such as 1Mbps and 100 Mbps). If {{param|JumboFramesPermitted}} is {{true}} this may result in use of jumbo frames. The default value SHOULD be 1 {{units}}. </description>
+
+  <parameter name="BOMTime" type="dateTime" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Beginning of transmission send/receive time in UTC, which MUST be specified to {{param|TimestampResolution}} precision. If multiple connections are used, then {{param}} is set to the earliest value across all connections. For example: 2008-04-09T15:01:05.123456Z </description>
+
+  <parameter name="EOMTime" type="dateTime" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> End of transmission in UTC, which MUST be specified to {{param|TimestampResolution}} precision. If multiple connections are used, then {{param}} is set to the latest value across all connections. For example: 2008-04-09T15:01:05.123456Z </description>
+
+  <parameter name="TmaxUsed" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Configured value of {{param|Tmax}} used in the test. This value is expressed in {{units}}. </description>
+
+  <parameter name="TestInterval" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Duration of the test (either downlink or uplink). This value is expected to equal {{param|TestSubInterval}} * {{param|NumberTestSubIntervals}}. This value is expressed in {{units}}. </description>
+
+  <parameter name="MaxIPLayerCapacity" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The maximum IP-Layer Capacity metric from among all {{param|IncrementalResult.{i}.IPLayerCapacity}} values measured between {{param|BOMTime}} and {{param|EOMTime}} across all connections for this test. This is calculated according to {{bibref|TR-471}} Equation 1. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. </description>
+
+  <parameter name="TimeOfMax" type="dateTime" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Time in UTC of end of the sub-interval when {{param|MaxIPLayerCapacity}} was measured. If the value of {{param|MaxIPLayerCapacity}} occurred in multiple sub-intervals, this MUST be the earliest of these sub-intervals. Value MUST be specified to {{param|TimestampResolution}} precision. For example: 2008-04-09T15:01:05.123456Z </description>
+
+  <parameter name="MaxETHCapacityNoFCS" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the Maximum IP-Layer Capacity metric, according to {{bibref|TR-471}} Equation 1, and calculations to estimate the capacity at Layer 2 with Preamble and Inter-frame gap, but no ETH Frame Check Sequence. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. </description>
+
+  <parameter name="MaxETHCapacityWithFCS" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the Maximum IP-Layer Capacity metric, according to {{bibref|TR-471}} Equation 1, and calculations to estimate the capacity at Layer 2 with ETH Frame Check Sequence. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6bits/second = 1 {{units}}. </description>
+
+  <parameter name="MaxETHCapacityWithFCSVLAN" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the Maximum IP-Layer Capacity metric, according to {{bibref|TR-471}} Equation 1, and calculations to estimate the capacity at Layer 2 with ETH Frame Check Sequence and VLAN tag. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6bits/second = 1 {{units}}. </description>
+
+  <parameter name="LossRatioAtMax" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of lost packets to total packets during sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="RTTRangeAtMax" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Round Trip Time (RTT) during sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="PDVRangeAtMax" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Packet Delay Variation (PDV) during sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="MinOnewayDelayAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The minimum one-way delay during the sub-interval of {{param|MaxIPLayerCapacity}}. The minimum one-way delay is calculated at the conclusion of the test and SHALL be calculated using the conditional distribution of all packets with a finite one-way delay value (undefined delays are excluded). This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReorderedRatioAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of reordered packets to total packets during the sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReplicatedRatioAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of replicated packets to total packets during the sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="InterfaceEthMbpsAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of bits observed on the Interface during an IP-Layer Capacity test for time interval of duration {{param|TestSubInterval}} ending at {{param|IncrementalResult.{i}.TimeOfSubInterval}} corresponding to the {{param|MaxIPLayerCapacity}}, divided by the duration of {{param|TestSubInterval}}. Result is expressed in Mbps with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. This is primarily a diagnostic measurement. Measurement direction follows the {{param|Role}}. </description>
+
+  <parameter name="IPLayerCapacitySummary" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The IP-Layer Capacity metric from among all {{param|IncrementalResult.{i}.IPLayerCapacity}} values measured between {{param|BOMTime}} and {{param|EOMTime}} across all connections for this test. This is calculated according to {{bibref|TR-471}} Equation 1. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. </description>
+
+  <parameter name="LossRatioSummary" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of lost packets to total packets during the complete {{param|TestInterval}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="RTTRangeSummary" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of measured Round Trip Time (RTT) during the complete {{param|TestInterval}}. This value is expressed in {{units}}, as a decimal to 9 decimal digits. </description>
+
+  <parameter name="PDVRangeSummary" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Packet Delay Variation (PDV) during the complete {{param|TestInterval}}. This value is expressed in {{units}}, as a decimal to 9 decimal digits. </description>
+
+  <parameter name="MinOnewayDelaySummary" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The minimum one-way delay during the complete {{param|TestInterval}}. This value is expressed in {{units}}, as a decimal to 9 decimal digits. </description>
+
+  <parameter name="MinRTTSummary" type="decimal" specSource="TR181" profile="Device2_IPLayerCapacityTest:1" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The minimum RTT during the complete {{param|TestInterval}}. This value is expressed in {{units}}, as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReorderedRatioSummary" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of reordered packets to total packets during the complete {{param|TestInterval}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReplicatedRatioSummary" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of replicated packets to total packets during the complete {{param|TestInterval}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="InterfaceEthMbpsSummary" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of bits observed on the {{param|Interface}} during an IP-Layer Capacity test for the entire time interval of duration {{param|TestInterval}}, divided by the duration of {{param|TestInterval}}. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. This is primarily a diagnostic measurement. Measurement direction follows the {{param|Role}}. </description>
+
+  <parameter name="IncrementalResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of entries in the IncrementalResult table. </description>
+
+  <parameter name="ModalResultNumberOfEntries" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of entries in the ModalResult table. </description>
+
+  <parameter name="TmaxRTTUsed" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Configured value of {{param|TmaxRTT}} used in the test. This value is expressed in {{units}}. </description>
+
+  <parameter name="TimestampResolutionUsed" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Indicates the timestamp resolution of reported results. This is a function of the measurement protocol, and it is usually determined once the protocol chosen. Value specified in {{units}}. </description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of udpst launched by this diag.  A pid of -1 indicates that the app is not running</description>
+
+
+
+
+<object name="Device.IP.Diagnostics.IPLayerCapacityMetrics.ModalResult.{i}." shortObjectName="Dev2IpDiagIPCapModResObject" specSource="TR181" profile="Unspecified" requirements="P" supportLevel="MultipleInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1423" lockZone="0" />
+  <description source="TRx"> Modal test results. Only returned when bimodal test mode is enabled ({{param|#.NumberFirstModeTestSubIntervals}} >=1). If returned, it MUST contain 1 or more entries, with instance number 1 corresponding to the second mode and instance number 2 corresponding to the third mode. Results for the Maximum in each mode/instance are calculated based on {{object|#.IncrementalResult.{i}.}} data within the boundary of its corresponding mode. </description>
+
+  <parameter name="MaxIPLayerCapacity" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The maximum IP-Layer Capacity metric from among all {{param|#.IncrementalResult.{i}.IPLayerCapacity}} values within corresponding mode across all connections for this test. This is calculated according to {{bibref|TR-471}} Equation 1. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6bits/second = 1 {{units}}. </description>
+
+  <parameter name="TimeOfMax" type="dateTime" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Time in UTC of end of the sub-interval when {{param|MaxIPLayerCapacity}} was measured. If the value of {{param|MaxIPLayerCapacity}} occurred in multiple sub-intervals, this MUST be the earliest of these sub-intervals. Value MUST be specified to {{param|#.TimestampResolution}} precision. For example: 2008-04-09T15:01:05.123456Z </description>
+
+  <parameter name="MaxETHCapacityNoFCS" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the Maximum IP-Layer Capacity metric, according to {{bibref|TR-471}} Equation 1, and calculations to estimate the capacity at Layer 2 with Preamble and Inter-frame gap, but no ETH Frame Check Sequence. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6bits/second = 1 {{units}}. </description>
+
+  <parameter name="MaxETHCapacityWithFCS" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the Maximum IP-Layer Capacity metric, according to {{bibref|TR-471}} Equation 1, and calculations to estimate the capacity at Layer 2 with ETH Frame Check Sequence. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6bits/second = 1 {{units}}. </description>
+
+  <parameter name="MaxETHCapacityWithFCSVLAN" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the Maximum IP-Layer Capacity metric, according to {{bibref|TR-471}} Equation 1, and calculations to estimate the capacity at Layer 2 with ETH Frame Check Sequence and VLAN tag. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6bits/second = 1 {{units}}. </description>
+
+  <parameter name="LossRatioAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of lost packets to total packets during sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="RTTRangeAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Round Trip Time (RTT) during sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="PDVRangeAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Packet Delay Variation (PDV) during sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="MinOnewayDelayAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The minimum one-way delay during the sub-interval of {{param|MaxIPLayerCapacity}}. The minimum one-way delay is calculated at the conclusion of the test and SHALL be calculated using the conditional distribution of all packets with a finite one-way delay value (undefined delays are excluded). This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReorderedRatioAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of reordered packets to total packets during the sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReplicatedRatioAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of replicated packets to total packets during the sub-interval of {{param|MaxIPLayerCapacity}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="InterfaceEthMbpsAtMax" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of bits observed on the {{param|#.Interface}} during an IP-Layer Capacity test for time interval of duration {{param|#.TestSubInterval}} ending at {{param|#.IncrementalResult.{i}.TimeOfSubInterval}} corresponding to the {{param|MaxIPLayerCapacity}}, divided by the duration of {{param|#.TestSubInterval}}. Result is expressed in Mbps with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. This is primarily a diagnostic measurement. Measurement direction follows the {{param|#.Role}}. </description>
+
+
+
+
+<object name="Device.IP.Diagnostics.IPLayerCapacityMetrics.IncrementalResult.{i}." shortObjectName="Dev2IpDiagIPCapIncResObject" specSource="TR181" profile="Unspecified" requirements="P" supportLevel="MultipleInstances" hideObjectFromAcs="false" bbfProtocol="common" oid="1424" lockZone="0" />
+  <description source="TRx"> Results for time segmented tests (tests where {{param|#.NumberTestSubIntervals}} > 1). This data is calculated across all connections in the test. A new object is created every {{param|#.TestSubInterval}} after that interval has completed. Instance numbers MUST start at 1 and sequentially increment as new instances are created. All instances are removed when new test is started or results are otherwise cleared. </description>
+
+  <parameter name="IPLayerCapacity" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Results of measurements using the maximum IP-Layer Capacity metric calculation for a single interval from {{bibref|TR-471}} Equation 1, for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. Result is expressed in {{units}} with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. </description>
+
+  <parameter name="TimeOfSubInterval" type="dateTime" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Time in UTC of end of sub-interval when {{param|IPLayerCapacity}} was measured. Value MUST be specified to {{param|#.TimestampResolution}} precision. For example: 2008-04-09T15:01:05.123456Z </description>
+
+  <parameter name="LossRatio" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of lost packets to total packets, for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="RTTRange" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Round Trip Time (RTT), for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. See {{bibref|TR-471}} for description of how value is calculated. This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="PDVRange" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The range of Packet Delay Variation (PDV), for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. See {{bibref|TR-471}} for description of how value is calculated. This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="MinOnewayDelay" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The minimum one-way delay, for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. The minimum one-way delay is calculated at the conclusion of the test and SHALL be calculated using the conditional distribution of all packets with a finite one-way delay value (undefined delays are excluded). This value is expressed in {{units}}. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReorderedRatio" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of reordered packets to total packets, for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="ReplicatedRatio" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> Ratio of replicated packets to total packets, for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}} across all connections for this test. This value is expressed as a decimal to 9 decimal digits. </description>
+
+  <parameter name="InterfaceEthMbps" type="decimal" specSource="TR181" profile="Unspecified" requirements="R" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx"> The number of bits observed on the {{param|#.Interface}} during an IP-Layer Capacity test for time interval of duration {{param|#.TestSubInterval}} ending at {{param|TimeOfSubInterval}}, divided by the duration of {{param|#.TestSubInterval}}. Result is expressed in Mbps with 2 digits beyond the decimal. 10^6 bits/second = 1 {{units}}. This is primarily a diagnostic measurement. Measurement direction follows the {{param|#.Role}}. </description>
+
+
+
+
+<object name="Device.IP.Diagnostics.ServerSelectionDiagnostics." shortObjectName="Dev2IpDiagServerSelectionObject" specSource="TR181" profile="Device2_ServerSelectionDiag:1" supportLevel="Present" hideObjectFromAcs="false" bbfProtocol="common" oid="1425" lockZone="0" />
+  <description source="TRx">This object provides access to a diagnostics test that performs either an ICMP Ping or UDP Echo ping against multiple hosts determining which one has the smallest average response time. There MUST be a ping response to the transmitted ping, or timeout, before the next ping is sent out.</description>
+
+  <parameter name="DiagnosticsState" type="string" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="W" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="None" validValuesArray="DiagStateValues" hideParameterFromAcs="false" neverWriteToConfigFile="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">If the ACS sets the value of this parameter to Requested, the CPE MUST initiate the corresponding diagnostic test. When writing, the only allowed value is Requested. To ensure the use of the proper test parameters (the writable parameters in this object), the test parameters MUST be set either prior to or at the same time as (in the same SetParameterValues) setting the DiagnosticsState to Requested. When requested, the CPE SHOULD wait until after completion of the communication session with the ACS before starting the diagnostic.When the test is completed, the value of this parameter MUST be either Completed (if the test completed successfully), or one of the Error values listed above. If the value of this parameter is anything other than Completed, the values of the results parameters for this test are indeterminate. When the diagnostic initiated by the ACS is completed (successfully or not), the CPE MUST establish a new connection to the ACS to allow the ACS to view the results, indicating the Event code 8 DIAGNOSTICS COMPLETE in the Inform message. After the diagnostic is complete, the value of all result parameters (all read-only parameters in this object) MUST be retained by the CPE until either this diagnostic is run again, or the CPE reboots. After a reboot, if the CPE has not retained the result parameters from the most recent test, it MUST set the value of this parameter to None. Modifying any of the writable parameters in this object except for this one MUST result in the value of this parameter being set to None. While the test is in progress, modifying any of the writable parameters in this object except for this one MUST result in the test being terminated and the value of this parameter being set to None. While the test is in progress, setting this parameter to Requested (and possibly modifying other writable parameters in this object) MUST result in the test being terminated and then restarted using the current values of the test parameters.</description>
+
+  <parameter name="Interface" type="string" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="W" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="" maxLength="256" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The value MUST be the path name of the IP-layer interface over which the test is to be performed. If the referenced object is deleted, the parameter value MUST be set to an empty string. Example: Device.IP.Interface.1. If an empty string is specified, the CPE MUST use the interface as directed by its routing policy (Forwarding table entries) to determine the appropriate interface.</description>
+
+  <parameter name="ProtocolVersion" type="string" specSource="TR181" profile="Unspecified" requirements="W" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="Any" validValuesArray="ProtocolVersionValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Indicates the IP protocol version to be used. Enumeration of:&#10;Any (Use either IPv4 or IPv6 depending on the system preference)&#10;IPv4 (Use IPv4 for the requests)&#10;IPv6 (Use IPv6 for the requests)&#10;The factory default value MUST be Any.</description>
+
+  <parameter name="Protocol" type="string" specSource="TR181" profile="Unspecified" requirements="W" supportLevel="ReadWrite" defaultValue="ICMP" validValuesArray="ServerSelectionProtocolValues" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">The protocol over which the test is to be performed. Enumeration of:&#10;ICMP&#10;UDP Echo</description>
+
+  <parameter name="HostList" type="string" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="W" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Comma-separated list (up to 10 items) of strings (maximum item length 256). Each entry is a Host name or address of a host to ping.</description>
+
+  <parameter name="NumberOfRepetitions" type="unsignedInt" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="W" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="1" minValue="1" maxValue="32" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Number of repetitions of the ping test to perform for each HostList entry before reporting the results.</description>
+
+  <parameter name="Timeout" type="unsignedInt" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="W" denyActiveNotification="true" supportLevel="ReadWrite" defaultValue="1000" minValue="1" maxValue="4294967295" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Timeout in milliseconds for each iteration of the ping test where the total number of iterations is the value of NumberOfRepetitions times the number of entities in the HostList Parameter.</description>
+    <description source="BROADCOM">TR181 spec does not specify default, using the same value as Traceroute</description>
+
+  <parameter name="FastestHost" type="string" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the Host (one of the items within the HostList Parameter) with the smallest average response time.</description>
+
+  <parameter name="MinimumResponseTime" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the minimum response time in microseconds over all repetitions with successful responses of the most recent ping test for the Host identified in FastestHost. Success is defined by the underlying protocol used. If there were no successful responses across all Hosts, this value MUST be zero.</description>
+
+  <parameter name="AverageResponseTime" type="unsignedInt" specSource="TR181" profile="Device2_ServerSelectionDiag:1" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the average response time in microseconds over all repetitions with successful responses of the most recent ping test for the Host identified in FastestHost. Success is defined by the underlying protocol used. If there were no successful responses across all Hosts, this value MUST be zero.</description>
+
+  <parameter name="MaximumResponseTime" type="unsignedInt" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">Result parameter indicating the maximum response time in microseconds over all repetitions with successful responses of the most recent ping test for the Host identified in FastestHost. Success is defined by the underlying protocol used. If there were no successful responses across all Hosts, this value MUST be zero.</description>
+
+  <parameter name="IPAddressUsed" type="IPAddress" specSource="TR181" profile="Unspecified" requirements="R" mayDenyActiveNotification="true" denyActiveNotification="true" supportLevel="ReadOnly" hideParameterFromAcs="false" uniqueKey="false" bbfProtocol="common" />
+    <description source="TRx">[IPAddress] Indicates which IP address was used to send the request to the host identified in FastestHost.</description>
+
+  <parameter name="X_BROADCOM_COM_Pid" type="int" specSource="Broadcom" profile="Unspecified" supportLevel="ReadOnly" defaultValue="-1" hideParameterFromAcs="true" uniqueKey="false" bbfProtocol="common" />
+    <description source="BROADCOM">The pid of the serverselection app launched by this diag.  A pid of -1 indicates that the app is not running.</description>
+
+
+
+
+<vsaInfo>
+
+<validstringarray name="minimumSingleVsaValues" />
+  <element>IgnoreThis</element>
+
+<validstringarray name="ponTypeValues" />
+  <element>GPON</element>
+  <element>EPON</element>
+  <element>BPON</element>
+  <element>GEPON</element>
+  <element>PONTYPE_NONE</element>
+  <element>AE</element>
+  <element>XGPON</element>
+  <element>XGS-PON</element>
+  <element>NGPON2</element>
+
+<validstringarray name="ponRateValues" />
+  <element>1010</element>
+  <element>2510</element>
+  <element>1025</element>
+  <element>0202</element>
+  <element>1001</element>
+  <element>0101</element>
+  <element>0201</element>
+  <element>2501</element>
+
+<validstringarray name="status3eValues" />
+  <element>Disabled</element>
+  <element>Enabled</element>
+  <element>Error</element>
+
+<validstringarray name="DiagStateValues" />
+  <element>None</element>
+  <element>Requested</element>
+  <element>Complete</element>
+  <element>Ping_InProgress</element>
+  <element>Error_CannotResolveHostName</element>
+  <element>Error_NoRouteToHost</element>
+  <element>Error_InitConnectionFailed</element>
+  <element>Error_NoResponse</element>
+  <element>Error_TransferFailed</element>
+  <element>Error_PasswordRequestedFailed</element>
+  <element>Error_LoginFailed</element>
+  <element>Error_RejectedByRemote</element>
+  <element>Error_NoTransferMode</element>
+  <element>Error_NoPASV</element>
+  <element>Error_NoCWD</element>
+  <element>Error_NoSTOR</element>
+  <element>Error_IncorrectSize</element>
+  <element>Error_Timeout</element>
+  <element>Error_NoTransferComplete</element>
+  <element>Error_MaxHopCountExceeded</element>
+  <element>Error_Internal</element>
+  <element>Error_Other</element>
+
+<validstringarray name="IPLayerCapSupportedMetricsValues" />
+  <element>IPLR</element>
+  <element>Sampled_RTT</element>
+  <element>IPDV</element>
+  <element>IPRR</element>
+
+<validstringarray name="IPLayerRoleValues" />
+  <element>Receiver</element>
+  <element>Sender</element>
+
+<validstringarray name="TestTypeValues" />
+  <element>Search</element>
+  <element>Fixed</element>
+
+<validstringarray name="ProtocolVersionValues" />
+  <element>Any</element>
+  <element>IPv4</element>
+  <element>IPv6</element>
+
+<validstringarray name="ServerSelectionProtocolValues" />
+  <element>ICMP</element>
+  <element>UDP Echo</element>
+
+<validstringarray name="LoggingLevelValues" />
+  <element>Error</element>
+  <element>Notice</element>
+  <element>Debug</element>
+
+<validstringarray name="spdsvcStateValues" />
+  <element>None</element>
+  <element>Requested</element>
+  <element>Completed</element>
+  <element>Failed</element>
+  <element>ERROR_REQUEST_ABORTED</element>
+
+<validstringarray name="modeValues" />
+  <element>client_send</element>
+  <element>client_bw</element>
+
+<validstringarray name="directionValues" />
+  <element>upstream</element>
+  <element>downstream</element>
+  <element>bothstream</element>
+
+<validstringarray name="dataPathValues" />
+  <element>HW</element>
+  <element>SW</element>
+
+<validstringarray name="AlgorithmValues" />
+  <element>Fast</element>
+  <element>Bin</element>
+  <element>Ramp</element>
+  <element>RxRate</element>
+
+</vsaInfo>
+
+<profileInfo>
+<profile name="Device2_Baseline:1" />
+<profile name="Device2_Baseline:2" />
+<profile name="Device2_Baseline:3" />
+<profile name="Device2_Reboot:1" />
+<profile name="Unspecified" />
+<profile name="Device2_IPInterface:1" />
+<profile name="Device2_IPInterface:2" />
+<profile name="Device2_IPv6Interface:1" />
+<profile name="X_BROADCOM_COM_DEV2_IPv6:1" />
+<profile name="Device2_IPPing:1" />
+<profile name="Device2_TraceRoute:1" />
+<profile name="Device2_UDPEcho:1" />
+<profile name="Device2_UDPEchoPlus:1" />
+<profile name="Device2_Download:1" />
+<profile name="Device2_DownloadTCP:1" />
+<profile name="Device2_Upload:1" />
+<profile name="Device2_UploadTCP:1" />
+<profile name="Broadcom" />
+<profile name="X_BROADCOM_COM_Baseline:1" />
+<profile name="Device2_ServerSelectionDiag:1" />
+<profile name="Device2_UDPEchoDiag:1" />
+<profile name="Device2_IPLayerCapacityTest:1" />
+<profile name="Baseline:1" />
+<profile name="X_BROADCOM_COM_SPDSVC:1" />
+</profileInfo>
+
+
+</xmlMandatorySingleRootNode>

@@ -4,25 +4,19 @@
    Copyright (c) 2018 Broadcom 
    All Rights Reserved
 
-Unless you and Broadcom execute a separate written software license
-agreement governing use of this software, this software is licensed
-to you under the terms of the GNU General Public License version 2
-(the "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
-with the following added to such license:
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as published by
+the Free Software Foundation (the "GPL").
 
-   As a special exception, the copyright holders of this software give
-   you permission to link this software with independent modules, and
-   to copy and distribute the resulting executable under terms of your
-   choice, provided that you also meet, for each linked independent
-   module, the terms and conditions of the license of that module.
-   An independent module is a module which is not derived from this
-   software.  The special exception does not apply to any modifications
-   of the software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-Not withstanding the above, under no circumstances may you combine
-this software in any way with any other Broadcom software provided
-under a license other than the GPL, without Broadcom's express prior
-written consent.
+
+A copy of the GPL is available at http://www.broadcom.com/licenses/GPLv2.php, or by
+writing to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
 
 :>
 */
@@ -235,9 +229,12 @@ static unsigned int _nf_hook_in_out_tcp(uint32_t hooknum, struct sk_buff *skb, c
     spdtst.bits.is_dir_upload = (g_tcpspd[stream_idx].action == SPDT_DIR_TX); 
     spdtst.bits.stream_idx = stream_idx; 
 
-    if (g_tcpspd[stream_idx].srv_socket &&
-        (SS_CONNECTING == g_tcpspd[stream_idx].srv_socket->state ||
-        SS_UNCONNECTED == g_tcpspd[stream_idx].srv_socket->state))
+    if (!g_tcpspd[stream_idx].srv_socket) {
+         return NF_ACCEPT;
+    }
+
+    if (SS_CONNECTING == g_tcpspd[stream_idx].srv_socket->state ||
+        SS_UNCONNECTED == g_tcpspd[stream_idx].srv_socket->state)
     {
         skb_push(skb, ETH_HLEN);
 
@@ -814,6 +811,7 @@ int tcpspd_sock_mgr_connect(uint8_t stream_idx, struct socket **sock, spdt_conn_
                             sock_tcpinfo[stream_idx].tcpi_advmss);
     tcpspd_engine_set_rtt(stream_idx, sock_tcpinfo[stream_idx].tcpi_rtt);
     tcpspd_engine_set_rwnd(stream_idx, g_tcpspd[stream_idx].rwnd_bytes, sock_tcpinfo[stream_idx].tcpi_rtt, sock_tcpinfo[stream_idx].tcpi_rcv_wscale, g_tcpspd[stream_idx].rate_Mbps);
+    tcpspd_engine_set_txwscale(stream_idx, sock_tcpinfo[stream_idx].tcpi_snd_wscale);
 
     return 0;
 

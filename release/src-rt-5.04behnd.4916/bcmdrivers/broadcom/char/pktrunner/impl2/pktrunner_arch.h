@@ -27,7 +27,6 @@
 #define disp_pool_alloc(X) kmalloc(X, GFP_KERNEL)
 #define finish_init() SIM_SET_LOG_LEVEL()
 
-static inline int __isEnetBondedLanWanPort(uint32_t logicalPort) { return 0; }
 static inline rdpa_traffic_dir dpiqos_dir(Blog_t *blog_p) { return rdpa_dir_ds; }
 #define lan2lan_dir rdpa_dir_us
 #define debug_gdx_port(B)
@@ -71,22 +70,6 @@ static inline rdpa_traffic_dir dpiqos_dir(Blog_t *blog_p) { return rdpa_dir_ds; 
 #else /* CONFIG_BCM_PMC */
 #define finish_init() SIM_SET_LOG_LEVEL()
 #endif /* CONFIG_BCM_PMC */
-
-/* Returns TRUE if LAN/SF2-Port is bonded with Runner WAN port */
-static inline int __isEnetBondedLanWanPort(uint32_t logicalPort)
-{
-   int ret_val = FALSE ;
-
-#if defined(CONFIG_BCM_KERNEL_BONDING) && !defined(CONFIG_BCM963158)
-  bcmFun_t *enetFunc = bcmFun_get(BCM_FUN_ID_ENET_IS_BONDED_LAN_WAN_PORT);
-
-  BCM_ASSERT(enetFunc != NULL);
-
-  ret_val = enetFunc(&logicalPort);
-#endif
-
-   return (ret_val);
-}
 
 static inline rdpa_traffic_dir dpiqos_dir(Blog_t *blog_p) {
     struct net_device *dev = blog_p->rx_dev_p;

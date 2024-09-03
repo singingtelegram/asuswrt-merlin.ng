@@ -1,29 +1,23 @@
 /*
 * <:copyright-BRCM:2021:DUAL/GPL:standard
-*
-*    Copyright (c) 2021 Broadcom
+* 
+*    Copyright (c) 2021 Broadcom 
 *    All Rights Reserved
-*
-* Unless you and Broadcom execute a separate written software license
-* agreement governing use of this software, this software is licensed
-* to you under the terms of the GNU General Public License version 2
-* (the "GPL"), available at http://www.broadcom.com/licenses/GPLv2.php,
-* with the following added to such license:
-*
-*    As a special exception, the copyright holders of this software give
-*    you permission to link this software with independent modules, and
-*    to copy and distribute the resulting executable under terms of your
-*    choice, provided that you also meet, for each linked independent
-*    module, the terms and conditions of the license of that module.
-*    An independent module is a module which is not derived from this
-*    software.  The special exception does not apply to any modifications
-*    of the software.
-*
-* Not withstanding the above, under no circumstances may you combine
-* this software in any way with any other Broadcom software provided
-* under a license other than the GPL, without Broadcom's express prior
-* written consent.
-*
+* 
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License, version 2, as published by
+* the Free Software Foundation (the "GPL").
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* 
+* A copy of the GPL is available at http://www.broadcom.com/licenses/GPLv2.php, or by
+* writing to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+* Boston, MA 02111-1307, USA.
+* 
 * :>
 */
 
@@ -181,7 +175,7 @@ static int driver_thread(void *arg)
                 break;
 
             case msg_terminate:
-                __logDebug("%s terminating...", __FUNCTION__);
+                __logInfo("%s terminating...", __FUNCTION__);
                 return 0;
 
             case msg_job:
@@ -298,14 +292,19 @@ void pon_drv_task_init(void)
     bcmFun_reg(BCM_FUN_ID_NETLINK_INVOKE_SERDES_JOB_WITH_OUTPUT, (bcmFun_t *)netlink_invoke_serdes_job_to);
     bcmFun_reg(BCM_FUN_ID_NETLINK_INVOKE_SERDES_JOB, (bcmFun_t *)netlink_invoke_serdes_job);
     bcmFun_reg(BCM_FUN_ID_NCO_SW_HOLD_VAL_GET, (bcmFun_t *)nco_sw_hold_val_get);
+    bcmFun_reg(BCM_FUN_ID_EYESCOPE_MSG, (bcmFun_t *)eyescope_nl_send_messgae);
 }
 
 /* uninit */
 void pon_drv_task_uninit(void)
 {
     int rc;
+    char *msg = "";
 
     __logInfo("pon_drv_task_uninit.");
+
+    /* kthread_stop may get blocked, so send a msg_terminate first */
+    send_message_to_pon_drv_task(msg_terminate, msg);
 
     if ((rc = kthread_stop(pon_drv_thread)))
     {
@@ -318,4 +317,6 @@ void pon_drv_task_uninit(void)
     bcmFun_dereg(BCM_FUN_ID_WAN_SERDES_TYPE_GET);
     bcmFun_dereg(BCM_FUN_ID_NETLINK_INVOKE_SERDES_JOB_WITH_OUTPUT);
     bcmFun_dereg(BCM_FUN_ID_NETLINK_INVOKE_SERDES_JOB);
+    bcmFun_dereg(BCM_FUN_ID_NCO_SW_HOLD_VAL_GET);
+    bcmFun_dereg(BCM_FUN_ID_EYESCOPE_MSG);
 }

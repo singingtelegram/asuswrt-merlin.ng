@@ -180,12 +180,12 @@ int vfbio_finish_first_boot(void)
 	return vfbio_rpc_finish_first_boot();
 }
 
-int vfbio_lun_create(char *name, unsigned int size, int *id)
+int vfbio_lun_create(char *name, uint64_t size, uint32_t flags, int *id)
 {	
 	struct vfbio_lun_info info;
 	int ret;
 
-	*id = vfbio_rpc_lun_create(*id, name, size);
+	*id = vfbio_rpc_lun_create(*id, name, size, flags);
 	if(*id < 0)
 		return -1;
 	
@@ -248,7 +248,7 @@ int vfbio_lun_get_blk_num(int id, unsigned int *num)
 	return -1;
 }
 
-int vfbio_lun_get_size(int id, unsigned int *size)
+int vfbio_lun_get_size(int id, uint64_t *size)
 {
 	unsigned int blk_s, blk_n;
 	
@@ -288,7 +288,7 @@ int vfbio_lun_write(int id, unsigned int blk, unsigned int cnt, void *buffer)
 	return vfbio_rpc_write(desc->devnum, (ulong)buffer, blk, desc->blksz, &cnt);
 }
 
-int vfbio_lun_resize(int id, unsigned int size)
+int vfbio_lun_resize(int id, uint64_t size)
 {
 	char name[VFBIO_LUN_INFO_NAME_MAX];
 	unsigned int size_blk;

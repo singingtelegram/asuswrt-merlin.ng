@@ -7,16 +7,16 @@
 
 static struct kmem_cache *cmdlist_cache_p = NULL;
 
-void *cmdlist_buffer_alloc(void **phys_addr_pp)
+void *cmdlist_buffer_alloc(phys_addr_t *phys_addr_p)
 {
     void *buffer_p = kmem_cache_alloc(cmdlist_cache_p, GFP_ATOMIC);
 
     if(buffer_p)
     {
-        *phys_addr_pp = (void *)VIRT_TO_PHYS(buffer_p);
+        *phys_addr_p = VIRT_TO_PHYS(buffer_p);
     }
 
-    __logDebug("buffer_p %p, phys_addr_p %px", buffer_p, *phys_addr_pp);
+    __logDebug("buffer_p %p, phys_addr %pa", buffer_p, phys_addr_p);
 
     return buffer_p;
 }
