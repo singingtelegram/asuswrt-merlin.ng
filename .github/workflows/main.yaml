@@ -51,6 +51,8 @@ jobs:
         echo "$GITHUB_PATH"
         whereis automake
         whereis autoconf
+        automake --version
+        release/src-rt-5.04behnd.4916/hostTools/scripts/checkver.pl -e automake -r 1.10.2
     - name: make
       run: |
         cd release/src-rt-5.04behnd.4916
