@@ -34,7 +34,10 @@ jobs:
       run: |
         sudo rm /bin/sh
         sudo ln -s /bin/bash /bin/sh
+        ls -al $GITHUB_WORKSPACE/tools/
+        ls -al $GITHUB_WORKSPACE/tools/brcm-arm-hnd/
         sudo ln -s $GITHUB_WORKSPACE/tools/brcm-arm-hnd /opt/toolchains
+        ls -al /opt/toolchains
     - name: envvars
       run: |
         echo "/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
