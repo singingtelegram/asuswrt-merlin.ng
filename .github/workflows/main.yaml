@@ -30,13 +30,16 @@ jobs:
         python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib libncurses5 mtd-utils \
         libncurses5-dev libvorbis-dev git autopoint autogen automake-1.15 sed build-essential intltool libglib2.0-dev \
         xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools libelf1:i386 gengetopt libjson-c-dev libjson-c-dev:i386
+    - name: fetch-toolchains
+      run: |
+        git clone https://github.com/RMerl/am-toolchains $GITHUB_WORKSPACE/toolchains/
     - name: setup
       run: |
         sudo rm /bin/sh
         sudo ln -s /bin/bash /bin/sh
-        ls -al $GITHUB_WORKSPACE/tools/
-        ls -al $GITHUB_WORKSPACE/tools/brcm-arm-hnd/
-        sudo ln -s $GITHUB_WORKSPACE/tools/brcm-arm-hnd /opt/toolchains
+        ls -al $GITHUB_WORKSPACE/toolchains/
+        ls -al $GITHUB_WORKSPACE/toolchains/brcm-arm-hnd
+        sudo ln -s $GITHUB_WORKSPACE/toolchains/brcm-arm-hnd /opt/toolchains
         ls -al /opt/toolchains
     - name: envvars
       run: |
