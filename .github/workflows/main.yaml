@@ -35,10 +35,12 @@ jobs:
         sudo rm /bin/sh
         sudo ln -s /bin/bash /bin/sh
         sudo ln -s $GITHUB_WORKSPACE/tools/brcm-arm-hnd /opt/toolchains
-        echo "::set-env name=PATH::$PATH:/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin"
-        echo "::set-env name=PATH::$PATH:/opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin"
-        echo "::set-env name=PATH::$PATH:/opt/toolchains/crosstools-arm_softfp-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin"
-        echo "::set-env name=LD_LIBRARY_PATH::$LD_LIBRARY:/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/lib"
+    - name: envvars
+      run: |
+        echo "/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
+        echo "/opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
+        echo "/opt/toolchains/crosstools-arm_softfp-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
+        echo "LD_LIBRARY_PATH=$LD_LIBRARY:/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/lib" >> $GITHUB_ENV
     - name: make
       run: |
         cd release/src-rt-5.04behnd.4916
