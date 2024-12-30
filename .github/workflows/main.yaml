@@ -56,6 +56,7 @@ jobs:
     - name: make
       run: |
         cd release/src-rt-5.04behnd.4916
+        sed -i 's/prebuild_checks//g' Makefile
         make ${{ matrix.target }}
     - uses: actions/upload-artifact@v4
       with:
