@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ "3006.102" ]
+  pull_request:
+    branches: [ "3006.102" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        target: ["rt-be96u"]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+    - name: add i386
+      run: sudo dpkg --add-architecture i386
+    - name: apt-get update
+      run: sudo apt-get update
+    - name: apt-get install
+      run: |
+        sudo apt-get install libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf autoconf-archive automake bash bison \
+        bzip2 diffutils file flex m4 g++ gawk groff-base libncurses5-dev libtool libslang2 make patch perl pkg-config shtool \
+        subversion tar texinfo zlib1g zlib1g-dev git gettext libexpat1-dev libssl-dev cvs gperf unzip \
+        python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
+        libncurses5-dev libvorbis-dev git autopoint autogen automake-1.15 sed build-essential intltool libglib2.0-dev \
+        xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools libelf1:i386 gengetopt libjson-c-dev libjson-c-dev:i386
+    - name: setup
+      run: |
+        sudo rm /bin/sh
+        sudo ln -s /bin/bash /bin/sh
+        sudo ln -s $GITHUB_WORKSPACE/tools/brcm-arm-hnd /opt/toolchains
+        echo "::set-env name=PATH::$PATH:/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin"
+        echo "::set-env name=PATH::$PATH:/opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin"
+        echo "::set-env name=PATH::$PATH:/opt/toolchains/crosstools-arm_softfp-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin"
+        echo "::set-env name=LD_LIBRARY_PATH::$LD_LIBRARY:/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/lib"
+    - name: make
+      run: |
+        cd release/src-rt-5.04behnd.4916
+        make clean
+        make ${{ matrix.target }}
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.target }}.trx
+        path: |
+          release/src-rt-5.04behnd.4916/targets/96813GW/*.pkgtb
+          release/src-rt-5.04behnd.4916/targets/96813GW/sha256sum.sha256
+      
+          
+        
