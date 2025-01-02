@@ -157,3 +157,24 @@ jobs:
             name: release-${{ matrix.cfg.model }}-${{ matrix.cfg.ui }}
             path: "/project/artifacts"
           continue-on-error: true
+    release-job:
+      name: Publish
+      needs: build-job
+      runs-on: ubuntu-latest
+      # if: startsWith(github.event.ref, 'refs/tags/')
+      steps:
+        - name: Download packages
+          uses: actions/download-artifact@v4
+        - name: Get release version
+          run: |
+            echo "version=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        - name: Publish archives and packages
+          uses: softprops/action-gh-release@v1
+          with:
+            tag_name: ${{ env.version }}
+            body_path: /home/runner/work/asuswrt-merlin.ng/asuswrt-merlin.ng/release-gt-be98-default/CHANGELOG
+            draft: true
+            prerelease: true
+            files: /home/runner/work/asuswrt-merlin.ng/asuswrt-merlin.ng/release*/*
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
