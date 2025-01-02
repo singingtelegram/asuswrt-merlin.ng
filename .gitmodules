@@ -1,3 +1,0 @@
-[submodule "tools/am-toolchains"]
-	path = tools/am-toolchains
-	url = https://github.com/RMerl/am-toolchains
