@@ -131,11 +131,12 @@ jobs:
             if [ ${#files[@]} -gt 0 ]; then
                 for f in "${files[@]}"; do
                     if [ -f "$f" ] && [ "${f##*.}" != "md5" ]; then
-                        echo "Creating MD5 signature for $f"
-                        md5sum "$f" > "$f.md5"
+                        echo "Creating SHA512 signature for $f"
+                        sha512sum "$f" | tee "$f.sha512"
                         echo "Copying image $f to workspace"
                         cp "$f" "${ARTIFACTS_DIR}"
-                        cp "$f.md5" "${ARTIFACTS_DIR}"
+                        cp "$f.sha512" "${ARTIFACTS_DIR}"
+                        cp "*.sha256" "${ARTIFACTS_DIR}"
                     fi
                 done
             else
