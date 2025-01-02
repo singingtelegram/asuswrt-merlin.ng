@@ -73,12 +73,6 @@ jobs:
                 sed -i "s/EXTENDNO=.*/EXTENDNO=${MINOR_VER}/g" release/src-rt/version.conf
                 echo "Release detected. Updating version.conf with MAJOR_VER=${MAJOR_VER} and MINOR_VER=${MINOR_VER}"
             fi
-        - name: Generate changelog
-          if: matrix.cfg.skip == false && matrix.cfg.ui == 'default'
-          run: |
-            cd ${PROJECT_DIR}
-            python tools/get-last-notes.py > "${CHANGELOG_FILE}"
-            cat "${CHANGELOG_FILE}"
         - name: "Build"
           if: matrix.cfg.skip == false
           run: |
