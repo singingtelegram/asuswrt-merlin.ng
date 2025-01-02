@@ -10,7 +10,8 @@ jobs:
         matrix:
           cfg:
             - { model: "rt-be96u",          sdk: "src-rt-5.04behnd.4916",      ui: "default",  skip: false }
-            - { model: "gt-be98_pro",       sdk: "src-rt-5.04behnd.4916",      ui: "default",      skip: false }
+            - { model: "rt-be96u",          sdk: "src-rt-5.04behnd.4916",      ui: "rog",      skip: false }
+            - { model: "gt-be98_pro",       sdk: "src-rt-5.04behnd.4916",      ui: "default",  skip: false }
             - { model: "gt-be98_pro",       sdk: "src-rt-5.04behnd.4916",      ui: "rog",      skip: false }
             - { model: "rt-be88u",          sdk: "src-rt-5.04behnd.4916",      ui: "default",  skip: false }
             - { model: "rt-be86u",          sdk: "src-rt-5.04behnd.4916",      ui: "default",  skip: false }
