@@ -175,7 +175,7 @@ jobs:
           uses: softprops/action-gh-release@v1
           with:
             tag_name: ${{ env.version }}
-            body_path: /home/runner/work/asuswrt-merlin.ng/asuswrt-merlin.ng/release-gt-be98-default/CHANGELOG
+            body: ${{ env.version }}
             draft: true
             prerelease: true
             files: /home/runner/work/asuswrt-merlin.ng/asuswrt-merlin.ng/release*/*
