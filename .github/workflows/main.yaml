@@ -137,10 +137,10 @@ jobs:
                         echo "Creating SHA512 signature for $f"
                         sha512sum "$f" | tee "$f.sha512"
                         echo "Copying image $f to workspace"
-                        ls -alh
+                        ls -alh ${IMAGE_PATH}
                         cp "$f" "${ARTIFACTS_DIR}"
                         cp "$f.sha512" "${ARTIFACTS_DIR}"
-                        cp "sha256sum.sha256" "${ARTIFACTS_DIR}"
+                        cp ${IMAGE_PATH}/sha256sum.sha256 "${ARTIFACTS_DIR}"
                     fi
                 done
             else
