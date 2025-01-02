@@ -140,7 +140,6 @@ jobs:
                         ls -alh ${IMAGE_PATH}
                         cp "$f" "${ARTIFACTS_DIR}"
                         cp "$f.sha512" "${ARTIFACTS_DIR}"
-                        cp ${IMAGE_PATH}/sha256sum.sha256 "${ARTIFACTS_DIR}"
                     fi
                 done
             else
