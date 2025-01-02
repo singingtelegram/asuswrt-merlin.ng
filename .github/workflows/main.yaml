@@ -1,68 +1,163 @@
-name: CI
+name: Images 
+run-name: "Building images 🚀"
+on: [push]
+jobs:          
+    build-job:
+      name: Build
+      runs-on: ubuntu-latest
+      strategy:
+        fail-fast: false
+        matrix:
+          cfg:
+            - { model: "rt-be96u",          sdk: "src-rt-5.04behnd.4916",      ui: "default",  skip: false }
+            - { model: "rt-be96u",          sdk: "src-rt-5.04behnd.4916",      ui: "rog",      skip: false }
+      if: "!contains(github.event.commits[0].message, '[SKIP_CI]')"
+      container:
+        image: singingtelegram/asuswrt-merlin-toolchains-docker:latest
+        env:
+          MERLINUPDATE: "y"
+          MODEL: ${{ matrix.cfg.model }}
+          SDK: ${{ matrix.cfg.sdk }}
+          UI: ${{ matrix.cfg.ui }}
+          SKIP_BUILD: ${{ matrix.cfg.skip }}
+          GIT_REPO: "https://github.com/singingtelegram/asuswrt-merlin.ng.git"
+          PROJECT_DIR: "/project/asuswrt-merlin.ng"
+          ARTIFACTS_DIR: "/project/artifacts"
+          CHANGELOG_FILE: "/tmp/CHANGELOG"
+          PROJECTBASEDIR: "/project" # REMOVE_ME: Fixes https://github.com/SonarSource/sonarcloud-github-action/pull/58
+        options: --user docker 
+        volumes:
+          - /mnt:/project # HACK: Use /mnt partition since bigger than others. This prevents to run out of space
+      steps:
+        - name: Run debug commands - post
+          run: |
+            cd /
+            echo "--- Disk available ----"
+            df -h
+        - name: Fix permissions in docker image
+          if: matrix.cfg.skip == false
+          run: |
+            sudo chown -R docker:docker /github/home /home/docker /project
+        - name: "Fetch code"
+          if: matrix.cfg.skip == false
+          run: |
+            cd /project
+            if [[ $GITHUB_REF_TYPE == "tag" ]]; then
+                export TAG="${GITHUB_REF#refs/tags/}"
+                echo "Fetching code from tag $TAG"
+            else
+                export BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+                echo "Fetching code from branch $BRANCH"
+            fi
 
-on:
-  push:
-    branches: [ "3006.102" ]
-  pull_request:
-    branches: [ "3006.102" ]
+            if git clone --depth 1 --branch "${TAG:-$BRANCH}" "$GIT_REPO"; then
+                echo "Code fetched successfully."
+            else
+                echo "Failed to fetch code. Check the repository and settings."
+                exit 1
+            fi
 
-jobs:
-  build:
+            ls /home/docker
+        - name: "Set version"
+          if: matrix.cfg.skip == false
+          run: |
+            cd ${PROJECT_DIR}
+            export CIRCLE_TAG="${GITHUB_REF#refs/*/}"
+            if [[ $GITHUB_REF_TYPE == "branch" ]]; then
+              echo "Nothing to do. Not a release. Branch detected: ${CIRCLE_TAG}"
+            else
+                TAG=$(echo ${CIRCLE_TAG} | sed 's/^[^.]*\.//')
+                MAJOR_VER=$(echo "${TAG}" | sed -E 's/([0-9.]*)[_-]?(.*)/\1/')
+                MINOR_VER=$(echo "${TAG}" | sed -E 's/([0-9.]*)[_-]?(.*)/\2/')
+                sed -i "s/SERIALNO=.*/SERIALNO=${MAJOR_VER}/g" release/src-rt/version.conf
+                sed -i "s/EXTENDNO=.*/EXTENDNO=${MINOR_VER}/g" release/src-rt/version.conf
+                echo "Release detected. Updating version.conf with MAJOR_VER=${MAJOR_VER} and MINOR_VER=${MINOR_VER}"
+            fi
+        - name: Generate changelog
+          if: matrix.cfg.skip == false && matrix.cfg.ui == 'default'
+          run: |
+            cd ${PROJECT_DIR}
+            python tools/get-last-notes.py > "${CHANGELOG_FILE}"
+            cat "${CHANGELOG_FILE}"
+        - name: "Build"
+          if: matrix.cfg.skip == false
+          run: |
+            echo "----- Space available -----"
+            df -h
+            echo "----- I am: $(id) -----"
+            cd ${PROJECT_DIR}/release/${SDK}
+            echo "----- Files in dir: $(pwd) -----"
+            ls -alh
+            echo "----- Setting toolchains for ${SDK} -----"
+            if [[ ${SDK} == "src-rt-5.04axhnd.675x" ]]; then
+              source /home/docker/envs/bcm-hnd-ax-4.19.sh
+            elif [[ ${SDK} == "src-rt-5.02axhnd.675x" ]]; then
+              source /home/docker/envs/bcm-hnd.sh
+            elif [[ ${SDK} == "src-rt-5.02axhnd" ]]; then
+              source /home/docker/envs/bcm-hnd.sh
+            elif [[ ${SDK} == "src-rt-5.04behnd.4916" ]]; then
+              source /home/docker/envs/bcm-hnd-ax-4.19be_soft.sh
+            else
+              echo "SDK not supported"
+              exit -1
+            fi
+            echo "----- hack-ish fix ---------"
+            sudo ln -sf /home/docker/am-toolchains/brcm-arm-hnd /opt/toolchains
+            echo "----- Check envs dir ---------"
 
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        target: ["rt-be96u"]
+            ls -alh /home/docker/envs/
+            echo "----- Debugging env vars -----"
+            env
+            echo "------ Setting UI as $UI ---------"
+            if [[ ${UI} == "tuf" ]]; then
+              echo "Enabling TUF UI"
+              sed -i 's/TUF_UI=n/TUF_UI=y/' ${PROJECT_DIR}/release/src-rt/target.mak
+            fi
+            if [[ ${UI} == "rog" ]]; then
+              echo "Enabling ROG UI"
+              sed -i 's/ROG_UI=n/ROG_UI=y/' ${PROJECT_DIR}/release/src-rt/target.mak
+            fi
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: 'true'
-    - name: add i386
-      run: sudo dpkg --add-architecture i386
-    - name: apt-get update
-      run: sudo apt-get update
-    - name: apt-get install
-      run: |
-        sudo apt-get install libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf autoconf-archive automake bash bison \
-        bzip2 diffutils file flex m4 g++ gawk groff-base libncurses5-dev libtool libslang2 make patch perl pkg-config shtool \
-        subversion tar texinfo zlib1g zlib1g-dev git gettext libexpat1-dev libssl-dev cvs gperf unzip \
-        python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib libncurses5 mtd-utils \
-        libncurses5-dev libvorbis-dev git autopoint autogen automake-1.15 sed build-essential intltool libglib2.0-dev \
-        xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools libelf1:i386 gengetopt libjson-c-dev libjson-c-dev:i386
-    - name: fetch-toolchains
-      run: |
-        git clone https://github.com/RMerl/am-toolchains $GITHUB_WORKSPACE/toolchains/
-    - name: setup
-      run: |
-        sudo rm /bin/sh
-        sudo ln -s /bin/bash /bin/sh
-        ls -al $GITHUB_WORKSPACE/toolchains/
-        ls -al $GITHUB_WORKSPACE/toolchains/brcm-arm-hnd
-        sudo ln -s $GITHUB_WORKSPACE/toolchains/brcm-arm-hnd /opt/toolchains
-        ls -al /opt/toolchains
-    - name: envvars
-      run: |
-        echo "/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
-        echo "/opt/toolchains/crosstools-aarch64-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
-        echo "/opt/toolchains/crosstools-arm_softfp-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/bin" >> $GITHUB_PATH
-        echo "LD_LIBRARY_PATH=$LD_LIBRARY:/opt/toolchains/crosstools-arm-gcc-10.3-linux-4.19-glibc-2.32-binutils-2.36.1/usr/lib" >> $GITHUB_ENV
-        echo "$PATH"
-        echo "$GITHUB_PATH"
-        whereis automake
-        whereis autoconf
-        automake --version
-        release/src-rt-5.04behnd.4916/hostTools/scripts/checkver.pl -e automake -r 1.10.2
-    - name: make
-      run: |
-        cd release/src-rt-5.04behnd.4916
-        make ${{ matrix.target }}
-    - uses: actions/upload-artifact@v4
-      with:
-        name: ${{ matrix.target }}.trx
-        path: |
-          release/src-rt-5.04behnd.4916/targets/96813GW/*.pkgtb
-          release/src-rt-5.04behnd.4916/targets/96813GW/sha256sum.sha256
-      
-          
-        
+            echo "----- BUILD ${MODEL}-----"
+            make "${MODEL}"
+            # #### Just for testing ####
+            # mkdir -p "${PROJECT_DIR}/release/${SDK}/image/"
+            # echo "TEST" > "${PROJECT_DIR}/release/${SDK}/image/${MODEL}_${UI}_puresqubi.w"
+            
+        - name: "Prepare artifacts"
+          if: matrix.cfg.skip == false
+          run: |
+            mkdir -p "${ARTIFACTS_DIR}"
+            export IMAGE_PATH=${PROJECT_DIR}/release/${SDK}/image/
+            echo "Removing images with boot loader."
+            rm -rf ${IMAGE_PATH}/*cferom*
+
+            files=("${IMAGE_PATH}"/*squashfs.pkgtb "${IMAGE_PATH}"/*.w)
+
+            if [ ${#files[@]} -gt 0 ]; then
+                for f in "${files[@]}"; do
+                    if [ -f "$f" ] && [ "${f##*.}" != "md5" ]; then
+                        echo "Creating MD5 signature for $f"
+                        md5sum "$f" > "$f.md5"
+                        echo "Copying image $f to workspace"
+                        cp "$f" "${ARTIFACTS_DIR}"
+                        cp "$f.md5" "${ARTIFACTS_DIR}"
+                    fi
+                done
+            else
+                echo "No *.squashfs.pkgtb or *.w files found in ${IMAGE_PATH}"
+            fi
+            
+            # Changelogs are the same for each models since we are building from the same branch. We do use only the one generated by GT-BE98 for now.
+            if [[ "${MODEL}" == "gt-be98" ]]; then
+              if [ -e "${CHANGELOG_FILE}" ]; then
+                cp "${CHANGELOG_FILE}" "${ARTIFACTS_DIR}"
+              fi
+            fi
+        - name: "Archive artifacts"
+          if: matrix.cfg.skip == false
+          uses: actions/upload-artifact@v4
+          with:
+            name: release-${{ matrix.cfg.model }}-${{ matrix.cfg.ui }}
+            path: "/project/artifacts"
+          continue-on-error: true
