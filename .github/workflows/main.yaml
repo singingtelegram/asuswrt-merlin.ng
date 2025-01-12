@@ -40,8 +40,8 @@ jobs:
             sudo chown -R docker:docker /github/home /home/docker /project
         - name: Update packages
           run: |
-            apt-get update
-            DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+            sudo apt-get update
+            sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
         - name: "Fetch code"
           if: matrix.cfg.skip == false
           run: |
