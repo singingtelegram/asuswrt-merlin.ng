@@ -10,21 +10,32 @@ Asuswrt-Merlin 3006.xxx Changelog
           it.
   - NOTE: As a reminder, the ROG variant of the webui is not
           supported in the 3006 firmware series, as maintaining
-          two separate interfaces is too much work.
+          two separate interfaces is too much extra work.
 
-  - NEW: Added RT-AX86U_PRO, RT-AX88U_PRO, ZenWifi Pro XT12,
+  - NEW: Moved RT-AX86U_PRO, RT-AX88U_PRO, ZenWifi Pro XT12,
          GT-AX6000, GT-AXE16000 and GT-AX11000_PRO to the
          3006 firmware series.
 
+  - NEW: Added RT-BE92U support, based on GPL 102_37435.  This GPL
+         seems to have some stability issues, so consider support
+         for this model to remain Beta, until a fix is provided
+         for it.
+
   - UPDATED: Merged GPL 3006.102_36521 for Wifi 6 models (Wifi 7
              GPL codebase is unchanged from 3006.102.3).
-  - UPDATED: OpenVPN to 2.6.13.
+  - UPDATED: OpenVPN to 2.6.14.
   - UPDATED: miniupnpd to 2.3.7 (20250207 snapshot)
   - UPDATED: amtm to 5.2 (decoderman)
+  - UPDATED: dnsmasq to 2.91.
+  - UPDATED: dropbear to 2025.87.
   - FIXED: Missing hostname on Wireless Log for MLO-capable Wifi 7
            clients.
   - FIXED: CVE-2024-9143 in OpenSSL (Debian backport by RSDNTWK)
   - FIXED: CVE-2024-13176 in OpenSSL (Ubuntu backport by RSDNTWK)
+  - FIXED: Guest Networks on an isolated VLAN with DNSDirector set
+           to "Router" would fail to do any name resolution.
+  - FIXED: Wrong tab selected when clicking on "Profile" on the VLAN
+           page (dave14305)
 
 
 3006.102.3 (11-Jan-2025)

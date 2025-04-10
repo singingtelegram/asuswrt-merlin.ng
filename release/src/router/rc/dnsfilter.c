@@ -175,6 +175,7 @@ void dnsfilter_settings(FILE *fp) {
 #ifdef RTCONFIG_MULTILAN_CFG
 	int i,j;
 	char buf[32] = {0};
+	char lan_ipaddr[INET_ADDRSTRLEN];
 	MTLAN_T *pmtl = NULL;
 	size_t  mtl_sz = 0;
 #endif
@@ -188,11 +189,11 @@ void dnsfilter_settings(FILE *fp) {
 #ifdef RTCONFIG_OPENVPN
 //		if (nvram_get_int("VPNServer_enable")) {
 			char word[8] = {0};
-			char buf[32] = {0};
+			char nvservers[32] = {0};
 			char *next = NULL;
 			int unit;
-			nvram_safe_get_r("vpn_serverx_eas", buf, sizeof(buf));
-			foreach_44(word, buf, next) {
+			nvram_safe_get_r("vpn_serverx_start", nvservers, sizeof(nvservers));
+			foreach_44(word, nvservers, next) {
 				unit = atoi(word);
 				fprintf(fp, "-A PREROUTING -i tun%d -p udp -m udp --dport 53 -j DNSFILTER\n"
 					"-A PREROUTING -i tun%d -p tcp -m tcp --dport 53 -j DNSFILTER\n"
@@ -270,6 +271,15 @@ void dnsfilter_settings(FILE *fp) {
 						if(pmtl[i].sdn_t.dnsf_idx == DNSF_SRV_UNFILTERED)
 						{
 							fprintf(fp, "-A DNSFILTER -i %s -j RETURN\n", pmtl[i].nw_t.ifname);
+						}
+						else if (pmtl[i].sdn_t.dnsf_idx == DNSF_SRV_ROUTER)
+						{
+							strlcpy(lan_ipaddr, pmtl[i].nw_t.addr, sizeof(lan_ipaddr));
+							if (*lan_ipaddr == '\0')	// Fallback
+							{
+								strlcpy(lan_ipaddr, nvram_safe_get("lan_ipaddr"), sizeof(lan_ipaddr));
+							}
+							fprintf(fp, "-A DNSFILTER -i %s -j DNAT --to-destination %s\n", pmtl[i].nw_t.ifname, lan_ipaddr);
 						}
 						else if (get_dns_filter(AF_INET, pmtl[i].sdn_t.dnsf_idx, &dnsfsrv))
 						{
